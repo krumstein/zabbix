@@ -1,12 +1,12 @@
 Name:		cv-zabbix-checks	
-Version:	0.5.2
+Version:	0.5.3
 Release:	1%{?dist}
 Summary:	Zabbix checks by CLusterVision
 
 Group:		CV	
 License:	GPLv3.0
 URL:		http://github.com/krumstein/trinityX
-Source0:	cv-zabbix-checks-0.5.2.tar.gz
+Source0:	cv-zabbix-checks-0.5.3.tar.gz
 
 BuildArch:	noarch
 BuildRoot:	%{_tmppath}/%{name}-buildroot
@@ -23,16 +23,16 @@ ClusterVision Zabbix checks
 %install
 install -m 0755 -o zabbix -g zabbix -d $RPM_BUILD_ROOT/var/lib/zabbix
 install -m 0755 -o zabbix -g zabbix -d $RPM_BUILD_ROOT/var/lib/zabbix/userparameters
-install -m 0755 -o zabbix -g zabbix  userparameters/mounts_systemd userparameters/smartctl-disks-discovery.pl userparameters/drbd   userparameters/ipmitool   userparameters/pacemaker   userparameters/perc   userparameters/smcli $RPM_BUILD_ROOT/var/lib/zabbix/userparameters/
+install -m 0755 -o zabbix -g zabbix  userparameters/opainfo userparameters/mounts_systemd userparameters/smartctl-disks-discovery.pl userparameters/drbd   userparameters/ipmitool   userparameters/pacemaker   userparameters/perc   userparameters/smcli $RPM_BUILD_ROOT/var/lib/zabbix/userparameters/
 
 install -m 0755 -d $RPM_BUILD_ROOT/etc/zabbix/zabbix_agentd.d/
-install -m 0644 -o zabbix -g zabbix  zabbix_agentd.d/userparameter_systemd.conf zabbix_agentd.d/userparameter_mounts_systemd.conf zabbix_agentd.d/userparameter_smartctl.conf zabbix_agentd.d/userparameter_drbd.conf   zabbix_agentd.d/userparameter_ipmi.conf   zabbix_agentd.d/userparameter_pacemaker.conf   zabbix_agentd.d/userparameter_perc.conf   zabbix_agentd.d/userparameter_smcli.conf  $RPM_BUILD_ROOT/etc/zabbix/zabbix_agentd.d/
+install -m 0644 -o zabbix -g zabbix  zabbix_agentd.d/userparameter_opainfo.conf  zabbix_agentd.d/userparameter_systemd.conf zabbix_agentd.d/userparameter_mounts_systemd.conf zabbix_agentd.d/userparameter_smartctl.conf zabbix_agentd.d/userparameter_drbd.conf   zabbix_agentd.d/userparameter_ipmi.conf   zabbix_agentd.d/userparameter_pacemaker.conf   zabbix_agentd.d/userparameter_perc.conf   zabbix_agentd.d/userparameter_smcli.conf  $RPM_BUILD_ROOT/etc/zabbix/zabbix_agentd.d/
 
 install -m 0755 -d $RPM_BUILD_ROOT/etc/sudoers.d/
 install -m 0644 sudoers-zabbix $RPM_BUILD_ROOT/etc/sudoers.d/zabbix
 
 install -m 0755 -d $RPM_BUILD_ROOT/usr/lib/zabbix/templates/
-install -m 0644 templates/slurm_daemon.xml  templates/chrony_daemon.xml templates/mounts_systemd.xml templates/smartctl.xml templates/apc_inrow_cooling.xml templates/drbd.xml templates/ipmitool.xml templates/pacemaker.xml templates/perc.xml templates/powervault.xml templates/slurm.xml templates/smcli.xml  $RPM_BUILD_ROOT/usr/lib/zabbix/templates/
+install -m 0644  templates/opainfo.xml templates/slurm_daemon.xml  templates/chrony_daemon.xml templates/mounts_systemd.xml templates/smartctl.xml templates/apc_inrow_cooling.xml templates/drbd.xml templates/ipmitool.xml templates/pacemaker.xml templates/perc.xml templates/powervault.xml templates/slurm.xml templates/smcli.xml  $RPM_BUILD_ROOT/usr/lib/zabbix/templates/
 
 install -m 0755 templates/import.sh $RPM_BUILD_ROOT/usr/lib/zabbix/templates/
 
@@ -52,6 +52,7 @@ rm -rf $RPM_BUILD_ROOT
 /var/lib/zabbix/userparameters/perc  
 /var/lib/zabbix/userparameters/smcli
 /var/lib/zabbix/userparameters/mounts_systemd
+/var/lib/zabbix/userparameters/opainfo
 /var/lib/zabbix/userparameters/smartctl-disks-discovery.pl
 
 /etc/zabbix/zabbix_agentd.d/userparameter_drbd.conf 
@@ -61,6 +62,7 @@ rm -rf $RPM_BUILD_ROOT
 /etc/zabbix/zabbix_agentd.d/userparameter_smcli.conf
 /etc/zabbix/zabbix_agentd.d/userparameter_mounts_systemd.conf
 /etc/zabbix/zabbix_agentd.d/userparameter_systemd.conf
+/etc/zabbix/zabbix_agentd.d/userparameter_opainfo.conf
 /etc/zabbix/zabbix_agentd.d/userparameter_smartctl.conf
 
 /etc/sudoers.d/zabbix
@@ -80,12 +82,15 @@ rm -rf $RPM_BUILD_ROOT
 /usr/lib/zabbix/templates/slurm_daemon.xml
 /usr/lib/zabbix/templates/chrony_daemon.xml
 /usr/lib/zabbix/templates/smartctl.xml
+/usr/lib/zabbix/templates/opainfo.xml
 
 %doc
 
 
 
 %changelog
+* Fri Nov 04 2016 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.5.3
+- Added opa hfi monitoring
 * Fri Nov 04 2016 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.5.1
 - Added accessibilty of mount check
 * Fri Nov 04 2016 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.5

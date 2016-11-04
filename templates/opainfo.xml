@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
     <version>3.0</version>
-    <date>2016-10-10T12:15:41Z</date>
+    <date>2016-10-25T12:43:18Z</date>
     <groups>
         <group>
             <name>Templates</name>
@@ -9,8 +9,8 @@
     </groups>
     <templates>
         <template>
-            <template>CV App DRBD</template>
-            <name>CV App DRBD</name>
+            <template>CV OPAinfo</template>
+            <name>CV OPAinfo</name>
             <description/>
             <groups>
                 <group>
@@ -19,18 +19,17 @@
             </groups>
             <applications>
                 <application>
-                    <name>DRBD</name>
+                    <name>OPAinfo</name>
                 </application>
             </applications>
-            <items/>
-            <discovery_rules>
+               <discovery_rules>
                 <discovery_rule>
-                    <name>DRBD discovery</name>
+                    <name>Omnipath HFI discovery</name>
                     <type>0</type>
                     <snmp_community/>
                     <snmp_oid/>
-                    <key>drbd[discovery]</key>
-                    <delay>3600</delay>
+                    <key>opainfo[discovery]</key>
+                    <delay>300</delay>
                     <status>0</status>
                     <allowed_hosts/>
                     <snmpv3_contextname/>
@@ -55,20 +54,20 @@
                         <conditions/>
                     </filter>
                     <lifetime>3600</lifetime>
-                    <description>Discovery of DRBD devices.</description>
+                    <description/>
                     <item_prototypes>
                         <item_prototype>
-                            <name>DRBD {#DRBD_MINOR} connection status</name>
+                            <name>HFI interface {#HFINUM} linkquality</name>
                             <type>0</type>
                             <snmp_community/>
                             <multiplier>0</multiplier>
                             <snmp_oid/>
-                            <key>drbd[conn,{#DRBD_MINOR}]</key>
-                            <delay>60</delay>
-                            <history>7</history>
+                            <key>opainfo[linkquality,{#HFINUM}]</key>
+                            <delay>300</delay>
+                            <history>90</history>
                             <trends>0</trends>
                             <status>0</status>
-                            <value_type>1</value_type>
+                            <value_type>0</value_type>
                             <allowed_hosts/>
                             <units/>
                             <delta>0</delta>
@@ -94,7 +93,7 @@
                             <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
-                                    <name>DRBD</name>
+                                    <name>OPAinfo</name>
                                 </application>
                             </applications>
                             <valuemap/>
@@ -102,17 +101,17 @@
                             <application_prototypes/>
                         </item_prototype>
                         <item_prototype>
-                            <name>DRBD {#DRBD_MINOR} disk status</name>
+                            <name>HFI interface {#HFINUM} portstate</name>
                             <type>0</type>
                             <snmp_community/>
                             <multiplier>0</multiplier>
                             <snmp_oid/>
-                            <key>drbd[disk,{#DRBD_MINOR}]</key>
-                            <delay>60</delay>
-                            <history>7</history>
+                            <key>opainfo[portstate,{#HFINUM}]</key>
+                            <delay>300</delay>
+                            <history>90</history>
                             <trends>0</trends>
                             <status>0</status>
-                            <value_type>1</value_type>
+                            <value_type>0</value_type>
                             <allowed_hosts/>
                             <units/>
                             <delta>0</delta>
@@ -138,7 +137,7 @@
                             <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
-                                    <name>DRBD</name>
+                                    <name>OPAinfo</name>
                                 </application>
                             </applications>
                             <valuemap/>
@@ -146,17 +145,17 @@
                             <application_prototypes/>
                         </item_prototype>
                         <item_prototype>
-                            <name>DRBD {#DRBD_MINOR} role status</name>
+                            <name>HFI interface {#HFINUM} linkspeed</name>
                             <type>0</type>
                             <snmp_community/>
                             <multiplier>0</multiplier>
                             <snmp_oid/>
-                            <key>drbd[role,{#DRBD_MINOR}]</key>
-                            <delay>60</delay>
-                            <history>7</history>
+                            <key>opainfo[linkspeed,{#HFINUM}]</key>
+                            <delay>300</delay>
+                            <history>90</history>
                             <trends>0</trends>
                             <status>0</status>
-                            <value_type>1</value_type>
+                            <value_type>0</value_type>
                             <allowed_hosts/>
                             <units/>
                             <delta>0</delta>
@@ -182,48 +181,110 @@
                             <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
-                                    <name>DRBD</name>
+                                    <name>OPAinfo</name>
                                 </application>
                             </applications>
                             <valuemap/>
                             <logtimefmt/>
                             <application_prototypes/>
                         </item_prototype>
+
+                        <item_prototype>
+                            <name>HFI interface {#HFINUM} linkwidth</name>
+                            <type>0</type>
+                            <snmp_community/>
+                            <multiplier>0</multiplier>
+                            <snmp_oid/>
+                            <key>opainfo[linkwidth,{#HFINUM}]</key>
+                            <delay>300</delay>
+                            <history>90</history>
+                            <trends>0</trends>
+                            <status>0</status>
+                            <value_type>0</value_type>
+                            <allowed_hosts/>
+                            <units/>
+                            <delta>0</delta>
+                            <snmpv3_contextname/>
+                            <snmpv3_securityname/>
+                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                            <snmpv3_authpassphrase/>
+                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                            <snmpv3_privpassphrase/>
+                            <formula>1</formula>
+                            <delay_flex/>
+                            <params/>
+                            <ipmi_sensor/>
+                            <data_type>0</data_type>
+                            <authtype>0</authtype>
+                            <username/>
+                            <password/>
+                            <publickey/>
+                            <privatekey/>
+                            <port/>
+                            <description/>
+                            <inventory_link>0</inventory_link>
+                            <applications>
+                                <application>
+                                    <name>OPAinfo</name>
+                                </application>
+                            </applications>
+                            <valuemap/>
+                            <logtimefmt/>
+                            <application_prototypes/>
+                        </item_prototype>
+
+
+                        <item_prototype>
+                            <name>HFI interface {#HFINUM} lid</name>
+                            <type>0</type>
+                            <snmp_community/>
+                            <multiplier>0</multiplier>
+                            <snmp_oid/>
+                            <key>opainfo[lid,{#HFINUM}]</key>
+                            <delay>300</delay>
+                            <history>90</history>
+                            <trends>0</trends>
+                            <status>0</status>
+                            <value_type>4</value_type>
+                            <allowed_hosts/>
+                            <units/>
+                            <delta>0</delta>
+                            <snmpv3_contextname/>
+                            <snmpv3_securityname/>
+                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                            <snmpv3_authpassphrase/>
+                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                            <snmpv3_privpassphrase/>
+                            <formula>1</formula>
+                            <delay_flex/>
+                            <params/>
+                            <ipmi_sensor/>
+                            <data_type>0</data_type>
+                            <authtype>0</authtype>
+                            <username/>
+                            <password/>
+                            <publickey/>
+                            <privatekey/>
+                            <port/>
+                            <description/>
+                            <inventory_link>0</inventory_link>
+                            <applications>
+                                <application>
+                                    <name>OPAinfo</name>
+                                </application>
+                            </applications>
+                            <valuemap/>
+                            <logtimefmt/>
+                            <application_prototypes/>
+                        </item_prototype>
+
                     </item_prototypes>
                     <trigger_prototypes>
                         <trigger_prototype>
-                            <expression>{CV App DRBD:drbd[conn,{#DRBD_MINOR}].regexp(&quot;^Connected$&quot;)}=0</expression>
-                            <name>DRBD {#DRBD_MINOR} is not Connected on {HOST.NAME}</name>
-                            <url/>
-                            <status>0</status>
-                            <priority>4</priority>
-                            <description/>
-                            <type>0</type>
-                            <dependencies/>
-                        </trigger_prototype>
-                        <trigger_prototype>
-                            <expression>{CV App DRBD:drbd[disk,{#DRBD_MINOR}].regexp(&quot;^UpToDate&quot;)}=0</expression>
-                            <name>DRBD {#DRBD_MINOR} is not UpToDate on {HOST.NAME}</name>
-                            <url/>
-                            <status>0</status>
-                            <priority>4</priority>
-                            <description/>
-                            <type>0</type>
-                            <dependencies/>
-                        </trigger_prototype>
-                        <trigger_prototype>
-                            <expression>{CV App DRBD:drbd[role,{#DRBD_MINOR}].str(&quot;Primary&quot;)}=0</expression>
-                            <name>DRBD {#DRBD_MINOR} missing Primary role on {HOST.NAME}</name>
-                            <url/>
-                            <status>0</status>
-                            <priority>4</priority>
-                            <description/>
-                            <type>0</type>
-                            <dependencies/>
-                        </trigger_prototype>
-                        <trigger_prototype>
-                            <expression>{CV App DRBD:drbd[role,{#DRBD_MINOR}].change()}=1</expression>
-                            <name>DRBD {#DRBD_MINOR} role changed on {HOST.NAME}</name>
+                            <expression>{CV OPAinfo:opainfo[linkquality,{#HFINUM}].last(0)}&lt;5</expression>
+                            <name>Link quality of port {#HFINUM} on {HOST.NAME} is not excellent</name>
                             <url/>
                             <status>0</status>
                             <priority>2</priority>
@@ -231,6 +292,49 @@
                             <type>0</type>
                             <dependencies/>
                         </trigger_prototype>
+                        <trigger_prototype>
+                            <expression>{CV OPAinfo:opainfo[linkquality,{#HFINUM}].last(0)}&lt;4</expression>
+                            <name>Link quality of port {#HFINUM} on {HOST.NAME} is not good</name>
+                            <url/>
+                            <status>0</status>
+                            <priority>3</priority>
+                            <description/>
+                            <type>0</type>
+                            <dependencies/>
+                        </trigger_prototype>
+                        <trigger_prototype>
+                            <expression>{CV OPAinfo:opainfo[linkwidth,{#HFINUM}].last(0)}&lt;4</expression>
+                            <name>Link width of port {#HFINUM} on {HOST.NAME} is not 4</name>
+                            <url/>
+                            <status>0</status>
+                            <priority>3</priority>
+                            <description/>
+                            <type>0</type>
+                            <dependencies/>
+                        </trigger_prototype>
+
+                         <trigger_prototype>
+                            <expression>{CV OPAinfo:opainfo[linkspeed,{#HFINUM}].last(0)}&lt;25</expression>
+                            <name>Link speed of port {#HFINUM} on {HOST.NAME} is not 25Gbps</name>
+                            <url/>
+                            <status>0</status>
+                            <priority>3</priority>
+                            <description/>
+                            <type>0</type>
+                            <dependencies/>
+                        </trigger_prototype>
+
+                         <trigger_prototype>
+                            <expression>{CV OPAinfo:opainfo[portstate,{#HFINUM}].last(0)}&lt;&gt;4</expression>
+                            <name>Link speed  {#HFINUM} on {HOST.NAME} is not Active</name>
+                            <url/>
+                            <status>0</status>
+                            <priority>4</priority>
+                            <description/>
+                            <type>0</type>
+                            <dependencies/>
+                        </trigger_prototype>
+
                     </trigger_prototypes>
                     <graph_prototypes/>
                     <host_prototypes/>

@@ -5,8 +5,11 @@ Cmnd_Alias ZABBIX_CMD = /var/lib/zabbix/userparameters/pacemaker, \
     /var/lib/zabbix/userparameters/ipmitool, \
     /var/lib/zabbix/userparameters/drbd, \
     /var/lib/zabbix/userparameters/mounts_systemd, \
-    /usr/sbin/smartctl,/var/lib/zabbix/userparameters/smartctl-disks-discovery.pl, \
+    /var/lib/zabbix/userparameters/opainfo, \
+    /usr/sbin/smartctl,\
+    /var/lib/zabbix/userparameters/smartctl-disks-discovery.pl, \
     /usr/bin/ipmitool, \
     /opt/dell/mdstoragesoftware/mdstoragemanager/client/SMcli, \
-    /usr/bin/sinfo, /usr/bin/scontrol
+    /usr/bin/sinfo, \
+    /usr/bin/scontrol
 zabbix ALL = (root) NOPASSWD: ZABBIX_CMD

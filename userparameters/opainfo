@@ -1,0 +1,150 @@
+#!/usr/bin/python
+# vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4
+
+import argparse
+import json
+import subprocess
+import os
+import sys
+import time
+import tempfile
+import fcntl
+import logging
+
+__author__ = 'Vladimir Krumshtein <vladimir.krumstein@clustervision.com>'
+__date__ = 'Nov 2016'
+__version__ = '1.0.0'
+
+DEBUG = False
+try:
+	from subprocess import DEVNULL # py3k
+except ImportError:
+	import os
+	DEVNULL = open(os.devnull, 'wb')
+
+class OPAINFO(object):
+
+    EXECUTABLE = '/usr/sbin/opainfo'
+    CMD = [EXECUTABLE, '']
+
+    if not os.path.exists(EXECUTABLE):
+        print "No executable found '%s'. Please install omipath tools" % EXECUTABLE
+        sys.exit(1)
+ 
+    @classmethod
+    def execute_cmd(cls):
+        proc = subprocess.Popen(cls.CMD, stdout=subprocess.PIPE, stderr=DEVNULL,  close_fds=True)
+        if proc.returncode:
+            sys.exit(1)
+        return proc.communicate()[0].split('\n')[:]
+
+    @classmethod
+    def discovery_hfi(cls, args):
+        data = []
+        hfi_num = 1
+        port_num = 1
+        while True:
+            port_num = 1
+            while True:
+                cls.CMD= [cls.EXECUTABLE, '-g','-h', str(hfi_num),'-p',str(port_num)]
+                res = cls.execute_cmd()
+                try:
+                    if res[0].startswith("PortName") == False:
+                        break
+                    else:
+                        data.append({'{#HFINUM}':"%s:%s"%(hfi_num,port_num)})
+                        port_num+=1
+                except:
+                    break
+            hfi_num+=1
+            try:
+                cls.CMD= [cls.EXECUTABLE, '-g','-h', str(hfi_num),'-p',str("1")]
+                if  cls.execute_cmd()[0].startswith("Portname") == False:
+                    break
+            except:
+                break
+        
+        return json.dumps({'data': data}, separators=(',', ':'))
+
+    @classmethod
+    def getopainfo(cls, args, param):
+        hfi_info = {}
+        hfi_num,port_num  = args.hfi.split(":")
+        cls.CMD= [cls.EXECUTABLE, '-g','-h', hfi_num,'-p',port_num]
+        for line in cls.execute_cmd():
+            hfi_info[line.split("..")[0]]=line.split(":")[-1].strip()
+        return hfi_info[param]
+
+    @classmethod
+    def link_quality(cls, args):
+        return cls.getopainfo(args,"LinkQualityIndicator")
+
+    @classmethod
+    def port_state(cls, args):
+        return int(cls.getopainfo(args,"PortStates.s.PortState"),16)
+
+    @classmethod
+    def lid(cls, args):
+        return cls.getopainfo(args,"LID")
+
+    #https://github.com/01org/opa-ff/blob/96bfc9f87f7e7caa715e72b4a80925c6e6e8c3d4/IbAccess/Common/Inc/stl_sm.h
+    @classmethod
+    def link_speed(cls, args):
+        speed_map = {0:"0",1:"12.5",2:"25"}
+        return speed_map[int(cls.getopainfo(args,"LinkSpeed.Active"),16)]
+
+    @classmethod
+    def link_width(cls, args):
+        width_map = {0:0,1:1,2:2,4:3,8:4}
+        return width_map[int(cls.getopainfo(args,"LinkWidth.Active"),16)]
+
+
+def parse_args():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-d', '--debug', action='store_true')
+
+    subparsers = parser.add_subparsers()
+
+    subparser_discovery = subparsers.add_parser('discovery')
+    subparser_discovery.set_defaults(func=OPAINFO.discovery_hfi)
+
+    subparser_powerstate = subparsers.add_parser('linkquality')
+    subparser_powerstate.set_defaults(func=OPAINFO.link_quality)
+    subparser_powerstate.add_argument('hfi')
+
+    subparser_powerstate = subparsers.add_parser('portstate')
+    subparser_powerstate.set_defaults(func=OPAINFO.port_state)
+    subparser_powerstate.add_argument('hfi')
+
+    subparser_powerstate = subparsers.add_parser('linkspeed')
+    subparser_powerstate.set_defaults(func=OPAINFO.link_speed)
+    subparser_powerstate.add_argument('hfi')
+
+    subparser_powerstate = subparsers.add_parser('linkwidth')
+    subparser_powerstate.set_defaults(func=OPAINFO.link_width)
+    subparser_powerstate.add_argument('hfi')
+
+    subparser_powerstate = subparsers.add_parser('lid')
+    subparser_powerstate.set_defaults(func=OPAINFO.lid)
+    subparser_powerstate.add_argument('hfi')
+
+
+    return parser.parse_known_args()[0]
+
+def main():
+    args = parse_args()
+    try:
+        if args.debug:
+            global DEBUG 
+            DEBUG = True
+            logging.basicConfig(format='%(process)d %(lineno)d %(message)s',stream=sys.stderr, level=logging.DEBUG)
+        print(args.func(args)) 
+    except Exception as e:
+        if args.debug:
+            raise e
+        print(e)
+
+
+if __name__ == '__main__':
+    main()
+
