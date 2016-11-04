@@ -25,9 +25,11 @@ TOKEN=$(curl -s localhost/zabbix/api_jsonrpc.php \
                    }}'  | python -c "import json,sys; auth=json.load(sys.stdin); print (auth[\"result\"])")
 echo "Got token"
 echo "importing template"
+#TEMPL=$(cat $1 )
 curl -s localhost/zabbix/api_jsonrpc.php \
               -H 'Content-Type: application/json-rpc' \
-              -d '{"jsonrpc": "2.0",
+              -d @- <<CURL_DATA
+ {"jsonrpc": "2.0",
                    "method": "configuration.import",
                   "params": {
                        "format": "xml",
@@ -65,9 +67,11 @@ curl -s localhost/zabbix/api_jsonrpc.php \
                               }
 				
                        },
-                       "source": "'"${TEMPL}"'"
+                       "source": "${TEMPL}"
                    },
-                   "auth": "'${TOKEN}'",
+                   "auth": "${TOKEN}",
                    "id": 2
-	         }'  
+	         }  
+CURL_DATA
+
 echo ""
