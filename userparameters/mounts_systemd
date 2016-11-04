@@ -1,0 +1,118 @@
+#!/usr/bin/python
+
+import argparse
+import json
+import subprocess
+import os
+import sys
+import time
+import tempfile
+import fcntl
+import logging
+
+from  dbus import SystemBus, SessionBus, Interface
+
+__author__ = 'Vladimir Krumshtein <vladimir.krumstein@clustervision.com>'
+__date__ = 'Nov 2016'
+__version__ = '1.0.0'
+
+DEBUG = False
+try:
+	from subprocess import DEVNULL # py3k
+except ImportError:
+	import os
+	DEVNULL = open(os.devnull, 'wb')
+
+class MOUNTS(object):
+
+    @classmethod
+    def discovery_mounts(cls, args):
+        data = []
+        for mp in cls.get_mount_units().keys():
+            data.append({'{#MOUNTPOINT}':mp})
+        return json.dumps({'data': data}, separators=(',', ':'))
+
+    @classmethod
+    def state(cls, args):
+        mountpoint = args.mountpoint
+        return cls.get_mount_units()[mountpoint]["ActiveState"]
+
+    @classmethod
+    def type(cls, args):
+        mountpoint = args.mountpoint
+        return cls.get_mount_units()[mountpoint]["Type"]
+
+
+    @classmethod
+    def get_mount_units(cls):
+        units = {}
+        bus = SystemBus()
+        systemd = bus.get_object('org.freedesktop.systemd1',
+                        '/org/freedesktop/systemd1')
+        manager = Interface(systemd, dbus_interface='org.freedesktop.systemd1.Manager')
+        for u in manager.ListUnits():
+            unit_proxy = bus.get_object('org.freedesktop.systemd1', str(u[6]))
+            try:
+                unit =  Interface(unit_proxy, dbus_interface='org.freedesktop.systemd1.Unit')
+                what = str(unit_proxy.Get(	'org.freedesktop.systemd1.Mount',
+                			'What',    
+                			dbus_interface='org.freedesktop.DBus.Properties'))
+                where = str(unit_proxy.Get(	'org.freedesktop.systemd1.Mount',
+                			'Where',    
+                			dbus_interface='org.freedesktop.DBus.Properties'))
+                
+                type = str(unit_proxy.Get(	'org.freedesktop.systemd1.Mount',
+                			'Type',    
+                			dbus_interface='org.freedesktop.DBus.Properties'))
+
+                active_state = str(unit_proxy.Get(	'org.freedesktop.systemd1.Unit',
+                			'ActiveState',    
+                			dbus_interface='org.freedesktop.DBus.Properties'))
+
+                sub_state = str(unit_proxy.Get(	'org.freedesktop.systemd1.Unit',
+                			'SubState',    
+                			dbus_interface='org.freedesktop.DBus.Properties'))
+                units[where] = {"What":what,"ActiveState":active_state, "SubState":sub_state, "Type":type}
+
+            except:
+                pass
+        #print units
+        return units
+
+def parse_args():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-d', '--debug', action='store_true')
+
+    subparsers = parser.add_subparsers()
+
+    subparser_discovery = subparsers.add_parser('discovery')
+    subparser_discovery.set_defaults(func=MOUNTS.discovery_mounts)
+
+    subparser_powerstate = subparsers.add_parser('state')
+    subparser_powerstate.set_defaults(func=MOUNTS.state)
+    subparser_powerstate.add_argument('mountpoint')
+    
+    subparser_powerstate = subparsers.add_parser('type')
+    subparser_powerstate.set_defaults(func=MOUNTS.type)
+    subparser_powerstate.add_argument('mountpoint')
+
+    return parser.parse_known_args()[0]
+
+def main():
+    args = parse_args()
+    try:
+        if args.debug:
+            global DEBUG 
+            DEBUG = True
+            logging.basicConfig(format='%(process)d %(lineno)d %(message)s',stream=sys.stderr, level=logging.DEBUG)
+        print(args.func(args)) 
+    except Exception as e:
+        if args.debug:
+            raise e
+        print(e)
+
+
+if __name__ == '__main__':
+    main()
+
+#vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4
