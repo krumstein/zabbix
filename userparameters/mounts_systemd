@@ -35,7 +35,16 @@ class MOUNTS(object):
     @classmethod
     def state(cls, args):
         mountpoint = args.mountpoint
-        return cls.get_mount_units()[mountpoint]["ActiveState"]
+        return 1 if cls.get_mount_units()[mountpoint]["SubState"] == "mounted" else 0
+
+    @classmethod
+    def access(cls, args):
+        mountpoint = args.mountpoint
+	try:
+		os.stat(mountpoint)
+		return 1
+	except:
+		return 0
 
     @classmethod
     def type(cls, args):
@@ -72,7 +81,8 @@ class MOUNTS(object):
                 sub_state = str(unit_proxy.Get(	'org.freedesktop.systemd1.Unit',
                 			'SubState',    
                 			dbus_interface='org.freedesktop.DBus.Properties'))
-                units[where] = {"What":what,"ActiveState":active_state, "SubState":sub_state, "Type":type}
+		if type not in ["tmpfs","devtmpfs","rpc_pipefs","debugfs","hugetlbfs","mqueue","fusectl","binfmt_misc","configfs","nfsd"]:
+                	units[where] = {"What":what,"ActiveState":active_state, "SubState":sub_state, "Type":type}
 
             except:
                 pass
@@ -95,6 +105,11 @@ def parse_args():
     subparser_powerstate = subparsers.add_parser('type')
     subparser_powerstate.set_defaults(func=MOUNTS.type)
     subparser_powerstate.add_argument('mountpoint')
+
+    subparser_powerstate = subparsers.add_parser('access')
+    subparser_powerstate.set_defaults(func=MOUNTS.access)
+    subparser_powerstate.add_argument('mountpoint')
+
 
     return parser.parse_known_args()[0]
 
