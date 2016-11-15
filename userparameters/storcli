@@ -1,0 +1,114 @@
+#!/usr/bin/python
+
+import argparse
+import json
+import subprocess
+import os
+import sys
+import re
+
+__author__ = 'Vladimir Krumshtein <vladimir.krumstein@clustervision.com>'
+__date__ = 'Nov 2016'
+__version__ = '1.0.0'
+
+
+class STORCLI(object):
+
+    EXECUTABLE = '/opt/MegaRAID/storcli/storcli64'
+
+    if not os.path.exists(EXECUTABLE):
+        print "No executable found '%s'. Please install storcli from http://docs.avagotech.com/docs/1.20.15_StorCLI  " % EXECUTABLE
+        sys.exit(1)
+
+    @classmethod
+    def discovery_cntrl(cls, args):
+        data = []
+        controllers_count = 0
+        proc = subprocess.Popen([cls.EXECUTABLE, 'show ctrlcount'], stdout=subprocess.PIPE, close_fds=True)
+        if proc.returncode:
+             sys.exit(1)
+        for line in proc.communicate()[0].split('\n'):
+            tmp_arr = [s.strip() for s in line.split('=') if s.strip()]
+            try:
+                if tmp_arr and tmp_arr[0] == "Controller Count":
+                    controllers_count = int(tmp_arr[1])
+            except:
+                pass
+        for controller in xrange(controllers_count):
+            proc = subprocess.Popen([cls.EXECUTABLE, '/c%d'%controller, '/vall','show'], stdout=subprocess.PIPE, close_fds=True) 
+            for line in proc.communicate()[0].split('\n'):
+                tmp_arr = [s.strip() for s in line.split(' ') if s.strip()]
+                if tmp_arr and re.search(r'\d+/\d+',tmp_arr[0]):
+                    pdisk = {'{#C_PDISK}': str(controller) + "_" + tmp_arr[0]}
+                    data.append(pdisk)
+        return json.dumps({'data': data}, separators=(',', ':'))
+
+    @classmethod
+    def getstate(cls, args, parm):
+        controller = args.vdisk.split('_')[0]
+        pdisk = args.vdisk.split('_')[1]
+        proc = subprocess.Popen([ cls.EXECUTABLE, '/c%d'%int(controller), '/vall','show'], stdout=subprocess.PIPE, close_fds=True)
+        if proc.returncode:
+            sys.exit(1)
+        volume_id = 0
+        for line in proc.communicate()[0].split('\n'):
+            tmp_arr = [s.strip() for s in line.split(' ') if s.strip()]
+            if tmp_arr and tmp_arr[0] == pdisk:
+                return tmp_arr[parm]
+
+    @classmethod
+    def vdrivestate(cls, args):
+        return cls.getstate(args, 2)
+
+    @classmethod
+    def vdrivetype(cls, args):
+        return cls.getstate(args, 1)
+
+    @classmethod
+    def vdrivesize(cls, args):
+        return cls.getstate(args, 8)
+
+    @classmethod
+    def vdrivename(cls, args):
+        return cls.getstate(args, 10)
+
+
+def parse_args():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-d', '--debug', action='store_true')
+
+    subparsers = parser.add_subparsers()
+
+    subparser_discovery = subparsers.add_parser('discovery')
+    subparser_discovery.set_defaults(func=STORCLI.discovery_cntrl)
+
+    subparser_powerstate = subparsers.add_parser('vdrivestate')
+    subparser_powerstate.set_defaults(func=STORCLI.vdrivestate)
+    subparser_powerstate.add_argument('vdisk')
+
+    subparser_powerstate = subparsers.add_parser('vdrivetype')
+    subparser_powerstate.set_defaults(func=STORCLI.vdrivetype)
+    subparser_powerstate.add_argument('vdisk')
+
+    subparser_powerstate = subparsers.add_parser('vdrivesize')
+    subparser_powerstate.set_defaults(func=STORCLI.vdrivesize)
+    subparser_powerstate.add_argument('vdisk')
+
+    subparser_powerstate = subparsers.add_parser('vdrivename')
+    subparser_powerstate.set_defaults(func=STORCLI.vdrivename)
+    subparser_powerstate.add_argument('vdisk')
+
+    return parser.parse_known_args()[0]
+
+def main():
+    args = parse_args()
+    try:
+        print(args.func(args)) 
+    except Exception as e:
+        if args.debug:
+            raise e
+        print(e)
+
+
+if __name__ == '__main__':
+    main()

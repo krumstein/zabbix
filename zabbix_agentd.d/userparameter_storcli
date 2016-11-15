@@ -1,0 +1,1 @@
+UserParameter=storcli[*],/usr/bin/sudo /var/lib/zabbix/userparameters/storcli '$1' '$2'
