@@ -6,36 +6,42 @@ import subprocess
 import os
 import sys
 
-__author__ = 'Dmitry Chirikov <dmitry.chirikov@clustervision.com>'
-__date__ = 'Oct 2016'
+__author__ = 'Vladimir Krumshtein <vladimir.krumstein@clustervision.com>'
+__date__ = 'Nov 2016'
 __version__ = '1.0.0'
 
 
-class PERC(object):
+class SAS3IRCU(object):
 
-    EXECUTABLE = '/opt/dell/toolkit/bin/raidcfg'
+    EXECUTABLE = '/opt/lsi/sas3ircu/sas3ircu'
 
     if not os.path.exists(EXECUTABLE):
-        print "No executable found '%s'. Please install Dell's 'raidcfg' rpm" % EXECUTABLE
+        print "No executable found '%s'. Please install sas3ircu from http://www.avagotech.com/cs/Satellite?pagename=AVG2%2FsearchLayout&locale=avg_en&Search=sas3ircu&submit=search into /opt/lsi/sas3ircu/sas3ircu " % EXECUTABLE
         sys.exit(1)
 
     @classmethod
-    def discovery_pdisks(cls, args):
+    def discovery_cntrl(cls, args):
+        data = []
         controllers = []
-        proc = subprocess.Popen([cls.EXECUTABLE, 'controller'], stdout=subprocess.PIPE, close_fds=True)
+        proc = subprocess.Popen([cls.EXECUTABLE, 'LIST'], stdout=subprocess.PIPE, close_fds=True)
         if proc.returncode:
              sys.exit(1)
         for line in proc.communicate()[0].split('\n'):
-            tmp_arr = [s.strip() for s in line.split(': ') if s.strip()]
-            if tmp_arr and tmp_arr[0] == 'Controller_ID/Slot_ID':
-                controllers.append(tmp_arr[1])
-        data = []
+            tmp_arr = [s.strip() for s in line.split(' ') if s.strip()]
+            try:
+                if tmp_arr and tmp_arr[0].isdigit():
+                    controllers.append(tmp_arr[0])
+                    
+            except:
+                pass
+
         for controller in controllers:
-            proc = subprocess.Popen([cls.EXECUTABLE, '-c=' + controller, 'pdisk'], stdout=subprocess.PIPE, close_fds=True) 
+            proc = subprocess.Popen([cls.EXECUTABLE,  controller, 'STATUS'], stdout=subprocess.PIPE, close_fds=True) 
             for line in proc.communicate()[0].split('\n'):
                 tmp_arr = [s.strip() for s in line.split(': ') if s.strip()]
-                if tmp_arr and tmp_arr[0] == 'Location':
-                    #pdisks[controller].append(tmp_arr[1])
+                volume_id = 0
+                if tmp_arr and tmp_arr[0]=='Volume ID':
+                    volume_id = tmp_arr[1]
                     pdisk = {'{#C_PDISK}': controller + "_" + tmp_arr[1]}
                     data.append(pdisk)
         return json.dumps({'data': data}, separators=(',', ':'))
@@ -44,52 +50,20 @@ class PERC(object):
     def getstate(cls, args, parm):
         controller = args.pdisk.split('_')[0]
         pdisk = args.pdisk.split('_')[1]
-        proc = subprocess.Popen([cls.EXECUTABLE, '-c=' + controller, '-pd=' + pdisk, 'adisk'], stdout=subprocess.PIPE, close_fds=True)
+        proc = subprocess.Popen([cls.EXECUTABLE,  controller, 'STATUS'], stdout=subprocess.PIPE, close_fds=True)
         if proc.returncode:
             sys.exit(1)
+        volume_id = 0
         for line in proc.communicate()[0].split('\n'):
             tmp_arr = [s.strip() for s in line.split(': ') if s.strip()]
-            if tmp_arr and tmp_arr[0] == parm:
+            if tmp_arr and tmp_arr[0] == "Volume ID":
+                volume_id = tmp_arr[1]
+            if volume_id == pdisk and tmp_arr and tmp_arr[0] == parm:
                 return tmp_arr[1]
 
     @classmethod
-    def powerstate(cls, args):
-        return cls.getstate(args, "PowerState")
-
-    @classmethod
-    def diskstate(cls, args):
-        return cls.getstate(args, "DiskState")
-
-    @classmethod
-    def smartstate(cls, args):
-        return cls.getstate(args, "SMARTState")
-
-    @classmethod
-    def mediatype(cls, args):
-        return cls.getstate(args, "Media")
-
-    @classmethod
-    def size(cls, args):
-        return cls.getstate(args, "Size")
-
-    @classmethod
-    def info(cls, args):
-        controller = args.pdisk.split('_')[0]
-        pdisk = args.pdisk.split('_')[1]
-        proc = subprocess.Popen([cls.EXECUTABLE, '-c=' + controller, '-pd=' + pdisk, 'adisk'], stdout=subprocess.PIPE, close_fds=True)
-        if proc.returncode:
-            sys.exit(1)
-        info = {}
-        keys = ['Vendor', 'Model', 'Protocol', 'NegSpeed', 'CapSpeed']
-        for line in proc.communicate()[0].split('\n'):
-            tmp_arr = [s.strip() for s in line.split(': ') if s.strip()]
-            if not tmp_arr:
-                continue
-            for key in keys:
-                if tmp_arr[0] == key:
-                    info[key] = tmp_arr[1]
-        return '|'.join([k + '=' + info[k] for k in info])
-
+    def volumestate(cls, args):
+        return cls.getstate(args, "Volume state")
 
 def parse_args():
     parser = argparse.ArgumentParser()
@@ -98,31 +72,11 @@ def parse_args():
     subparsers = parser.add_subparsers()
 
     subparser_discovery = subparsers.add_parser('discovery')
-    subparser_discovery.set_defaults(func=PERC.discovery_pdisks)
+    subparser_discovery.set_defaults(func=SAS3IRCU.discovery_cntrl)
 
-    subparser_powerstate = subparsers.add_parser('powerstate')
-    subparser_powerstate.set_defaults(func=PERC.powerstate)
+    subparser_powerstate = subparsers.add_parser('volumestate')
+    subparser_powerstate.set_defaults(func=SAS3IRCU.volumestate)
     subparser_powerstate.add_argument('pdisk')
-
-    subparser_diskstate = subparsers.add_parser('diskstate')
-    subparser_diskstate.set_defaults(func=PERC.diskstate)
-    subparser_diskstate.add_argument('pdisk')
-
-    subparser_smartstate = subparsers.add_parser('smartstate')
-    subparser_smartstate.set_defaults(func=PERC.smartstate)
-    subparser_smartstate.add_argument('pdisk')
-
-    subparser_size = subparsers.add_parser('size')
-    subparser_size.set_defaults(func=PERC.size)
-    subparser_size.add_argument('pdisk')
-
-    subparser_mediatype = subparsers.add_parser('mediatype')
-    subparser_mediatype.set_defaults(func=PERC.mediatype)
-    subparser_mediatype.add_argument('pdisk')
-
-    subparser_info = subparsers.add_parser('info')
-    subparser_info.set_defaults(func=PERC.info)
-    subparser_info.add_argument('pdisk')
 
     return parser.parse_known_args()[0]
 

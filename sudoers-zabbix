@@ -6,6 +6,7 @@ Cmnd_Alias ZABBIX_CMD = /var/lib/zabbix/userparameters/pacemaker, \
     /var/lib/zabbix/userparameters/drbd, \
     /var/lib/zabbix/userparameters/mounts_systemd, \
     /var/lib/zabbix/userparameters/opainfo, \
+    /var/lib/zabbix/userparameters/sas3ircu, \
     /usr/sbin/smartctl,\
     /var/lib/zabbix/userparameters/smartctl-disks-discovery.pl, \
     /usr/bin/ipmitool, \

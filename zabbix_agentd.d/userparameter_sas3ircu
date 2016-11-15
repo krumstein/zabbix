@@ -1,0 +1,1 @@
+UserParameter=sas3ircu[*],/usr/bin/sudo /var/lib/zabbix/userparameters/sas3ircu '$1' '$2'
