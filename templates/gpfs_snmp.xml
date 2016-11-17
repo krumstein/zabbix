@@ -84,6 +84,7 @@
           <valuemap/>
           <logtimefmt/>
         </item>
+      </items>
       <discovery_rules>
         <discovery_rule>
           <name>GPFS Clusters</name>
