@@ -1,5 +1,5 @@
 Name:		cv-zabbix-checks	
-Version:	0.8
+Version:	0.9
 Release:	1%{?dist}
 Summary:	Zabbix checks by CLusterVision
 
@@ -67,6 +67,8 @@ systemctl restart zabbix-agent
 
 
 %changelog
+* Thu Nov 17 2016 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.9
+- Updated templates, standart timeouts
 * Tue Nov 15 2016 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.8
 - Added storcli
 * Tue Nov 15 2016 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.7
