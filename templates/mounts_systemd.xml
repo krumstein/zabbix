@@ -30,7 +30,7 @@
                     <snmp_community/>
                     <snmp_oid/>
                     <key>mounts_systemd[discovery]</key>
-                    <delay>300</delay>
+                    <delay>3600</delay>
                     <status>0</status>
                     <allowed_hosts/>
                     <snmpv3_contextname/>
@@ -54,7 +54,7 @@
                         <formula/>
                         <conditions/>
                     </filter>
-                    <lifetime>3600</lifetime>
+                    <lifetime>0</lifetime>
                     <description/>
                     <item_prototypes>
                         <item_prototype>
@@ -155,7 +155,7 @@
                             <multiplier>0</multiplier>
                             <snmp_oid/>
                             <key>mounts_systemd[type,{#MOUNTPOINT}]</key>
-                            <delay>300</delay>
+                            <delay>3600</delay>
                             <history>90</history>
                             <trends>0</trends>
                             <status>0</status>
@@ -201,7 +201,7 @@
                             <name>MountPoint {#MOUNTPOINT} is not accessable</name>
                             <url/>
                             <status>0</status>
-                            <priority>4</priority>
+                            <priority>3</priority>
                             <description/>
                             <type>0</type>
                             <dependencies/>
@@ -212,7 +212,7 @@
                             <name>MountPoint {#MOUNTPOINT} not mounted</name>
                             <url/>
                             <status>0</status>
-                            <priority>4</priority>
+                            <priority>3</priority>
                             <description/>
                             <type>0</type>
                             <dependencies/>

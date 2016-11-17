@@ -33,7 +33,7 @@
                     <multiplier>0</multiplier>
                     <snmp_oid/>
                     <key>nodes.mem.util</key>
-                    <delay>30</delay>
+                    <delay>300</delay>
                     <history>90</history>
                     <trends>365</trends>
                     <status>0</status>
@@ -76,7 +76,7 @@
                     <multiplier>0</multiplier>
                     <snmp_oid/>
                     <key>slurm.cpus.util</key>
-                    <delay>30</delay>
+                    <delay>300</delay>
                     <history>90</history>
                     <trends>365</trends>
                     <status>0</status>
@@ -119,7 +119,7 @@
                     <multiplier>0</multiplier>
                     <snmp_oid/>
                     <key>slurm.nodes.meminuse</key>
-                    <delay>30</delay>
+                    <delay>300</delay>
                     <history>90</history>
                     <trends>365</trends>
                     <status>0</status>
@@ -162,7 +162,7 @@
                     <multiplier>0</multiplier>
                     <snmp_oid/>
                     <key>slurm.nodes.util</key>
-                    <delay>30</delay>
+                    <delay>300</delay>
                     <history>90</history>
                     <trends>365</trends>
                     <status>0</status>
@@ -205,7 +205,7 @@
                     <multiplier>0</multiplier>
                     <snmp_oid/>
                     <key>slurm[-c, cpus.allocated]</key>
-                    <delay>30</delay>
+                    <delay>300</delay>
                     <history>90</history>
                     <trends>365</trends>
                     <status>0</status>
@@ -248,7 +248,7 @@
                     <multiplier>0</multiplier>
                     <snmp_oid/>
                     <key>slurm[-c, cpus.idle]</key>
-                    <delay>30</delay>
+                    <delay>300</delay>
                     <history>90</history>
                     <trends>365</trends>
                     <status>0</status>
@@ -291,7 +291,7 @@
                     <multiplier>0</multiplier>
                     <snmp_oid/>
                     <key>slurm[-c, cpus.total]</key>
-                    <delay>30</delay>
+                    <delay>300</delay>
                     <history>90</history>
                     <trends>365</trends>
                     <status>0</status>
@@ -334,7 +334,7 @@
                     <multiplier>0</multiplier>
                     <snmp_oid/>
                     <key>slurm[-c, daemon.backup]</key>
-                    <delay>30</delay>
+                    <delay>300</delay>
                     <history>365</history>
                     <trends>0</trends>
                     <status>0</status>
@@ -377,7 +377,7 @@
                     <multiplier>0</multiplier>
                     <snmp_oid/>
                     <key>slurm[-c, daemon.primary]</key>
-                    <delay>30</delay>
+                    <delay>300</delay>
                     <history>365</history>
                     <trends>0</trends>
                     <status>0</status>
@@ -420,7 +420,7 @@
                     <multiplier>0</multiplier>
                     <snmp_oid/>
                     <key>slurm[-c, nodes.allocated]</key>
-                    <delay>30</delay>
+                    <delay>3600</delay>
                     <history>90</history>
                     <trends>365</trends>
                     <status>0</status>
@@ -463,7 +463,7 @@
                     <multiplier>0</multiplier>
                     <snmp_oid/>
                     <key>slurm[-c, nodes.idle]</key>
-                    <delay>30</delay>
+                    <delay>300</delay>
                     <history>90</history>
                     <trends>365</trends>
                     <status>0</status>
@@ -506,7 +506,7 @@
                     <multiplier>0</multiplier>
                     <snmp_oid/>
                     <key>slurm[-c, nodes.memfree]</key>
-                    <delay>30</delay>
+                    <delay>300</delay>
                     <history>90</history>
                     <trends>365</trends>
                     <status>0</status>
@@ -549,7 +549,7 @@
                     <multiplier>0</multiplier>
                     <snmp_oid/>
                     <key>slurm[-c, nodes.memtotal]</key>
-                    <delay>30</delay>
+                    <delay>3600</delay>
                     <history>90</history>
                     <trends>365</trends>
                     <status>0</status>
@@ -592,7 +592,7 @@
                     <multiplier>0</multiplier>
                     <snmp_oid/>
                     <key>slurm[-c, nodes.other]</key>
-                    <delay>30</delay>
+                    <delay>300</delay>
                     <history>90</history>
                     <trends>365</trends>
                     <status>0</status>
@@ -635,7 +635,7 @@
                     <multiplier>0</multiplier>
                     <snmp_oid/>
                     <key>slurm[-c, nodes.total]</key>
-                    <delay>30</delay>
+                    <delay>3600</delay>
                     <history>90</history>
                     <trends>365</trends>
                     <status>0</status>
@@ -684,7 +684,7 @@
             <name>Slurm backup daemon is not UP</name>
             <url/>
             <status>1</status>
-            <priority>4</priority>
+            <priority>3</priority>
             <description/>
             <type>0</type>
             <dependencies/>

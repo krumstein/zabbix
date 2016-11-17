@@ -54,7 +54,7 @@
                         <formula/>
                         <conditions/>
                     </filter>
-                    <lifetime>30</lifetime>
+                    <lifetime>0</lifetime>
                     <description/>
                     <item_prototypes>
                         <item_prototype>
@@ -108,7 +108,7 @@
                             <multiplier>0</multiplier>
                             <snmp_oid/>
                             <key>storcli[vdrivetype,{#C_PDISK}]</key>
-                            <delay>600</delay>
+                            <delay>3600</delay>
                             <history>90</history>
                             <trends>0</trends>
                             <status>0</status>
@@ -152,7 +152,7 @@
                             <multiplier>0</multiplier>
                             <snmp_oid/>
                             <key>storcli[vdrivename,{#C_PDISK}]</key>
-                            <delay>600</delay>
+                            <delay>3600</delay>
                             <history>90</history>
                             <trends>0</trends>
                             <status>0</status>
@@ -196,7 +196,7 @@
                             <multiplier>0</multiplier>
                             <snmp_oid/>
                             <key>storcli[vdrivesize,{#C_PDISK}]</key>
-                            <delay>600</delay>
+                            <delay>3600</delay>
                             <history>90</history>
                             <trends>0</trends>
                             <status>0</status>

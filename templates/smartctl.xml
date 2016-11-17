@@ -30,7 +30,7 @@
                     <snmp_community/>
                     <snmp_oid/>
                     <key>uHDD.discovery</key>
-                    <delay>1800</delay>
+                    <delay>3600</delay>
                     <status>0</status>
                     <allowed_hosts/>
                     <snmpv3_contextname/>
@@ -61,7 +61,7 @@
                             </condition>
                         </conditions>
                     </filter>
-                    <lifetime>30</lifetime>
+                    <lifetime>0</lifetime>
                     <description/>
                     <item_prototypes>
                         <item_prototype>
@@ -71,7 +71,7 @@
                             <multiplier>0</multiplier>
                             <snmp_oid/>
                             <key>uHDD[{#DISKNAME},5 Reallocated]</key>
-                            <delay>7200</delay>
+                            <delay>3600</delay>
                             <history>7</history>
                             <trends>0</trends>
                             <status>0</status>
@@ -115,7 +115,7 @@
                             <multiplier>1</multiplier>
                             <snmp_oid/>
                             <key>uHDD[{#DISKNAME},Power_On]</key>
-                            <delay>7200</delay>
+                            <delay>3600</delay>
                             <history>7</history>
                             <trends>0</trends>
                             <status>0</status>
@@ -159,7 +159,7 @@
                             <multiplier>0</multiplier>
                             <snmp_oid/>
                             <key>uHDD[{#DISKNAME},Spin_Retry_Count]</key>
-                            <delay>7200</delay>
+                            <delay>3600</delay>
                             <history>7</history>
                             <trends>0</trends>
                             <status>0</status>
@@ -379,7 +379,7 @@
                             <multiplier>0</multiplier>
                             <snmp_oid/>
                             <key>uHDD.critical[{#DISKNAME}]</key>
-                            <delay>900</delay>
+                            <delay>600</delay>
                             <history>7</history>
                             <trends>0</trends>
                             <status>0</status>
@@ -423,7 +423,7 @@
                             <multiplier>0</multiplier>
                             <snmp_oid/>
                             <key>uHDD.model.[{#DISKNAME}]</key>
-                            <delay>86400</delay>
+                            <delay>3600</delay>
                             <history>7</history>
                             <trends>0</trends>
                             <status>0</status>
@@ -467,7 +467,7 @@
                             <multiplier>0</multiplier>
                             <snmp_oid/>
                             <key>uHDD.sn.[{#DISKNAME}]</key>
-                            <delay>86400</delay>
+                            <delay>3600</delay>
                             <history>3</history>
                             <trends>0</trends>
                             <status>0</status>
@@ -511,7 +511,7 @@
                             <multiplier>0</multiplier>
                             <snmp_oid/>
                             <key>uHDD.health.[{#DISKNAME}]</key>
-                            <delay>7200</delay>
+                            <delay>3600</delay>
                             <history>3</history>
                             <trends>0</trends>
                             <status>0</status>
@@ -584,7 +584,7 @@
                             <expression>{CV SMART hdd monitoring:uHDD.critical[{#DISKNAME}].last()}&gt;0</expression>
                             <name>[HDD.{#DISKNAME}] SMART Critical error total: {ITEM.LASTVALUE}</name>
                             <url/>
-                            <status>0</status>
+                            <status>1</status>
                             <priority>1</priority>
                             <description/>
                             <type>0</type>
@@ -635,7 +635,7 @@
                             <name>[HDD.{#DISKNAME}] SMART new error!</name>
                             <url/>
                             <status>0</status>
-                            <priority>4</priority>
+                            <priority>3</priority>
                             <description>New error in SMART.</description>
                             <type>0</type>
                             <dependencies/>

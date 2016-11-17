@@ -13,7 +13,7 @@
                             <name>New sel message</name>
                             <url/>
                             <status>0</status>
-                            <priority>4</priority>
+                            <priority>3</priority>
                             <description/>
                             <type>0</type>
                             <dependencies/>
@@ -111,7 +111,7 @@
                         <formula/>
                         <conditions/>
                     </filter>
-                    <lifetime>3600</lifetime>
+                    <lifetime>0</lifetime>
                     <description/>
                     <item_prototypes>
                         <item_prototype>
@@ -121,7 +121,7 @@
                             <multiplier>0</multiplier>
                             <snmp_oid/>
                             <key>ipmitool[up_crit,{#SENSOR_NAME}]</key>
-                            <delay>300</delay>
+                            <delay>3600</delay>
                             <history>90</history>
                             <trends>0</trends>
                             <status>0</status>
@@ -166,7 +166,7 @@
                             <multiplier>0</multiplier>
                             <snmp_oid/>
                             <key>ipmitool[low_crit,{#SENSOR_NAME}]</key>
-                            <delay>300</delay>
+                            <delay>3600</delay>
                             <history>90</history>
                             <trends>0</trends>
                             <status>0</status>
@@ -265,12 +265,12 @@
                             <name>Value of {#SENSOR_NAME} is lower than critical</name>
                             <url/>
                             <status>0</status>
-                            <priority>4</priority>
+                            <priority>1</priority>
                             <description/>
                             <type>0</type>
                             <dependencies/>
+                            <status>1</status>
                         </trigger_prototype>
-
                     </trigger_prototypes>
                     <graph_prototypes/>
                     <host_prototypes/>

@@ -30,7 +30,7 @@
                     <snmp_community/>
                     <snmp_oid/>
                     <key>smcli[discovery]</key>
-                    <delay>30</delay>
+                    <delay>3600</delay>
                     <status>0</status>
                     <allowed_hosts/>
                     <snmpv3_contextname/>
@@ -54,7 +54,7 @@
                         <formula/>
                         <conditions/>
                     </filter>
-                    <lifetime>3600</lifetime>
+                    <lifetime>0</lifetime>
                     <description/>
                     <item_prototypes>
                         <item_prototype>
@@ -64,7 +64,7 @@
                             <multiplier>0</multiplier>
                             <snmp_oid/>
                             <key>smcli[health,{#MD_ARRAY}]</key>
-                            <delay>3600</delay>
+                            <delay>300</delay>
                             <history>90</history>
                             <trends>0</trends>
                             <status>0</status>

@@ -29,7 +29,7 @@
                     <snmp_community/>
                     <snmp_oid/>
                     <key>opainfo[discovery]</key>
-                    <delay>300</delay>
+                    <delay>3600</delay>
                     <status>0</status>
                     <allowed_hosts/>
                     <snmpv3_contextname/>
@@ -53,7 +53,7 @@
                         <formula/>
                         <conditions/>
                     </filter>
-                    <lifetime>3600</lifetime>
+                    <lifetime>0</lifetime>
                     <description/>
                     <item_prototypes>
                         <item_prototype>
@@ -242,7 +242,7 @@
                             <multiplier>0</multiplier>
                             <snmp_oid/>
                             <key>opainfo[lid,{#HFINUM}]</key>
-                            <delay>300</delay>
+                            <delay>3600</delay>
                             <history>90</history>
                             <trends>0</trends>
                             <status>0</status>
@@ -326,10 +326,10 @@
 
                          <trigger_prototype>
                             <expression>{CV OPAinfo:opainfo[portstate,{#HFINUM}].last(0)}&lt;&gt;4</expression>
-                            <name>Link speed  {#HFINUM} on {HOST.NAME} is not Active</name>
+                            <name>Port state  {#HFINUM} on {HOST.NAME} is not Active</name>
                             <url/>
                             <status>0</status>
-                            <priority>4</priority>
+                            <priority>3</priority>
                             <description/>
                             <type>0</type>
                             <dependencies/>

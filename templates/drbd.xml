@@ -54,7 +54,7 @@
                         <formula/>
                         <conditions/>
                     </filter>
-                    <lifetime>3600</lifetime>
+                    <lifetime>1</lifetime>
                     <description>Discovery of DRBD devices.</description>
                     <item_prototypes>
                         <item_prototype>
@@ -64,7 +64,7 @@
                             <multiplier>0</multiplier>
                             <snmp_oid/>
                             <key>drbd[conn,{#DRBD_MINOR}]</key>
-                            <delay>60</delay>
+                            <delay>300</delay>
                             <history>7</history>
                             <trends>0</trends>
                             <status>0</status>
@@ -108,7 +108,7 @@
                             <multiplier>0</multiplier>
                             <snmp_oid/>
                             <key>drbd[disk,{#DRBD_MINOR}]</key>
-                            <delay>60</delay>
+                            <delay>300</delay>
                             <history>7</history>
                             <trends>0</trends>
                             <status>0</status>
@@ -152,7 +152,7 @@
                             <multiplier>0</multiplier>
                             <snmp_oid/>
                             <key>drbd[role,{#DRBD_MINOR}]</key>
-                            <delay>60</delay>
+                            <delay>300</delay>
                             <history>7</history>
                             <trends>0</trends>
                             <status>0</status>
@@ -196,7 +196,7 @@
                             <name>DRBD {#DRBD_MINOR} is not Connected on {HOST.NAME}</name>
                             <url/>
                             <status>0</status>
-                            <priority>4</priority>
+                            <priority>3</priority>
                             <description/>
                             <type>0</type>
                             <dependencies/>
@@ -206,7 +206,7 @@
                             <name>DRBD {#DRBD_MINOR} is not UpToDate on {HOST.NAME}</name>
                             <url/>
                             <status>0</status>
-                            <priority>4</priority>
+                            <priority>3</priority>
                             <description/>
                             <type>0</type>
                             <dependencies/>
@@ -226,7 +226,7 @@
                             <name>DRBD {#DRBD_MINOR} role changed on {HOST.NAME}</name>
                             <url/>
                             <status>0</status>
-                            <priority>2</priority>
+                            <priority>1</priority>
                             <description/>
                             <type>0</type>
                             <dependencies/>
