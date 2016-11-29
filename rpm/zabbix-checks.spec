@@ -1,5 +1,5 @@
 Name:		cv-zabbix-checks	
-Version:	0.9
+Version:	0.10
 Release:	2%{?dist}
 Summary:	Zabbix checks by CLusterVision
 
@@ -67,6 +67,8 @@ systemctl restart zabbix-agent
 
 
 %changelog
+* Tue Nov 29 2016 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.10
+- Added verbose linux memory monitoring and graph
 * Thu Nov 17 2016 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.9
 - Updated templates, standart timeouts
 * Tue Nov 15 2016 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.8
