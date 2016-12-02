@@ -1,0 +1,12 @@
+#!/bin/bash
+error(){
+	echo '-1'
+	exit 1
+}
+MYSQL_SLAVE=$(sudo pcs status | grep MariaDB -A 2 | grep Slaves | awk '{ print $3 }') 
+ping -c 1 -w 1 $MYSQL_SLAVE >/dev/null 2>&1 || error
+IO_RUNNING=$(echo 'SHOW SLAVE STATUS \G' | sudo mysql -h $MYSQL_SLAVE   | grep -i SLAVE_IO_RUNNING | awk '{print $2}' | grep -i yes)
+SQL_RUNNING=$(echo 'SHOW SLAVE STATUS \G' | sudo mysql -h $MYSQL_SLAVE   | grep -i SLAVE_SQL_RUNNING | awk '{print $2}' | grep -i yes)
+[ -n $IO_RUNNING  -a -n  $SQL_RUNNING ]  || error
+SECONDS_BEHIND_MASTER=$(echo 'SHOW SLAVE STATUS \G' | sudo mysql -h $MYSQL_SLAVE   | grep -i SECONDS_BEHIND_MASTER  | awk '{print $2}' )
+echo $SECONDS_BEHIND_MASTER
