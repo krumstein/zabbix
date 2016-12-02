@@ -1,6 +1,6 @@
 Name:		cv-zabbix-checks	
-Version:	0.10
-Release:	2%{?dist}
+Version:	0.11
+Release:	1%{?dist}
 Summary:	Zabbix checks by CLusterVision
 
 Group:		CV	
@@ -67,6 +67,8 @@ systemctl restart zabbix-agent
 
 
 %changelog
+* Fri Dec 02 2016 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.11
+- Added rpm package difference between controller nodes
 * Tue Nov 29 2016 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.10
 - Added verbose linux memory monitoring and graph
 * Thu Nov 17 2016 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.9
