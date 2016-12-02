@@ -1,5 +1,5 @@
 Name:		cv-zabbix-checks	
-Version:	0.11
+Version:	0.12
 Release:	1%{?dist}
 Summary:	Zabbix checks by CLusterVision
 
@@ -67,6 +67,8 @@ systemctl restart zabbix-agent
 
 
 %changelog
+* Fri Dec 02 2016 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.12
+- Added slurm node status and count of jobs monitoring, move slurm daemon to slurm node 
 * Fri Dec 02 2016 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.11
 - Added rpm package difference between controller nodes
 * Tue Nov 29 2016 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.10
