@@ -98,6 +98,15 @@ class OPAINFO(object):
         width_map = {0:0,1:1,2:2,4:3,8:4}
         return width_map[int(cls.getopainfo(args,"LinkWidth.Active"),16)]
 
+    @classmethod
+    def xmit_bw(cls, args):
+        return cls.getopainfo(args,"XmitDataMB")
+
+    @classmethod
+    def rcv_bw(cls, args):
+        return cls.getopainfo(args,"RcvDataMB")
+
+
 
 def parse_args():
     parser = argparse.ArgumentParser()
@@ -126,6 +135,14 @@ def parse_args():
 
     subparser_powerstate = subparsers.add_parser('lid')
     subparser_powerstate.set_defaults(func=OPAINFO.lid)
+    subparser_powerstate.add_argument('hfi')
+
+    subparser_powerstate = subparsers.add_parser('xmit_bw')
+    subparser_powerstate.set_defaults(func=OPAINFO.xmit_bw)
+    subparser_powerstate.add_argument('hfi')
+
+    subparser_powerstate = subparsers.add_parser('rcv_bw')
+    subparser_powerstate.set_defaults(func=OPAINFO.rcv_bw)
     subparser_powerstate.add_argument('hfi')
 
 

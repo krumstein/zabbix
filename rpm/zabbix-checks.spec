@@ -1,5 +1,5 @@
 Name:		cv-zabbix-checks	
-Version:	0.13
+Version:	0.14
 Release:	1%{?dist}
 Summary:	Zabbix checks by CLusterVision
 
@@ -67,6 +67,8 @@ systemctl restart zabbix-agent
 
 
 %changelog
+* Mon Dec 05 2016 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.14
+- Added OPAinfo bandwidth monitoring.
 * Fri Dec 02 2016 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.13
 - Added mysql slave monitoring.
 * Fri Dec 02 2016 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.12
