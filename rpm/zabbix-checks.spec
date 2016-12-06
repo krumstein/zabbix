@@ -1,5 +1,5 @@
 Name:		cv-zabbix-checks	
-Version:	0.14
+Version:	0.15
 Release:	1%{?dist}
 Summary:	Zabbix checks by CLusterVision
 
@@ -41,8 +41,15 @@ install -m 0755 utils/add_group.sh $RPM_BUILD_ROOT/usr/lib/zabbix/utils/
 
 install -m 0755 -d $RPM_BUILD_ROOT/usr/lib/zabbix/externalscripts/
 install -m 0755 externalscripts/* $RPM_BUILD_ROOT/usr/lib/zabbix/externalscripts/
+
+install -m 0755 -d   $RPM_BUILD_ROOT/etc/cron.d/
+install -m 0644 gpfs_fileset_iusage  $RPM_BUILD_ROOT/etc/cron.d/
+
+
 mkdir $RPM_BUILD_ROOT/tmp
 touch $RPM_BUILD_ROOT/tmp/ipmitool.cache
+touch $RPM_BUILD_ROOT/tmp/gpfs_filset_usage
+
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -61,6 +68,7 @@ systemctl restart zabbix-agent
 %attr(-,root,root) /tmp/ipmitool.cache
 %attr(-,root,root) /usr/lib/zabbix/templates/*
 %attr(-,root,root) /usr/lib/zabbix/utils/*
+%config(noreplace) /etc/cron.d/gpfs_fileset_iusage
 
 %doc
 
