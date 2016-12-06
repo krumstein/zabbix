@@ -66,6 +66,7 @@ systemctl restart zabbix-agent
 %attr(-,root,root) /etc/sudoers.d/zabbix
 %attr(-,root,root) /usr/lib/zabbix/externalscripts/*
 %attr(-,root,root) /tmp/ipmitool.cache
+%attr(-,root,root) /tmp/gpfs_filset_usage
 %attr(-,root,root) /usr/lib/zabbix/templates/*
 %attr(-,root,root) /usr/lib/zabbix/utils/*
 %config(noreplace) /etc/cron.d/gpfs_fileset_iusage
