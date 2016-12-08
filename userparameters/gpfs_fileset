@@ -41,6 +41,29 @@ class GPFS_FILESET(object):
         return json.dumps({'data': data}, separators=(',', ':'))
 
     @classmethod
+    def getfreesize(cls,filesystem):
+        EXECUTABLE = '/bin/df'
+        proc = subprocess.Popen([EXECUTABLE, '/' + filesystem], stderr=DEVNULL, stdout=subprocess.PIPE, close_fds=True) 
+        for line in proc.communicate()[0].split('\n')[1:]:
+            tmp_arr = [s.strip() for s in line.split(' ') if s.strip()]
+            try:
+                return int(tmp_arr[3])
+            except:
+                return float(inf)
+
+    @classmethod
+    def gettotalsize(cls,filesystem):
+        EXECUTABLE = '/bin/df'
+        proc = subprocess.Popen([EXECUTABLE, '/' + filesystem], stderr=DEVNULL, stdout=subprocess.PIPE, close_fds=True) 
+        for line in proc.communicate()[0].split('\n')[1:]:
+            tmp_arr = [s.strip() for s in line.split(' ') if s.strip()]
+            try:
+                return int(tmp_arr[1])
+            except:
+                return float(inf)
+
+ 
+    @classmethod
     def getsize(cls, args, parm):
         (filesystem,fileset_name) = (args.fileset.split("/")[0],args.fileset.split("/")[1])
         SIZE = {}
@@ -66,7 +89,8 @@ class GPFS_FILESET(object):
 
     @classmethod
     def get_total(cls, args):
-        return int(cls.getsize(args,4))
+        (filesystem,fileset_name) = (args.fileset.split("/")[0],args.fileset.split("/")[1])
+        return min(int(cls.getsize(args,4)),cls.gettotalsize(filesystem) )
 
     @classmethod
     def get_used(cls, args):
@@ -74,7 +98,8 @@ class GPFS_FILESET(object):
 
     @classmethod
     def get_free(cls, args):
-        return cls.get_total(args) - cls.get_used(args)
+        (filesystem,fileset_name) = (args.fileset.split("/")[0],args.fileset.split("/")[1])
+        return min(cls.get_total(args) - cls.get_used(args), cls.getfreesize(filesystem))
 
     @classmethod
     def get_inodes(cls, args, parm):
