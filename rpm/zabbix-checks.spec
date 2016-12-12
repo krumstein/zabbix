@@ -1,6 +1,6 @@
 Name:		cv-zabbix-checks	
-Version:	0.15
-Release:	3%{?dist}
+Version:	0.16
+Release:	1%{?dist}
 Summary:	Zabbix checks by CLusterVision
 
 Group:		CV	
@@ -76,6 +76,8 @@ systemctl restart zabbix-agent
 
 
 %changelog
+* Mon Dec 12 2016 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.16
+- Added standart node template.
 * Mon Dec 05 2016 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.14
 - Added OPAinfo bandwidth monitoring.
 * Fri Dec 02 2016 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.13
