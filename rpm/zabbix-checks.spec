@@ -1,6 +1,6 @@
 Name:		cv-zabbix-checks	
 Version:	0.16
-Release:	2%{?dist}
+Release:	3%{?dist}
 Summary:	Zabbix checks by CLusterVision
 
 Group:		CV	
@@ -43,7 +43,7 @@ install -m 0755 -d $RPM_BUILD_ROOT/usr/lib/zabbix/externalscripts/
 install -m 0755 externalscripts/* $RPM_BUILD_ROOT/usr/lib/zabbix/externalscripts/
 
 install -m 0755 -d   $RPM_BUILD_ROOT/etc/cron.d/
-install -m 0644 gpfs_fileset_iusage  $RPM_BUILD_ROOT/etc/cron.d/
+install -m 0644 gpfs_fileset_usage  $RPM_BUILD_ROOT/etc/cron.d/
 
 
 mkdir $RPM_BUILD_ROOT/tmp
@@ -69,14 +69,14 @@ systemctl restart zabbix-agent
 %attr(-,root,root) /tmp/gpfs_filset_usage
 %attr(-,root,root) /usr/lib/zabbix/templates/*
 %attr(-,root,root) /usr/lib/zabbix/utils/*
-%config(noreplace) /etc/cron.d/gpfs_fileset_iusage
+%config(noreplace) /etc/cron.d/gpfs_fileset_usage
 
 %doc
 
 
 
 %changelog
-* Tue Dec 13 2016 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.16.1
+* Tue Dec 13 2016 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.16.3
 - GPFS fileset usage reports even without quotas.
 * Mon Dec 12 2016 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.16
 - Added standart node template.
