@@ -1,2 +1,0 @@
-#Uncomment to update gpfs fileset inodes usage
-#*/30 * * * * root /usr/lpp/mmfs/bin/mmlsfileset gpfs -i 2>/dev/null > /tmp/gpfs_filset_usage_tmp && mv -f  /tmp/gpfs_filset_usage_tmp /tmp/gpfs_filset_usage 

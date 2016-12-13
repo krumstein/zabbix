@@ -61,40 +61,46 @@ class GPFS_FILESET(object):
                 return int(tmp_arr[1])
             except:
                 return float(inf)
-
  
     @classmethod
-    def getsize(cls, args, parm):
+    def getsize(cls, args):
         (filesystem,fileset_name) = (args.fileset.split("/")[0],args.fileset.split("/")[1])
         SIZE = {}
-        cls.EXECUTABLE = '/usr/lpp/mmfs/bin/mmlsquota'
-        proc = subprocess.Popen([cls.EXECUTABLE,"-j", fileset_name, filesystem  ], stderr=DEVNULL, stdout=subprocess.PIPE, close_fds=True)
-        if proc.returncode:
-            sys.exit(1)
-        for line in proc.communicate()[0].split('\n')[2:]:
+        cache = open("/tmp/gpfs_filset_usage",'r')
+        (filesystem,fileset_name) = (args.fileset.split("/")[0],args.fileset.split("/")[1])
+        for line in cache.readlines()[3:]:
             tmp_arr = [s.strip() for s in line.split(' ') if s.strip()]
             try:
-                return int(tmp_arr[parm])
+                if tmp_arr[0] == fileset_name:
+                    return int(tmp_arr[7])
             except:
-                cls.EXECUTABLE = '/bin/df'
-                proc = subprocess.Popen([cls.EXECUTABLE, '/' + filesystem], stderr=DEVNULL, stdout=subprocess.PIPE, close_fds=True) 
-                for line in proc.communicate()[0].split('\n')[1:]:
-                    tmp_arr = [s.strip() for s in line.split(' ') if s.strip()]
-                    try:
-                        SIZE = {4: tmp_arr[1],2:tmp_arr[2]}
-                    except:
-                        pass
-    
-                return SIZE[parm] 
+                pass
+
+    @classmethod
+    def gettotalsize(cls, args):
+        (filesystem,fileset_name) = (args.fileset.split("/")[0],args.fileset.split("/")[1])
+        if fileset_name == 'root':
+            fileset_name = ''
+        total = 0
+        cls.EXECUTABLE = '/bin/df'
+        proc = subprocess.Popen([cls.EXECUTABLE, '/' + filesystem + '/' + fileset_name], stderr=DEVNULL, stdout=subprocess.PIPE, close_fds=True) 
+        for line in proc.communicate()[0].split('\n')[1:]:
+            tmp_arr = [s.strip() for s in line.split(' ') if s.strip()]
+            try:
+                total = int(tmp_arr[1])
+            except:
+                pass
+  
+        return total
 
     @classmethod
     def get_total(cls, args):
         (filesystem,fileset_name) = (args.fileset.split("/")[0],args.fileset.split("/")[1])
-        return min(int(cls.getsize(args,4)),cls.gettotalsize(filesystem) )
+        return cls.gettotalsize(args)
 
     @classmethod
     def get_used(cls, args):
-        return int(cls.getsize(args,2))
+        return int(cls.getsize(args))
 
     @classmethod
     def get_free(cls, args):
