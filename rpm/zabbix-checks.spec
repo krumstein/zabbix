@@ -1,6 +1,6 @@
 Name:		cv-zabbix-checks	
 Version:	0.17
-Release:	0%{?dist}
+Release:	1%{?dist}
 Summary:	Zabbix checks by CLusterVision
 
 Group:		CV	
@@ -76,6 +76,8 @@ systemctl restart zabbix-agent
 
 
 %changelog
+* Fri Feb 10 2017 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.17.1
+- Added sas2ircu check
 * Fri Feb 10 2017 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.17.0
 - Added sas2ircu check
 * Tue Dec 13 2016 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.16.3
