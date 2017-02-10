@@ -1,5 +1,5 @@
 Name:		cv-zabbix-checks	
-Version:	0.18
+Version:	0.19
 Release:	0%{?dist}
 Summary:	Zabbix checks by CLusterVision
 
@@ -76,6 +76,8 @@ systemctl restart zabbix-agent
 
 
 %changelog
+* Fri Feb 10 2017 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.19.0
+- Added huawei sel check
 * Fri Feb 10 2017 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.18.0
 - Added mysql galera check
 * Fri Feb 10 2017 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.17.1
