@@ -1,7 +1,7 @@
 Name:		cv-zabbix-checks	
-Version:	0.19
+Version:	0.20
 Release:	0%{?dist}
-Summary:	Zabbix checks by CLusterVision
+Summary:	Zabbix checks by ClusterVision
 
 Group:		CV	
 License:	GPLv3.0
@@ -76,6 +76,8 @@ systemctl restart zabbix-agent
 
 
 %changelog
+* Fri Feb 10 2017 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.20.0
+- Added infiniband checks
 * Fri Feb 10 2017 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.19.0
 - Added huawei sel check
 * Fri Feb 10 2017 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.18.0
