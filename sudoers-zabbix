@@ -7,6 +7,7 @@ Cmnd_Alias ZABBIX_CMD = /var/lib/zabbix/userparameters/pacemaker, \
     /var/lib/zabbix/userparameters/mounts_systemd, \
     /var/lib/zabbix/userparameters/opainfo, \
     /var/lib/zabbix/userparameters/sas3ircu, \
+    /var/lib/zabbix/userparameters/sas2ircu, \
     /var/lib/zabbix/userparameters/storcli, \
     /var/lib/zabbix/userparameters/gpfs_fileset , \
     /usr/sbin/smartctl,\

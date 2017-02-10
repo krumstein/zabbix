@@ -1,0 +1,94 @@
+#!/usr/bin/python
+
+import argparse
+import json
+import subprocess
+import os
+import sys
+
+__author__ = 'Vladimir Krumshtein <vladimir.krumstein@clustervision.com>'
+__date__ = 'Nov 2016'
+__version__ = '1.0.0'
+
+
+class SAS3IRCU(object):
+
+    EXECUTABLE = '/usr/sbin/sas2ircu'
+
+    if not os.path.exists(EXECUTABLE):
+        print "No executable found '%s'. Please install sas3ircu from http://www.avagotech.com/cs/Satellite?pagename=AVG2%2FsearchLayout&locale=avg_en&Search=sas3ircu&submit=search into /opt/lsi/sas3ircu/sas3ircu " % EXECUTABLE
+        sys.exit(1)
+
+    @classmethod
+    def discovery_cntrl(cls, args):
+        data = []
+        controllers = []
+        proc = subprocess.Popen([cls.EXECUTABLE, 'LIST'], stdout=subprocess.PIPE, close_fds=True)
+        if proc.returncode:
+             sys.exit(1)
+        for line in proc.communicate()[0].split('\n'):
+            tmp_arr = [s.strip() for s in line.split(' ') if s.strip()]
+            try:
+                if tmp_arr and tmp_arr[0].isdigit():
+                    controllers.append(tmp_arr[0])
+                    
+            except:
+                pass
+
+        for controller in controllers:
+            proc = subprocess.Popen([cls.EXECUTABLE,  controller, 'STATUS'], stdout=subprocess.PIPE, close_fds=True) 
+            for line in proc.communicate()[0].split('\n'):
+                tmp_arr = [s.strip() for s in line.split(': ') if s.strip()]
+                volume_id = 0
+                if tmp_arr and tmp_arr[0]=='Volume ID':
+                    volume_id = tmp_arr[1]
+                    pdisk = {'{#C_PDISK}': controller + "_" + tmp_arr[1]}
+                    data.append(pdisk)
+        return json.dumps({'data': data}, separators=(',', ':'))
+
+    @classmethod
+    def getstate(cls, args, parm):
+        controller = args.pdisk.split('_')[0]
+        pdisk = args.pdisk.split('_')[1]
+        proc = subprocess.Popen([cls.EXECUTABLE,  controller, 'STATUS'], stdout=subprocess.PIPE, close_fds=True)
+        if proc.returncode:
+            sys.exit(1)
+        volume_id = 0
+        for line in proc.communicate()[0].split('\n'):
+            tmp_arr = [s.strip() for s in line.split(': ') if s.strip()]
+            if tmp_arr and tmp_arr[0] == "Volume ID":
+                volume_id = tmp_arr[1]
+            if volume_id == pdisk and tmp_arr and tmp_arr[0] == parm:
+                return tmp_arr[1]
+
+    @classmethod
+    def volumestate(cls, args):
+        return cls.getstate(args, "Volume state")
+
+def parse_args():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-d', '--debug', action='store_true')
+
+    subparsers = parser.add_subparsers()
+
+    subparser_discovery = subparsers.add_parser('discovery')
+    subparser_discovery.set_defaults(func=SAS3IRCU.discovery_cntrl)
+
+    subparser_powerstate = subparsers.add_parser('volumestate')
+    subparser_powerstate.set_defaults(func=SAS3IRCU.volumestate)
+    subparser_powerstate.add_argument('pdisk')
+
+    return parser.parse_known_args()[0]
+
+def main():
+    args = parse_args()
+    try:
+        print(args.func(args)) 
+    except Exception as e:
+        if args.debug:
+            raise e
+        print(e)
+
+
+if __name__ == '__main__':
+    main()
