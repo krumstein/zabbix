@@ -1,0 +1,23 @@
+#!/bin/bash
+error(){
+	echo '-1'
+	exit 1
+}
+MYSQL_SLAVE=$(sudo pcs status | grep Galera -A 2 | grep Slaves | awk '{ print $3 }') 
+ping -c 1 -w 1 $MYSQL_SLAVE >/dev/null 2>&1 || error
+CLUSTER_SIZE=$(echo 'SHOW GLOBAL STATUS LIKE "wsrep_cluster_%";' | sudo mysql -h $MYSQL_SLAVE   | grep -i wsrep_cluster_size | awk '{print $2}')
+CLUSTER_STATUS=$(echo 'SHOW GLOBAL STATUS LIKE "wsrep_cluster_%";' | sudo mysql -h $MYSQL_SLAVE   | grep -i wsrep_cluster_status| awk '{print $2}')
+if [ "x$CLUSTER_STATUS" = "xPrimary" ]
+then
+	echo '1'
+	exit -1
+elif ["x$CLUSTER_SIZE" = "x2"]
+then
+	echo '1'
+	exit -1
+else
+	echo '0'
+	exit 0
+fi
+
+
