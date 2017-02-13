@@ -1,5 +1,5 @@
 Name:		cv-zabbix-checks	
-Version:	0.20
+Version:	0.21
 Release:	0%{?dist}
 Summary:	Zabbix checks by ClusterVision
 
@@ -76,6 +76,8 @@ systemctl restart zabbix-agent
 
 
 %changelog
+* Mon Feb 13 2017 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.21.0
+- Added export.sh script and fixed ipmitool template
 * Fri Feb 10 2017 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.20.0
 - Added infiniband checks
 * Fri Feb 10 2017 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.19.0
