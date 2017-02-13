@@ -264,7 +264,6 @@
                             <expression>{CV IPMItool:ipmitool[value,{#SENSOR_NAME}].last(0)}&lt;{CV IPMItool:ipmitool[low_crit,{#SENSOR_NAME}].last(0)}</expression>
                             <name>Value of {#SENSOR_NAME} is lower than critical</name>
                             <url/>
-                            <status>0</status>
                             <priority>1</priority>
                             <description/>
                             <type>0</type>

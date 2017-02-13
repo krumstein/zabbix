@@ -11,7 +11,7 @@ if [  $# -lt 1  ] ||  [ ! -e $1 ]
 fi 
 
 TEMPL=$(cat $1 |sed -e 's/"/\\"/g'|  sed -e 's/^[ \t]*//g' | tr -d '\n' )
-source /trinity/trinity.shadow
+source /trinity/local/trinity.shadow
 echo "getting token"
 TOKEN=$(curl -s localhost/zabbix/api_jsonrpc.php \
               -H 'Content-Type: application/json-rpc' \
