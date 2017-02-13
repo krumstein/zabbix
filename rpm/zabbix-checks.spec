@@ -77,7 +77,7 @@ systemctl restart zabbix-agent
 
 %changelog
 * Mon Feb 13 2017 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.21.0
-- Added export.sh script and fixed ipmitool template
+- Added export.sh script and fixed ipmitool template and fixed import.sh for newer TrinityX version
 * Fri Feb 10 2017 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.20.0
 - Added infiniband checks
 * Fri Feb 10 2017 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.19.0
