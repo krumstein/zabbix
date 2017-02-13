@@ -4,9 +4,6 @@
     <date>2016-10-10T12:18:22Z</date>
     <groups>
         <group>
-            <name>InRow cooling</name>
-        </group>
-        <group>
             <name>Templates</name>
         </group>
     </groups>
@@ -16,9 +13,6 @@
             <name>CV Template InRow ACRC301S Cooling Unit</name>
             <description/>
             <groups>
-                <group>
-                    <name>InRow cooling</name>
-                </group>
                 <group>
                     <name>Templates</name>
                 </group>
