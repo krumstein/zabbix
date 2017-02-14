@@ -1,6 +1,6 @@
 Name:		cv-zabbix-checks	
 Version:	0.21
-Release:	1%{?dist}
+Release:	2%{?dist}
 Summary:	Zabbix checks by ClusterVision
 
 Group:		CV	
@@ -76,6 +76,8 @@ systemctl restart zabbix-agent
 
 
 %changelog
+* Tue Feb 14 2017 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.21.2
+- Fixed name of userparameter configuration of sas3ircu and storcli
 * Mon Feb 13 2017 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.21.1
 - Fixed APC InRow cooling template
 * Mon Feb 13 2017 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.21.0
