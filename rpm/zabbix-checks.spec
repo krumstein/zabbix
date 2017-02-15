@@ -1,6 +1,6 @@
 Name:		cv-zabbix-checks	
 Version:	0.23
-Release:	0%{?dist}
+Release:	1%{?dist}
 Summary:	Zabbix checks by ClusterVision
 
 Group:		CV	
@@ -76,6 +76,8 @@ systemctl restart zabbix-agent
 
 
 %changelog
+* Tue Feb 14 2017 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.23.1
+- Hostname of HA Mellanox SM is in item key, not in external script
 * Tue Feb 14 2017 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.23.0
 - Added check HA subnet manager on mellanox switches 
 * Tue Feb 14 2017 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.22.0

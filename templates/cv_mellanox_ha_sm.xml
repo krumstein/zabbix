@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
   <version>3.2</version>
-  <date>2017-02-15T11:05:40Z</date>
+  <date>2017-02-15T11:47:48Z</date>
   <groups>
     <group>
       <name>Templates</name>
@@ -29,7 +29,7 @@
           <snmp_community/>
           <multiplier>0</multiplier>
           <snmp_oid/>
-          <key>ib_ha</key>
+          <key>ib_ha[monitor@edr-core.adm]</key>
           <delay>300</delay>
           <history>90</history>
           <trends>365</trends>
@@ -76,7 +76,7 @@
   </templates>
   <triggers>
     <trigger>
-      <expression>{CV Infiniband HA SM:ib_ha.last()}&lt;2</expression>
+      <expression>{CV Infiniband HA SM:ib_ha[monitor@edr-core.adm].last()}&lt;2</expression>
       <recovery_mode>0</recovery_mode>
       <recovery_expression/>
       <name>Number of nodes in HA is less, than 2</name>

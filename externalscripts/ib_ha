@@ -1,10 +1,12 @@
 #!/bin/bash
 IB_MONITOR_PW=$(sudo  sh -c 'source /trinity/local/trinity.shadow; echo ${IB_MONITOR_PW}')
 export IB_MONITOR_PW
+SWITCH=$1
+export SWITCH
 HA_STATUS="$(expect -c '
 log_user 0 
 puts "$env(IB_MONITOR_PW)\r"
-spawn ssh monitor@edr-core.adm
+spawn ssh $env(SWITCH)
 expect "Password:"
 send "$env(IB_MONITOR_PW)\r"
 expect "master] >"
