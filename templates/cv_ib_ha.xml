@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zabbix_export>
+  <version>3.2</version>
+  <date>2017-02-15T11:05:40Z</date>
+  <groups>
+    <group>
+      <name>Templates</name>
+    </group>
+  </groups>
+  <templates>
+    <template>
+      <template>CV Infiniband HA SM</template>
+      <name>CV Infiniband HA SM</name>
+      <description/>
+      <groups>
+        <group>
+          <name>Templates</name>
+        </group>
+      </groups>
+      <applications>
+        <application>
+          <name>Infiniband</name>
+        </application>
+      </applications>
+      <items>
+        <item>
+          <name>HA SM count of nodes</name>
+          <type>10</type>
+          <snmp_community/>
+          <multiplier>0</multiplier>
+          <snmp_oid/>
+          <key>ib_ha</key>
+          <delay>300</delay>
+          <history>90</history>
+          <trends>365</trends>
+          <status>0</status>
+          <value_type>3</value_type>
+          <allowed_hosts/>
+          <units/>
+          <delta>0</delta>
+          <snmpv3_contextname/>
+          <snmpv3_securityname/>
+          <snmpv3_securitylevel>0</snmpv3_securitylevel>
+          <snmpv3_authprotocol>0</snmpv3_authprotocol>
+          <snmpv3_authpassphrase/>
+          <snmpv3_privprotocol>0</snmpv3_privprotocol>
+          <snmpv3_privpassphrase/>
+          <formula>1</formula>
+          <delay_flex/>
+          <params/>
+          <ipmi_sensor/>
+          <data_type>0</data_type>
+          <authtype>0</authtype>
+          <username/>
+          <password/>
+          <publickey/>
+          <privatekey/>
+          <port/>
+          <description/>
+          <inventory_link>0</inventory_link>
+          <applications>
+            <application>
+              <name>Infiniband</name>
+            </application>
+          </applications>
+          <valuemap/>
+          <logtimefmt/>
+        </item>
+      </items>
+      <discovery_rules/>
+      <httptests/>
+      <macros/>
+      <templates/>
+      <screens/>
+    </template>
+  </templates>
+  <triggers>
+    <trigger>
+      <expression>{CV Infiniband HA SM:ib_ha.last()}&lt;2</expression>
+      <recovery_mode>0</recovery_mode>
+      <recovery_expression/>
+      <name>Number of nodes in HA is less, than 2</name>
+      <correlation_mode>0</correlation_mode>
+      <correlation_tag/>
+      <url/>
+      <status>0</status>
+      <priority>4</priority>
+      <description/>
+      <type>0</type>
+      <manual_close>0</manual_close>
+      <dependencies/>
+      <tags/>
+    </trigger>
+  </triggers>
+</zabbix_export>

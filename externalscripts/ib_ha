@@ -1,0 +1,23 @@
+#!/bin/bash
+IB_MONITOR_PW=$(sudo  sh -c 'source /trinity/local/trinity.shadow; echo ${IB_MONITOR_PW}')
+export IB_MONITOR_PW
+HA_STATUS="$(expect -c '
+log_user 0 
+puts "$env(IB_MONITOR_PW)\r"
+spawn ssh monitor@edr-core.adm
+expect "Password:"
+send "$env(IB_MONITOR_PW)\r"
+expect "master] >"
+send "enable\r"
+
+expect "master] #"
+send "show ib ha\r"
+expect "master] #"
+
+set results $expect_out(buffer)
+
+send "exit\r"
+expect eof
+puts $results'
+)"
+echo "${HA_STATUS}" | grep "Active HA nodes:" | awk '{print $4}'  
