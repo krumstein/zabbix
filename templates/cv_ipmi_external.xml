@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
   <version>3.2</version>
-  <date>2017-02-17T10:40:28Z</date>
+  <date>2017-02-17T12:57:26Z</date>
   <groups>
     <group>
       <name>Templates</name>
@@ -29,7 +29,7 @@
           <snmp_community/>
           <multiplier>0</multiplier>
           <snmp_oid/>
-          <key>ipmitool[--host,{HOST.CONN},--password,{$JBOD_PASS},--user,{$JBOD_USER},sel_cnt]</key>
+          <key>ipmitool[--host,{HOST.CONN},--user,{$JBOD_USER},sel_cnt]</key>
           <delay>300</delay>
           <history>90</history>
           <trends>0</trends>
@@ -73,7 +73,7 @@
           <type>10</type>
           <snmp_community/>
           <snmp_oid/>
-          <key>ipmitool[--host,{HOST.CONN},--password,{$JBOD_PASS},--user,{$JBOD_USER},discovery]</key>
+          <key>ipmitool[--host,{HOST.CONN},--user,{$JBOD_USER},discovery]</key>
           <delay>3600</delay>
           <status>0</status>
           <allowed_hosts/>
@@ -107,7 +107,7 @@
               <snmp_community/>
               <multiplier>0</multiplier>
               <snmp_oid/>
-              <key>ipmitool[--host,{HOST.CONN},--password,{$JBOD_PASS},--user,{$JBOD_USER},up_crit,{#SENSOR_NAME}]</key>
+              <key>ipmitool[--host,{HOST.CONN},--user,{$JBOD_USER},up_crit,{#SENSOR_NAME}]</key>
               <delay>3600</delay>
               <history>90</history>
               <trends>0</trends>
@@ -151,7 +151,7 @@
               <snmp_community/>
               <multiplier>0</multiplier>
               <snmp_oid/>
-              <key>ipmitool[--host,{HOST.CONN},--password,{$JBOD_PASS},--user,{$JBOD_USER},value,{#SENSOR_NAME}]</key>
+              <key>ipmitool[--host,{HOST.CONN},--user,{$JBOD_USER},value,{#SENSOR_NAME}]</key>
               <delay>300</delay>
               <history>90</history>
               <trends>0</trends>
@@ -192,7 +192,7 @@
           </item_prototypes>
           <trigger_prototypes>
             <trigger_prototype>
-              <expression>{CV IPMItool JBOD:ipmitool[--host,{HOST.CONN},--password,{$JBOD_PASS},--user,{$JBOD_USER},value,{#SENSOR_NAME}].last(0)}&gt;{CV IPMItool JBOD:ipmitool[--host,{HOST.CONN},--password,{$JBOD_PASS},--user,{$JBOD_USER},up_crit,{#SENSOR_NAME}].last(0)}</expression>
+              <expression>{CV IPMItool JBOD:ipmitool[--host,{HOST.CONN},--user,{$JBOD_USER},value,{#SENSOR_NAME}].last(0)}&gt;{CV IPMItool JBOD:ipmitool[--host,{HOST.CONN},--user,{$JBOD_USER},up_crit,{#SENSOR_NAME}].last(0)}</expression>
               <recovery_mode>0</recovery_mode>
               <recovery_expression/>
               <name>Value of {#SENSOR_NAME} is higher than critical</name>
@@ -220,7 +220,7 @@
   </templates>
   <triggers>
     <trigger>
-      <expression>{CV IPMItool JBOD:ipmitool[--host,{HOST.CONN},--password,{$JBOD_PASS},--user,{$JBOD_USER},sel_cnt].last(0)}&gt;1</expression>
+      <expression>{CV IPMItool JBOD:ipmitool[--host,{HOST.CONN},--user,{$JBOD_USER},sel_cnt].last(0)}&gt;1</expression>
       <recovery_mode>0</recovery_mode>
       <recovery_expression/>
       <name>New sel message</name>
