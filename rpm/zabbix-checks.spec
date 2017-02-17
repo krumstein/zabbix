@@ -1,6 +1,6 @@
 Name:		cv-zabbix-checks	
-Version:	0.23
-Release:	1%{?dist}
+Version:	0.24
+Release:	0%{?dist}
 Summary:	Zabbix checks by ClusterVision
 
 Group:		CV	
@@ -76,6 +76,8 @@ systemctl restart zabbix-agent
 
 
 %changelog
+* Fri Feb 16 2017 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.24.0
+- Added a ipmitool external checks for JBODs
 * Tue Feb 14 2017 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.23.1
 - Hostname of HA Mellanox SM is in item key, not in external script
 * Tue Feb 14 2017 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.23.0
