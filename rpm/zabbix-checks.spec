@@ -1,6 +1,6 @@
 Name:		cv-zabbix-checks	
 Version:	0.25
-Release:	0%{?dist}
+Release:	1%{?dist}
 Summary:	Zabbix checks by ClusterVision
 
 Group:		CV	
@@ -76,6 +76,8 @@ systemctl restart zabbix-agent
 
 
 %changelog
+* Fri Feb 16 2017 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.25.1
+- Bugfix for ipmitool
 * Fri Feb 16 2017 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.25.0
 - Added support for ipmitool filter in macros and added ipmitool template for power nodes
 * Fri Feb 16 2017 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.24.2
