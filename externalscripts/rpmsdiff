@@ -3,6 +3,6 @@ error(){
  echo '-1'; exit 1
 }
 which pcs >/dev/null 2>&1  || error
-NODES=($(sudo pcs  cluster status | grep Online: | awk '{print $3, $4}')) 
+NODES=($(sudo pcs cluster status | grep PCSD -A 2 |tr -d '\n' | awk '{print $3,$6}')) 
 [ ${#NODES[@]} -eq 2 ] || error
 sudo /usr/lib/zabbix/externalscripts/rpmscomp -d @${NODES[0]} @${NODES[1]} | grep -v 'Name' | grep -v '\-\-\-' | wc -l
