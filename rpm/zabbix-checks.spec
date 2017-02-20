@@ -1,6 +1,6 @@
 Name:		cv-zabbix-checks	
 Version:	0.25
-Release:	1%{?dist}
+Release:	2%{?dist}
 Summary:	Zabbix checks by ClusterVision
 
 Group:		CV	
@@ -76,15 +76,17 @@ systemctl restart zabbix-agent
 
 
 %changelog
-* Fri Feb 16 2017 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.25.1
+* Mon Feb 20 2017 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.25.2
 - Bugfix for ipmitool
-* Fri Feb 16 2017 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.25.0
+* Fri Feb 17 2017 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.25.1
+- Bugfix for ipmitool
+* Fri Feb 17 2017 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.25.0
 - Added support for ipmitool filter in macros and added ipmitool template for power nodes
-* Fri Feb 16 2017 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.24.2
+* Fri Feb 17 2017 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.24.2
 - Make ipmitool external check for JBOD to take password from trinity.shadow
-* Fri Feb 16 2017 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.24.1
+* Fri Feb 17 2017 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.24.1
 - Fixed rpmsdiff external check for newer pcs
-* Fri Feb 16 2017 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.24.0
+* Fri Feb 17 2017 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.24.0
 - Added a ipmitool external checks for JBODs
 * Tue Feb 14 2017 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.23.1
 - Hostname of HA Mellanox SM is in item key, not in external script
@@ -140,4 +142,3 @@ systemctl restart zabbix-agent
 - Initial RPM release 
 * Fri Oct 28 2016 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.2
 - Added external checks
-
