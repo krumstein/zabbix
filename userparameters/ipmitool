@@ -12,8 +12,8 @@ import logging
 import re
 
 __author__ = 'Vladimir Krumshtein <vladimir.krumstein@clustervision.com>'
-__date__ = 'Oct 2016'
-__version__ = '1.0.0'
+__date__ = 'Jan 2017'
+__version__ = '2.0.0'
 
 DEBUG = False
 RE = r''
@@ -142,11 +142,11 @@ class IPMITOOL(object):
 
     @classmethod
     def low_crit(cls, args):
-        return cls.getinfo(args,6)
+        return cls.getinfo(args,6) if cls.getinfo(args,6) != 'na' else 0
 
     @classmethod
     def up_crit(cls, args):
-        return cls.getinfo(args,7)
+        return cls.getinfo(args,7) if cls.getinfo(args,6) != 'na' else  2000000
 
 
 def parse_args():
