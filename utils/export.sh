@@ -43,4 +43,4 @@ result=$(curl -s localhost/zabbix/api_jsonrpc.php \
 	         }  
 CURL_DATA
 )
-echo $result |  python -c "import sys, json; print json.load(sys.stdin)['result']" | xmllint --format -
+echo $result |  python -c "import sys, json; print  str(json.load(sys.stdin)['result'].encode('utf-8'))" | xmllint --format -

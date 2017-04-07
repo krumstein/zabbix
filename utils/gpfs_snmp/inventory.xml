@@ -1,0 +1,7 @@
+[gpfs-servers]
+gpfs001
+gpfs002
+gpfs003
+gpfs004
+
+/trinity/images/gpfs ansible_connection=chroot

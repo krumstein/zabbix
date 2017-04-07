@@ -1,5 +1,5 @@
 Name:		cv-zabbix-checks	
-Version:	0.29
+Version:	0.31
 Release:	0%{?dist}
 Summary:	Zabbix checks by ClusterVision
 
@@ -76,6 +76,10 @@ systemctl restart zabbix-agent
 
 
 %changelog
+* Fri Apr 07 2017 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.31.0
+- Fixed export script ( encoding problem ) and ansible .yml for SNMP configure of GPFS
+* Fri Apr 07 2017 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.30.0
+- Added external check for ipmi and added check for amount of nodes of a slurm job
 * Fri Apr 07 2017 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.29.0
 - Added checks for rsnapshot and amount of filehandles
 * Fri Apr 07 2017 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.28.0

@@ -1,0 +1,46 @@
+---
+- name: Configure SNMP monitoring
+  hosts: gpfs-servers
+  tasks:
+    - name: Install net-snmp
+      yum:
+        name: '{{ item }}'
+        state: present
+      with_items:
+        - 'net-snmp-agent-libs'
+        - 'net-snmp' 
+    - name: Copy libs
+      file:
+        src: '{{ item.src }}'
+        dest: '{{ item.dest }}'
+        state: link
+      with_items:
+        - { src: '/usr/lib64/libnetsnmp.so.31', dest: '/usr/lib64/libnetsnmp.so' }
+        - { src: '/usr/lib64/libnetsnmphelpers.so.31', dest: '/usr/lib64/libnetsnmphelpers.so' }
+        - { src: '/usr/lib64/libnetsnmpagent.so.31', dest: '/usr/lib64/libnetsnmpagent.so' }
+        - { src: '/usr/lib64/libnetsnmpmibs.so.31', dest: '/usr/lib64/libnetsnmpmibs.so' }
+        - { src: '/usr/lib64/libcrypto.so.10', dest: '/usr/lib64/libcrypto.so' }
+        - { src: '/usr/lib64/libwrap.so.0', dest: '/usr/lib64/libwrap.so' }
+
+    - name: Configure SNMP agent
+      copy:
+        src: snmpd.conf 
+        dest: /etc/snmp/snmpd.conf 
+        owner: root
+        group: root
+        mode: 0600
+        backup: yes
+    - name: Enable SNMPD
+      systemd: 
+        name: snmpd.service
+        enabled: yes
+
+    - name: Restart SNMPD
+      systemd: 
+        name: snmpd.service
+        state: reloaded
+
+
+#    - name: Enable SNMP agent on GPFS
+#      shell:  mmchnode --snmp-agent -N  '{{ ansible_nodename }}'
+
