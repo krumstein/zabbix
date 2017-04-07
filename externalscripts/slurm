@@ -14,7 +14,8 @@ Usage: $0 -c
               nodes.allocated|
               nodes.idle|
               nodes.other|
-              nodes.total>
+              nodes.total|
+              task.size>
 "
 }
 while getopts "c:" o; do
@@ -72,6 +73,11 @@ case "${CHECK}" in
     nodes.total)
         /usr/bin/sudo /usr/bin/sinfo -o %F -h | /usr/bin/awk -F \/ '{print $4}'
         ;;
+    task.size)
+        /usr/bin/sudo /usr/bin/scontrol show job -a | grep NumNodes=$3 2>&1 >/dev/null
+        echo $?
+        ;;
+
     *)
         usage
         exit 1

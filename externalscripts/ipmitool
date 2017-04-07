@@ -1,3 +1,3 @@
 #!/bin/bash
-JBOD_IPMI_PASS=$(sudo  sh -c 'source /trinity/local/trinity.shadow; echo ${JBOD_IPMI_PASS}')
-/usr/lib/zabbix/externalscripts/ipmitool_pw --password $JBOD_IPMI_PASS $@
+IPMI_PASS=$(sudo  sh -c 'source /trinity/local/trinity.shadow; echo ${IPMI_PASS}')
+/usr/lib/zabbix/externalscripts/ipmitool_pw --password $IPMI_PASS $@
