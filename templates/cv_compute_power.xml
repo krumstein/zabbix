@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
   <version>3.2</version>
-  <date>2017-04-07T15:31:38Z</date>
+  <date>2017-04-07T15:32:07Z</date>
   <groups>
     <group>
       <name>Templates</name>
@@ -9,8 +9,8 @@
   </groups>
   <templates>
     <template>
-      <template>CV Compute</template>
-      <name>CV Compute</name>
+      <template>CV Compute Power</template>
+      <name>CV Compute Power</name>
       <description/>
       <groups>
         <group>
@@ -1289,7 +1289,7 @@
                   <calc_fnc>2</calc_fnc>
                   <type>0</type>
                   <item>
-                    <host>CV Compute</host>
+                    <host>CV Compute Power</host>
                     <key>net.if.in[{#IFNAME}]</key>
                   </item>
                 </graph_item>
@@ -1301,7 +1301,7 @@
                   <calc_fnc>2</calc_fnc>
                   <type>0</type>
                   <item>
-                    <host>CV Compute</host>
+                    <host>CV Compute Power</host>
                     <key>net.if.out[{#IFNAME}]</key>
                   </item>
                 </graph_item>
@@ -1579,7 +1579,7 @@
           </item_prototypes>
           <trigger_prototypes>
             <trigger_prototype>
-              <expression>{CV Compute:vfs.fs.size[{#FSNAME},pfree].last(0)}&lt;20</expression>
+              <expression>{CV Compute Power:vfs.fs.size[{#FSNAME},pfree].last(0)}&lt;20</expression>
               <recovery_mode>0</recovery_mode>
               <recovery_expression/>
               <name>Free disk space is less than 20% on volume {#FSNAME}</name>
@@ -1595,7 +1595,7 @@
               <tags/>
             </trigger_prototype>
             <trigger_prototype>
-              <expression>{CV Compute:vfs.fs.inode[{#FSNAME},pfree].last(0)}&lt;20</expression>
+              <expression>{CV Compute Power:vfs.fs.inode[{#FSNAME},pfree].last(0)}&lt;20</expression>
               <recovery_mode>0</recovery_mode>
               <recovery_expression/>
               <name>Free inodes is less than 20% on volume {#FSNAME}</name>
@@ -1638,7 +1638,7 @@
                   <calc_fnc>2</calc_fnc>
                   <type>2</type>
                   <item>
-                    <host>CV Compute</host>
+                    <host>CV Compute Power</host>
                     <key>vfs.fs.size[{#FSNAME},total]</key>
                   </item>
                 </graph_item>
@@ -1650,7 +1650,7 @@
                   <calc_fnc>2</calc_fnc>
                   <type>0</type>
                   <item>
-                    <host>CV Compute</host>
+                    <host>CV Compute Power</host>
                     <key>vfs.fs.size[{#FSNAME},free]</key>
                   </item>
                 </graph_item>
@@ -1667,7 +1667,10 @@
           <name>CV Chrony daemon</name>
         </template>
         <template>
-          <name>CV Infiniband</name>
+          <name>CV Infiniband Power</name>
+        </template>
+        <template>
+          <name>CV IPMItool Power</name>
         </template>
         <template>
           <name>CV OS Memory</name>
@@ -1675,19 +1678,13 @@
         <template>
           <name>CV Slurm compute</name>
         </template>
-        <template>
-          <name>Template App SSH Service</name>
-        </template>
-        <template>
-          <name>Template ICMP Ping</name>
-        </template>
       </templates>
       <screens/>
     </template>
   </templates>
   <triggers>
     <trigger>
-      <expression>{CV Compute:vfs.file.cksum[/etc/passwd].diff(0)}&gt;0</expression>
+      <expression>{CV Compute Power:vfs.file.cksum[/etc/passwd].diff(0)}&gt;0</expression>
       <recovery_mode>0</recovery_mode>
       <recovery_expression/>
       <name>/etc/passwd has been changed on {HOST.NAME}</name>
@@ -1703,7 +1700,7 @@
       <tags/>
     </trigger>
     <trigger>
-      <expression>{CV Compute:system.cpu.util[,iowait].avg(5m)}&gt;80</expression>
+      <expression>{CV Compute Power:system.cpu.util[,iowait].avg(5m)}&gt;80</expression>
       <recovery_mode>0</recovery_mode>
       <recovery_expression/>
       <name>Disk I/O is overloaded on {HOST.NAME}</name>
@@ -1719,7 +1716,7 @@
       <tags/>
     </trigger>
     <trigger>
-      <expression>{CV Compute:vm.memory.size[available].last(0)}&lt;500M</expression>
+      <expression>{CV Compute Power:vm.memory.size[available].last(0)}&lt;500M</expression>
       <recovery_mode>0</recovery_mode>
       <recovery_expression/>
       <name>Lack of available memory on server {HOST.NAME}</name>
@@ -1735,7 +1732,7 @@
       <tags/>
     </trigger>
     <trigger>
-      <expression>{CV Compute:proc.num[].avg(5m)}&gt;3000</expression>
+      <expression>{CV Compute Power:proc.num[].avg(5m)}&gt;3000</expression>
       <recovery_mode>0</recovery_mode>
       <recovery_expression/>
       <name>Too many processes on {HOST.NAME}</name>
@@ -1751,7 +1748,7 @@
       <tags/>
     </trigger>
     <trigger>
-      <expression>{CV Compute:proc.num[,,run].avg(5m)}&gt;3000</expression>
+      <expression>{CV Compute Power:proc.num[,,run].avg(5m)}&gt;3000</expression>
       <recovery_mode>0</recovery_mode>
       <recovery_expression/>
       <name>Too many processes running on {HOST.NAME}</name>
@@ -1794,7 +1791,7 @@
           <calc_fnc>2</calc_fnc>
           <type>0</type>
           <item>
-            <host>CV Compute</host>
+            <host>CV Compute Power</host>
             <key>system.cpu.switches</key>
           </item>
         </graph_item>
@@ -1806,7 +1803,7 @@
           <calc_fnc>2</calc_fnc>
           <type>0</type>
           <item>
-            <host>CV Compute</host>
+            <host>CV Compute Power</host>
             <key>system.cpu.intr</key>
           </item>
         </graph_item>
@@ -1838,7 +1835,7 @@
           <calc_fnc>2</calc_fnc>
           <type>0</type>
           <item>
-            <host>CV Compute</host>
+            <host>CV Compute Power</host>
             <key>system.cpu.load[percpu,avg1]</key>
           </item>
         </graph_item>
@@ -1850,7 +1847,7 @@
           <calc_fnc>2</calc_fnc>
           <type>0</type>
           <item>
-            <host>CV Compute</host>
+            <host>CV Compute Power</host>
             <key>system.cpu.load[percpu,avg5]</key>
           </item>
         </graph_item>
@@ -1862,7 +1859,7 @@
           <calc_fnc>2</calc_fnc>
           <type>0</type>
           <item>
-            <host>CV Compute</host>
+            <host>CV Compute Power</host>
             <key>system.cpu.load[percpu,avg15]</key>
           </item>
         </graph_item>
@@ -1894,7 +1891,7 @@
           <calc_fnc>2</calc_fnc>
           <type>0</type>
           <item>
-            <host>CV Compute</host>
+            <host>CV Compute Power</host>
             <key>system.cpu.util[,steal]</key>
           </item>
         </graph_item>
@@ -1906,7 +1903,7 @@
           <calc_fnc>2</calc_fnc>
           <type>0</type>
           <item>
-            <host>CV Compute</host>
+            <host>CV Compute Power</host>
             <key>system.cpu.util[,softirq]</key>
           </item>
         </graph_item>
@@ -1918,7 +1915,7 @@
           <calc_fnc>2</calc_fnc>
           <type>0</type>
           <item>
-            <host>CV Compute</host>
+            <host>CV Compute Power</host>
             <key>system.cpu.util[,interrupt]</key>
           </item>
         </graph_item>
@@ -1930,7 +1927,7 @@
           <calc_fnc>2</calc_fnc>
           <type>0</type>
           <item>
-            <host>CV Compute</host>
+            <host>CV Compute Power</host>
             <key>system.cpu.util[,nice]</key>
           </item>
         </graph_item>
@@ -1942,7 +1939,7 @@
           <calc_fnc>2</calc_fnc>
           <type>0</type>
           <item>
-            <host>CV Compute</host>
+            <host>CV Compute Power</host>
             <key>system.cpu.util[,iowait]</key>
           </item>
         </graph_item>
@@ -1954,7 +1951,7 @@
           <calc_fnc>2</calc_fnc>
           <type>0</type>
           <item>
-            <host>CV Compute</host>
+            <host>CV Compute Power</host>
             <key>system.cpu.util[,system]</key>
           </item>
         </graph_item>
@@ -1966,7 +1963,7 @@
           <calc_fnc>2</calc_fnc>
           <type>0</type>
           <item>
-            <host>CV Compute</host>
+            <host>CV Compute Power</host>
             <key>system.cpu.util[,user]</key>
           </item>
         </graph_item>
@@ -1978,7 +1975,7 @@
           <calc_fnc>2</calc_fnc>
           <type>0</type>
           <item>
-            <host>CV Compute</host>
+            <host>CV Compute Power</host>
             <key>system.cpu.util[,idle]</key>
           </item>
         </graph_item>

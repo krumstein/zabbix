@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
   <version>3.2</version>
-  <date>2017-04-07T15:31:38Z</date>
+  <date>2017-04-07T15:32:59Z</date>
   <groups>
     <group>
       <name>Templates</name>
@@ -9,8 +9,8 @@
   </groups>
   <templates>
     <template>
-      <template>CV Compute</template>
-      <name>CV Compute</name>
+      <template>CV Controller</template>
+      <name>CV Controller</name>
       <description/>
       <groups>
         <group>
@@ -19,6 +19,9 @@
       </groups>
       <applications>
         <application>
+          <name>Backup</name>
+        </application>
+        <application>
           <name>CPU</name>
         </application>
         <application>
@@ -26,6 +29,9 @@
         </application>
         <application>
           <name>General</name>
+        </application>
+        <application>
+          <name>Luna</name>
         </application>
         <application>
           <name>Network interfaces</name>
@@ -44,6 +50,49 @@
         </application>
       </applications>
       <items>
+        <item>
+          <name>Used file handles</name>
+          <type>0</type>
+          <snmp_community/>
+          <multiplier>0</multiplier>
+          <snmp_oid/>
+          <key>file-nr</key>
+          <delay>30</delay>
+          <history>90</history>
+          <trends>365</trends>
+          <status>0</status>
+          <value_type>3</value_type>
+          <allowed_hosts/>
+          <units/>
+          <delta>0</delta>
+          <snmpv3_contextname/>
+          <snmpv3_securityname/>
+          <snmpv3_securitylevel>0</snmpv3_securitylevel>
+          <snmpv3_authprotocol>0</snmpv3_authprotocol>
+          <snmpv3_authpassphrase/>
+          <snmpv3_privprotocol>0</snmpv3_privprotocol>
+          <snmpv3_privpassphrase/>
+          <formula>1</formula>
+          <delay_flex/>
+          <params/>
+          <ipmi_sensor/>
+          <data_type>0</data_type>
+          <authtype>0</authtype>
+          <username/>
+          <password/>
+          <publickey/>
+          <privatekey/>
+          <port/>
+          <description/>
+          <inventory_link>0</inventory_link>
+          <applications>
+            <application>
+              <name>OS</name>
+            </application>
+          </applications>
+          <valuemap/>
+          <logtimefmt/>
+        </item>
         <item>
           <name>Number of running processes</name>
           <type>0</type>
@@ -94,7 +143,7 @@
           <multiplier>0</multiplier>
           <snmp_oid/>
           <key>proc.num[]</key>
-          <delay>300</delay>
+          <delay>30</delay>
           <history>90</history>
           <trends>365</trends>
           <status>0</status>
@@ -125,6 +174,49 @@
           <applications>
             <application>
               <name>Processes</name>
+            </application>
+          </applications>
+          <valuemap/>
+          <logtimefmt/>
+        </item>
+        <item>
+          <name>Daily Backup status</name>
+          <type>0</type>
+          <snmp_community/>
+          <multiplier>0</multiplier>
+          <snmp_oid/>
+          <key>rsnapshot_daily</key>
+          <delay>300</delay>
+          <history>90</history>
+          <trends>365</trends>
+          <status>0</status>
+          <value_type>3</value_type>
+          <allowed_hosts/>
+          <units/>
+          <delta>0</delta>
+          <snmpv3_contextname/>
+          <snmpv3_securityname/>
+          <snmpv3_securitylevel>0</snmpv3_securitylevel>
+          <snmpv3_authprotocol>0</snmpv3_authprotocol>
+          <snmpv3_authpassphrase/>
+          <snmpv3_privprotocol>0</snmpv3_privprotocol>
+          <snmpv3_privpassphrase/>
+          <formula>1</formula>
+          <delay_flex/>
+          <params/>
+          <ipmi_sensor/>
+          <data_type>0</data_type>
+          <authtype>0</authtype>
+          <username/>
+          <password/>
+          <publickey/>
+          <privatekey/>
+          <port/>
+          <description/>
+          <inventory_link>0</inventory_link>
+          <applications>
+            <application>
+              <name>Backup</name>
             </application>
           </applications>
           <valuemap/>
@@ -1088,6 +1180,49 @@
           <logtimefmt/>
         </item>
         <item>
+          <name>MongoDB is running</name>
+          <type>0</type>
+          <snmp_community/>
+          <multiplier>0</multiplier>
+          <snmp_oid/>
+          <key>systemd.unit.is-active[mongod]</key>
+          <delay>300</delay>
+          <history>90</history>
+          <trends>365</trends>
+          <status>0</status>
+          <value_type>3</value_type>
+          <allowed_hosts/>
+          <units/>
+          <delta>0</delta>
+          <snmpv3_contextname/>
+          <snmpv3_securityname/>
+          <snmpv3_securitylevel>0</snmpv3_securitylevel>
+          <snmpv3_authprotocol>0</snmpv3_authprotocol>
+          <snmpv3_authpassphrase/>
+          <snmpv3_privprotocol>0</snmpv3_privprotocol>
+          <snmpv3_privpassphrase/>
+          <formula>1</formula>
+          <delay_flex/>
+          <params/>
+          <ipmi_sensor/>
+          <data_type>0</data_type>
+          <authtype>0</authtype>
+          <username/>
+          <password/>
+          <publickey/>
+          <privatekey/>
+          <port/>
+          <description/>
+          <inventory_link>0</inventory_link>
+          <applications>
+            <application>
+              <name>Luna</name>
+            </application>
+          </applications>
+          <valuemap/>
+          <logtimefmt/>
+        </item>
+        <item>
           <name>Checksum of $1</name>
           <type>0</type>
           <snmp_community/>
@@ -1289,7 +1424,7 @@
                   <calc_fnc>2</calc_fnc>
                   <type>0</type>
                   <item>
-                    <host>CV Compute</host>
+                    <host>CV Controller</host>
                     <key>net.if.in[{#IFNAME}]</key>
                   </item>
                 </graph_item>
@@ -1301,7 +1436,7 @@
                   <calc_fnc>2</calc_fnc>
                   <type>0</type>
                   <item>
-                    <host>CV Compute</host>
+                    <host>CV Controller</host>
                     <key>net.if.out[{#IFNAME}]</key>
                   </item>
                 </graph_item>
@@ -1579,7 +1714,7 @@
           </item_prototypes>
           <trigger_prototypes>
             <trigger_prototype>
-              <expression>{CV Compute:vfs.fs.size[{#FSNAME},pfree].last(0)}&lt;20</expression>
+              <expression>{CV Controller:vfs.fs.size[{#FSNAME},pfree].last(0)}&lt;20</expression>
               <recovery_mode>0</recovery_mode>
               <recovery_expression/>
               <name>Free disk space is less than 20% on volume {#FSNAME}</name>
@@ -1595,7 +1730,7 @@
               <tags/>
             </trigger_prototype>
             <trigger_prototype>
-              <expression>{CV Compute:vfs.fs.inode[{#FSNAME},pfree].last(0)}&lt;20</expression>
+              <expression>{CV Controller:vfs.fs.inode[{#FSNAME},pfree].last(0)}&lt;20</expression>
               <recovery_mode>0</recovery_mode>
               <recovery_expression/>
               <name>Free inodes is less than 20% on volume {#FSNAME}</name>
@@ -1638,7 +1773,7 @@
                   <calc_fnc>2</calc_fnc>
                   <type>2</type>
                   <item>
-                    <host>CV Compute</host>
+                    <host>CV Controller</host>
                     <key>vfs.fs.size[{#FSNAME},total]</key>
                   </item>
                 </graph_item>
@@ -1650,7 +1785,7 @@
                   <calc_fnc>2</calc_fnc>
                   <type>0</type>
                   <item>
-                    <host>CV Compute</host>
+                    <host>CV Controller</host>
                     <key>vfs.fs.size[{#FSNAME},free]</key>
                   </item>
                 </graph_item>
@@ -1667,19 +1802,13 @@
           <name>CV Chrony daemon</name>
         </template>
         <template>
-          <name>CV Infiniband</name>
+          <name>CV IPMItool</name>
         </template>
         <template>
           <name>CV OS Memory</name>
         </template>
         <template>
-          <name>CV Slurm compute</name>
-        </template>
-        <template>
-          <name>Template App SSH Service</name>
-        </template>
-        <template>
-          <name>Template ICMP Ping</name>
+          <name>CV TrinityX controller</name>
         </template>
       </templates>
       <screens/>
@@ -1687,7 +1816,7 @@
   </templates>
   <triggers>
     <trigger>
-      <expression>{CV Compute:vfs.file.cksum[/etc/passwd].diff(0)}&gt;0</expression>
+      <expression>{CV Controller:vfs.file.cksum[/etc/passwd].diff(0)}&gt;0</expression>
       <recovery_mode>0</recovery_mode>
       <recovery_expression/>
       <name>/etc/passwd has been changed on {HOST.NAME}</name>
@@ -1703,7 +1832,23 @@
       <tags/>
     </trigger>
     <trigger>
-      <expression>{CV Compute:system.cpu.util[,iowait].avg(5m)}&gt;80</expression>
+      <expression>{CV Controller:rsnapshot_daily.last()}&lt;1</expression>
+      <recovery_mode>0</recovery_mode>
+      <recovery_expression/>
+      <name>Daily backup</name>
+      <correlation_mode>0</correlation_mode>
+      <correlation_tag/>
+      <url/>
+      <status>0</status>
+      <priority>2</priority>
+      <description/>
+      <type>0</type>
+      <manual_close>0</manual_close>
+      <dependencies/>
+      <tags/>
+    </trigger>
+    <trigger>
+      <expression>{CV Controller:system.cpu.util[,iowait].avg(5m)}&gt;80</expression>
       <recovery_mode>0</recovery_mode>
       <recovery_expression/>
       <name>Disk I/O is overloaded on {HOST.NAME}</name>
@@ -1719,7 +1864,7 @@
       <tags/>
     </trigger>
     <trigger>
-      <expression>{CV Compute:vm.memory.size[available].last(0)}&lt;500M</expression>
+      <expression>{CV Controller:vm.memory.size[available].last(0)}&lt;500M</expression>
       <recovery_mode>0</recovery_mode>
       <recovery_expression/>
       <name>Lack of available memory on server {HOST.NAME}</name>
@@ -1735,14 +1880,30 @@
       <tags/>
     </trigger>
     <trigger>
-      <expression>{CV Compute:proc.num[].avg(5m)}&gt;3000</expression>
+      <expression>{CV Controller:systemd.unit.is-active[mongod].last()}=0</expression>
       <recovery_mode>0</recovery_mode>
       <recovery_expression/>
-      <name>Too many processes on {HOST.NAME}</name>
+      <name>MongoDB is not running</name>
       <correlation_mode>0</correlation_mode>
       <correlation_tag/>
       <url/>
-      <status>1</status>
+      <status>0</status>
+      <priority>3</priority>
+      <description/>
+      <type>0</type>
+      <manual_close>0</manual_close>
+      <dependencies/>
+      <tags/>
+    </trigger>
+    <trigger>
+      <expression>{CV Controller:file-nr.last()}&gt;50000</expression>
+      <recovery_mode>0</recovery_mode>
+      <recovery_expression/>
+      <name>Too many open file handles</name>
+      <correlation_mode>0</correlation_mode>
+      <correlation_tag/>
+      <url/>
+      <status>0</status>
       <priority>2</priority>
       <description/>
       <type>0</type>
@@ -1751,14 +1912,30 @@
       <tags/>
     </trigger>
     <trigger>
-      <expression>{CV Compute:proc.num[,,run].avg(5m)}&gt;3000</expression>
+      <expression>{CV Controller:proc.num[].avg(5m)}&gt;3000</expression>
+      <recovery_mode>0</recovery_mode>
+      <recovery_expression/>
+      <name>Too many processes on {HOST.NAME}</name>
+      <correlation_mode>0</correlation_mode>
+      <correlation_tag/>
+      <url/>
+      <status>0</status>
+      <priority>2</priority>
+      <description/>
+      <type>0</type>
+      <manual_close>0</manual_close>
+      <dependencies/>
+      <tags/>
+    </trigger>
+    <trigger>
+      <expression>{CV Controller:proc.num[,,run].avg(5m)}&gt;3000</expression>
       <recovery_mode>0</recovery_mode>
       <recovery_expression/>
       <name>Too many processes running on {HOST.NAME}</name>
       <correlation_mode>0</correlation_mode>
       <correlation_tag/>
       <url/>
-      <status>1</status>
+      <status>0</status>
       <priority>2</priority>
       <description/>
       <type>0</type>
@@ -1794,7 +1971,7 @@
           <calc_fnc>2</calc_fnc>
           <type>0</type>
           <item>
-            <host>CV Compute</host>
+            <host>CV Controller</host>
             <key>system.cpu.switches</key>
           </item>
         </graph_item>
@@ -1806,7 +1983,7 @@
           <calc_fnc>2</calc_fnc>
           <type>0</type>
           <item>
-            <host>CV Compute</host>
+            <host>CV Controller</host>
             <key>system.cpu.intr</key>
           </item>
         </graph_item>
@@ -1838,7 +2015,7 @@
           <calc_fnc>2</calc_fnc>
           <type>0</type>
           <item>
-            <host>CV Compute</host>
+            <host>CV Controller</host>
             <key>system.cpu.load[percpu,avg1]</key>
           </item>
         </graph_item>
@@ -1850,7 +2027,7 @@
           <calc_fnc>2</calc_fnc>
           <type>0</type>
           <item>
-            <host>CV Compute</host>
+            <host>CV Controller</host>
             <key>system.cpu.load[percpu,avg5]</key>
           </item>
         </graph_item>
@@ -1862,7 +2039,7 @@
           <calc_fnc>2</calc_fnc>
           <type>0</type>
           <item>
-            <host>CV Compute</host>
+            <host>CV Controller</host>
             <key>system.cpu.load[percpu,avg15]</key>
           </item>
         </graph_item>
@@ -1894,7 +2071,7 @@
           <calc_fnc>2</calc_fnc>
           <type>0</type>
           <item>
-            <host>CV Compute</host>
+            <host>CV Controller</host>
             <key>system.cpu.util[,steal]</key>
           </item>
         </graph_item>
@@ -1906,7 +2083,7 @@
           <calc_fnc>2</calc_fnc>
           <type>0</type>
           <item>
-            <host>CV Compute</host>
+            <host>CV Controller</host>
             <key>system.cpu.util[,softirq]</key>
           </item>
         </graph_item>
@@ -1918,7 +2095,7 @@
           <calc_fnc>2</calc_fnc>
           <type>0</type>
           <item>
-            <host>CV Compute</host>
+            <host>CV Controller</host>
             <key>system.cpu.util[,interrupt]</key>
           </item>
         </graph_item>
@@ -1930,7 +2107,7 @@
           <calc_fnc>2</calc_fnc>
           <type>0</type>
           <item>
-            <host>CV Compute</host>
+            <host>CV Controller</host>
             <key>system.cpu.util[,nice]</key>
           </item>
         </graph_item>
@@ -1942,7 +2119,7 @@
           <calc_fnc>2</calc_fnc>
           <type>0</type>
           <item>
-            <host>CV Compute</host>
+            <host>CV Controller</host>
             <key>system.cpu.util[,iowait]</key>
           </item>
         </graph_item>
@@ -1954,7 +2131,7 @@
           <calc_fnc>2</calc_fnc>
           <type>0</type>
           <item>
-            <host>CV Compute</host>
+            <host>CV Controller</host>
             <key>system.cpu.util[,system]</key>
           </item>
         </graph_item>
@@ -1966,7 +2143,7 @@
           <calc_fnc>2</calc_fnc>
           <type>0</type>
           <item>
-            <host>CV Compute</host>
+            <host>CV Controller</host>
             <key>system.cpu.util[,user]</key>
           </item>
         </graph_item>
@@ -1978,7 +2155,7 @@
           <calc_fnc>2</calc_fnc>
           <type>0</type>
           <item>
-            <host>CV Compute</host>
+            <host>CV Controller</host>
             <key>system.cpu.util[,idle]</key>
           </item>
         </graph_item>

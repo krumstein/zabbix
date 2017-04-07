@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zabbix_export>
+  <version>3.2</version>
+  <date>2017-04-07T15:36:44Z</date>
+  <groups>
+    <group>
+      <name>Templates</name>
+    </group>
+  </groups>
+  <templates>
+    <template>
+      <template>CV Huawei SNMP device</template>
+      <name>CV Huawei SNMP device</name>
+      <description/>
+      <groups>
+        <group>
+          <name>Templates</name>
+        </group>
+      </groups>
+      <applications/>
+      <items/>
+      <discovery_rules/>
+      <httptests/>
+      <macros/>
+      <templates>
+        <template>
+          <name>CV Huawei SNMP generic</name>
+        </template>
+        <template>
+          <name>CV Huawei SNMP interfaces</name>
+        </template>
+      </templates>
+      <screens/>
+    </template>
+  </templates>
+</zabbix_export>

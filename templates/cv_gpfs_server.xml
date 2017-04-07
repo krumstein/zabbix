@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
   <version>3.2</version>
-  <date>2017-04-07T15:31:38Z</date>
+  <date>2017-04-07T15:34:09Z</date>
   <groups>
     <group>
       <name>Templates</name>
@@ -9,8 +9,8 @@
   </groups>
   <templates>
     <template>
-      <template>CV Compute</template>
-      <name>CV Compute</name>
+      <template>CV GPFS Server</template>
+      <name>CV GPFS Server</name>
       <description/>
       <groups>
         <group>
@@ -41,6 +41,9 @@
         </application>
         <application>
           <name>Security</name>
+        </application>
+        <application>
+          <name>Slurm daemon</name>
         </application>
       </applications>
       <items>
@@ -1289,7 +1292,7 @@
                   <calc_fnc>2</calc_fnc>
                   <type>0</type>
                   <item>
-                    <host>CV Compute</host>
+                    <host>CV GPFS Server</host>
                     <key>net.if.in[{#IFNAME}]</key>
                   </item>
                 </graph_item>
@@ -1301,7 +1304,7 @@
                   <calc_fnc>2</calc_fnc>
                   <type>0</type>
                   <item>
-                    <host>CV Compute</host>
+                    <host>CV GPFS Server</host>
                     <key>net.if.out[{#IFNAME}]</key>
                   </item>
                 </graph_item>
@@ -1579,7 +1582,7 @@
           </item_prototypes>
           <trigger_prototypes>
             <trigger_prototype>
-              <expression>{CV Compute:vfs.fs.size[{#FSNAME},pfree].last(0)}&lt;20</expression>
+              <expression>{CV GPFS Server:vfs.fs.size[{#FSNAME},pfree].last(0)}&lt;20</expression>
               <recovery_mode>0</recovery_mode>
               <recovery_expression/>
               <name>Free disk space is less than 20% on volume {#FSNAME}</name>
@@ -1595,7 +1598,7 @@
               <tags/>
             </trigger_prototype>
             <trigger_prototype>
-              <expression>{CV Compute:vfs.fs.inode[{#FSNAME},pfree].last(0)}&lt;20</expression>
+              <expression>{CV GPFS Server:vfs.fs.inode[{#FSNAME},pfree].last(0)}&lt;20</expression>
               <recovery_mode>0</recovery_mode>
               <recovery_expression/>
               <name>Free inodes is less than 20% on volume {#FSNAME}</name>
@@ -1638,7 +1641,7 @@
                   <calc_fnc>2</calc_fnc>
                   <type>2</type>
                   <item>
-                    <host>CV Compute</host>
+                    <host>CV GPFS Server</host>
                     <key>vfs.fs.size[{#FSNAME},total]</key>
                   </item>
                 </graph_item>
@@ -1650,7 +1653,7 @@
                   <calc_fnc>2</calc_fnc>
                   <type>0</type>
                   <item>
-                    <host>CV Compute</host>
+                    <host>CV GPFS Server</host>
                     <key>vfs.fs.size[{#FSNAME},free]</key>
                   </item>
                 </graph_item>
@@ -1661,7 +1664,12 @@
         </discovery_rule>
       </discovery_rules>
       <httptests/>
-      <macros/>
+      <macros>
+        <macro>
+          <macro>{$IPMI_FILTER}</macro>
+          <value>(System Temp|Power|FAN|CPU1 Temp|CPU2 Temp)</value>
+        </macro>
+      </macros>
       <templates>
         <template>
           <name>CV Chrony daemon</name>
@@ -1670,16 +1678,16 @@
           <name>CV Infiniband</name>
         </template>
         <template>
+          <name>CV IPMItool</name>
+        </template>
+        <template>
           <name>CV OS Memory</name>
         </template>
         <template>
-          <name>CV Slurm compute</name>
+          <name>CV SMART hdd monitoring</name>
         </template>
         <template>
-          <name>Template App SSH Service</name>
-        </template>
-        <template>
-          <name>Template ICMP Ping</name>
+          <name>CV Storcli</name>
         </template>
       </templates>
       <screens/>
@@ -1687,7 +1695,7 @@
   </templates>
   <triggers>
     <trigger>
-      <expression>{CV Compute:vfs.file.cksum[/etc/passwd].diff(0)}&gt;0</expression>
+      <expression>{CV GPFS Server:vfs.file.cksum[/etc/passwd].diff(0)}&gt;0</expression>
       <recovery_mode>0</recovery_mode>
       <recovery_expression/>
       <name>/etc/passwd has been changed on {HOST.NAME}</name>
@@ -1703,7 +1711,23 @@
       <tags/>
     </trigger>
     <trigger>
-      <expression>{CV Compute:system.cpu.util[,iowait].avg(5m)}&gt;80</expression>
+      <expression>{CV GPFS Server:system.cpu.util[,system].avg(5m)}&gt;80</expression>
+      <recovery_mode>0</recovery_mode>
+      <recovery_expression/>
+      <name>CPU System is overloaded on {HOST.NAME}</name>
+      <correlation_mode>0</correlation_mode>
+      <correlation_tag/>
+      <url/>
+      <status>0</status>
+      <priority>1</priority>
+      <description/>
+      <type>0</type>
+      <manual_close>0</manual_close>
+      <dependencies/>
+      <tags/>
+    </trigger>
+    <trigger>
+      <expression>{CV GPFS Server:system.cpu.util[,iowait].avg(5m)}&gt;80</expression>
       <recovery_mode>0</recovery_mode>
       <recovery_expression/>
       <name>Disk I/O is overloaded on {HOST.NAME}</name>
@@ -1719,7 +1743,7 @@
       <tags/>
     </trigger>
     <trigger>
-      <expression>{CV Compute:vm.memory.size[available].last(0)}&lt;500M</expression>
+      <expression>{CV GPFS Server:vm.memory.size[available].last(0)}&lt;500M</expression>
       <recovery_mode>0</recovery_mode>
       <recovery_expression/>
       <name>Lack of available memory on server {HOST.NAME}</name>
@@ -1735,7 +1759,7 @@
       <tags/>
     </trigger>
     <trigger>
-      <expression>{CV Compute:proc.num[].avg(5m)}&gt;3000</expression>
+      <expression>{CV GPFS Server:proc.num[].avg(5m)}&gt;3000</expression>
       <recovery_mode>0</recovery_mode>
       <recovery_expression/>
       <name>Too many processes on {HOST.NAME}</name>
@@ -1751,7 +1775,7 @@
       <tags/>
     </trigger>
     <trigger>
-      <expression>{CV Compute:proc.num[,,run].avg(5m)}&gt;3000</expression>
+      <expression>{CV GPFS Server:proc.num[,,run].avg(5m)}&gt;3000</expression>
       <recovery_mode>0</recovery_mode>
       <recovery_expression/>
       <name>Too many processes running on {HOST.NAME}</name>
@@ -1794,7 +1818,7 @@
           <calc_fnc>2</calc_fnc>
           <type>0</type>
           <item>
-            <host>CV Compute</host>
+            <host>CV GPFS Server</host>
             <key>system.cpu.switches</key>
           </item>
         </graph_item>
@@ -1806,7 +1830,7 @@
           <calc_fnc>2</calc_fnc>
           <type>0</type>
           <item>
-            <host>CV Compute</host>
+            <host>CV GPFS Server</host>
             <key>system.cpu.intr</key>
           </item>
         </graph_item>
@@ -1838,7 +1862,7 @@
           <calc_fnc>2</calc_fnc>
           <type>0</type>
           <item>
-            <host>CV Compute</host>
+            <host>CV GPFS Server</host>
             <key>system.cpu.load[percpu,avg1]</key>
           </item>
         </graph_item>
@@ -1850,7 +1874,7 @@
           <calc_fnc>2</calc_fnc>
           <type>0</type>
           <item>
-            <host>CV Compute</host>
+            <host>CV GPFS Server</host>
             <key>system.cpu.load[percpu,avg5]</key>
           </item>
         </graph_item>
@@ -1862,7 +1886,7 @@
           <calc_fnc>2</calc_fnc>
           <type>0</type>
           <item>
-            <host>CV Compute</host>
+            <host>CV GPFS Server</host>
             <key>system.cpu.load[percpu,avg15]</key>
           </item>
         </graph_item>
@@ -1894,7 +1918,7 @@
           <calc_fnc>2</calc_fnc>
           <type>0</type>
           <item>
-            <host>CV Compute</host>
+            <host>CV GPFS Server</host>
             <key>system.cpu.util[,steal]</key>
           </item>
         </graph_item>
@@ -1906,7 +1930,7 @@
           <calc_fnc>2</calc_fnc>
           <type>0</type>
           <item>
-            <host>CV Compute</host>
+            <host>CV GPFS Server</host>
             <key>system.cpu.util[,softirq]</key>
           </item>
         </graph_item>
@@ -1918,7 +1942,7 @@
           <calc_fnc>2</calc_fnc>
           <type>0</type>
           <item>
-            <host>CV Compute</host>
+            <host>CV GPFS Server</host>
             <key>system.cpu.util[,interrupt]</key>
           </item>
         </graph_item>
@@ -1930,7 +1954,7 @@
           <calc_fnc>2</calc_fnc>
           <type>0</type>
           <item>
-            <host>CV Compute</host>
+            <host>CV GPFS Server</host>
             <key>system.cpu.util[,nice]</key>
           </item>
         </graph_item>
@@ -1942,7 +1966,7 @@
           <calc_fnc>2</calc_fnc>
           <type>0</type>
           <item>
-            <host>CV Compute</host>
+            <host>CV GPFS Server</host>
             <key>system.cpu.util[,iowait]</key>
           </item>
         </graph_item>
@@ -1954,7 +1978,7 @@
           <calc_fnc>2</calc_fnc>
           <type>0</type>
           <item>
-            <host>CV Compute</host>
+            <host>CV GPFS Server</host>
             <key>system.cpu.util[,system]</key>
           </item>
         </graph_item>
@@ -1966,7 +1990,7 @@
           <calc_fnc>2</calc_fnc>
           <type>0</type>
           <item>
-            <host>CV Compute</host>
+            <host>CV GPFS Server</host>
             <key>system.cpu.util[,user]</key>
           </item>
         </graph_item>
@@ -1978,7 +2002,7 @@
           <calc_fnc>2</calc_fnc>
           <type>0</type>
           <item>
-            <host>CV Compute</host>
+            <host>CV GPFS Server</host>
             <key>system.cpu.util[,idle]</key>
           </item>
         </graph_item>

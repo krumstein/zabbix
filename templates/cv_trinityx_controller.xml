@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zabbix_export>
+  <version>3.2</version>
+  <date>2017-04-07T16:03:14Z</date>
+  <groups>
+    <group>
+      <name>Templates</name>
+    </group>
+  </groups>
+  <templates>
+    <template>
+      <template>CV TrinityX controller</template>
+      <name>CV TrinityX controller</name>
+      <description/>
+      <groups>
+        <group>
+          <name>Templates</name>
+        </group>
+      </groups>
+      <applications/>
+      <items/>
+      <discovery_rules/>
+      <httptests/>
+      <macros/>
+      <templates>
+        <template>
+          <name>CV App DRBD</name>
+        </template>
+        <template>
+          <name>CV App Pacemaker</name>
+        </template>
+        <template>
+          <name>CV Controller Packages diff</name>
+        </template>
+        <template>
+          <name>CV Slurm</name>
+        </template>
+      </templates>
+      <screens/>
+    </template>
+  </templates>
+</zabbix_export>

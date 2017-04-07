@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
   <version>3.2</version>
-  <date>2017-04-07T15:46:05Z</date>
+  <date>2017-04-07T15:47:08Z</date>
   <groups>
     <group>
       <name>Templates</name>
@@ -9,8 +9,8 @@
   </groups>
   <templates>
     <template>
-      <template>CV IPMItool</template>
-      <name>CV IPMItool</name>
+      <template>CV IPMItool JBOD</template>
+      <name>CV IPMItool JBOD</name>
       <description/>
       <groups>
         <group>
@@ -25,11 +25,11 @@
       <items>
         <item>
           <name>IPMI sel count</name>
-          <type>0</type>
+          <type>10</type>
           <snmp_community/>
           <multiplier>0</multiplier>
           <snmp_oid/>
-          <key>ipmitool[sel_cnt]</key>
+          <key>ipmitool[--host,{HOST.CONN},--user,{$JBOD_USER},sel_cnt]</key>
           <delay>300</delay>
           <history>90</history>
           <trends>0</trends>
@@ -70,10 +70,10 @@
       <discovery_rules>
         <discovery_rule>
           <name>Sensors discovery</name>
-          <type>0</type>
+          <type>10</type>
           <snmp_community/>
           <snmp_oid/>
-          <key>ipmitool[--re,{$IPMI_FILTER},discovery]</key>
+          <key>ipmitool[--host,{HOST.CONN},--user,{$JBOD_USER},discovery]</key>
           <delay>3600</delay>
           <status>0</status>
           <allowed_hosts/>
@@ -102,56 +102,12 @@
           <description/>
           <item_prototypes>
             <item_prototype>
-              <name>IPMI sensor {#SENSOR_NAME} Low critical value</name>
-              <type>0</type>
-              <snmp_community/>
-              <multiplier>0</multiplier>
-              <snmp_oid/>
-              <key>ipmitool[--re,{$IPMI_FILTER},low_crit,{#SENSOR_NAME}]</key>
-              <delay>3600</delay>
-              <history>90</history>
-              <trends>0</trends>
-              <status>0</status>
-              <value_type>0</value_type>
-              <allowed_hosts/>
-              <units/>
-              <delta>0</delta>
-              <snmpv3_contextname/>
-              <snmpv3_securityname/>
-              <snmpv3_securitylevel>0</snmpv3_securitylevel>
-              <snmpv3_authprotocol>0</snmpv3_authprotocol>
-              <snmpv3_authpassphrase/>
-              <snmpv3_privprotocol>0</snmpv3_privprotocol>
-              <snmpv3_privpassphrase/>
-              <formula>1</formula>
-              <delay_flex/>
-              <params/>
-              <ipmi_sensor/>
-              <data_type>0</data_type>
-              <authtype>0</authtype>
-              <username/>
-              <password/>
-              <publickey/>
-              <privatekey/>
-              <port/>
-              <description/>
-              <inventory_link>0</inventory_link>
-              <applications>
-                <application>
-                  <name>IPMItool</name>
-                </application>
-              </applications>
-              <valuemap/>
-              <logtimefmt/>
-              <application_prototypes/>
-            </item_prototype>
-            <item_prototype>
               <name>IPMI sensor {#SENSOR_NAME} Up critical value</name>
-              <type>0</type>
+              <type>10</type>
               <snmp_community/>
               <multiplier>0</multiplier>
               <snmp_oid/>
-              <key>ipmitool[--re,{$IPMI_FILTER},up_crit,{#SENSOR_NAME}]</key>
+              <key>ipmitool[--host,{HOST.CONN},--user,{$JBOD_USER},up_crit,{#SENSOR_NAME}]</key>
               <delay>3600</delay>
               <history>90</history>
               <trends>0</trends>
@@ -191,11 +147,11 @@
             </item_prototype>
             <item_prototype>
               <name>IPMI sensor {#SENSOR_NAME}</name>
-              <type>0</type>
+              <type>10</type>
               <snmp_community/>
               <multiplier>0</multiplier>
               <snmp_oid/>
-              <key>ipmitool[--re,{$IPMI_FILTER},value,{#SENSOR_NAME}]</key>
+              <key>ipmitool[--host,{HOST.CONN},--user,{$JBOD_USER},value,{#SENSOR_NAME}]</key>
               <delay>300</delay>
               <history>90</history>
               <trends>0</trends>
@@ -236,7 +192,7 @@
           </item_prototypes>
           <trigger_prototypes>
             <trigger_prototype>
-              <expression>{CV IPMItool:ipmitool[--re,{$IPMI_FILTER},value,{#SENSOR_NAME}].last(0)}&gt;{CV IPMItool:ipmitool[--re,{$IPMI_FILTER},up_crit,{#SENSOR_NAME}].last(0)}</expression>
+              <expression>{CV IPMItool JBOD:ipmitool[--host,{HOST.CONN},--user,{$JBOD_USER},value,{#SENSOR_NAME}].last(0)}&gt;{CV IPMItool JBOD:ipmitool[--host,{HOST.CONN},--user,{$JBOD_USER},up_crit,{#SENSOR_NAME}].last(0)}</expression>
               <recovery_mode>0</recovery_mode>
               <recovery_expression/>
               <name>Value of {#SENSOR_NAME} is higher than critical</name>
@@ -251,49 +207,28 @@
               <dependencies/>
               <tags/>
             </trigger_prototype>
-            <trigger_prototype>
-              <expression>{CV IPMItool:ipmitool[--re,{$IPMI_FILTER},value,{#SENSOR_NAME}].last(0)}&lt;{CV IPMItool:ipmitool[--re,{$IPMI_FILTER},low_crit,{#SENSOR_NAME}].last(0)}</expression>
-              <recovery_mode>0</recovery_mode>
-              <recovery_expression/>
-              <name>Value of {#SENSOR_NAME} is lower than critical</name>
-              <correlation_mode>0</correlation_mode>
-              <correlation_tag/>
-              <url/>
-              <status>1</status>
-              <priority>1</priority>
-              <description/>
-              <type>0</type>
-              <manual_close>0</manual_close>
-              <dependencies/>
-              <tags/>
-            </trigger_prototype>
           </trigger_prototypes>
           <graph_prototypes/>
           <host_prototypes/>
         </discovery_rule>
       </discovery_rules>
       <httptests/>
-      <macros>
-        <macro>
-          <macro>{$IPMI_FILTER}</macro>
-          <value>(Inlet Temp|Power|FAN|CPU1 Core Rem|CPU2 Core Rem)</value>
-        </macro>
-      </macros>
+      <macros/>
       <templates/>
       <screens/>
     </template>
   </templates>
   <triggers>
     <trigger>
-      <expression>{CV IPMItool:ipmitool[sel_cnt].last(0)}&gt;1</expression>
+      <expression>{CV IPMItool JBOD:ipmitool[--host,{HOST.CONN},--user,{$JBOD_USER},sel_cnt].last(0)}&gt;1</expression>
       <recovery_mode>0</recovery_mode>
       <recovery_expression/>
       <name>New sel message</name>
       <correlation_mode>0</correlation_mode>
       <correlation_tag/>
       <url/>
-      <status>1</status>
-      <priority>2</priority>
+      <status>0</status>
+      <priority>3</priority>
       <description/>
       <type>0</type>
       <manual_close>0</manual_close>
