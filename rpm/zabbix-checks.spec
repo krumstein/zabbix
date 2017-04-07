@@ -1,5 +1,5 @@
 Name:		cv-zabbix-checks	
-Version:	0.28
+Version:	0.29
 Release:	0%{?dist}
 Summary:	Zabbix checks by ClusterVision
 
@@ -76,6 +76,8 @@ systemctl restart zabbix-agent
 
 
 %changelog
+* Fri Apr 07 2017 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.29.0
+- Added checks for rsnapshot and amount of filehandles
 * Fri Apr 07 2017 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.28.0
 - Zabbix agent does not log sudo
 * Fri Apr 07 2017 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.27.0
