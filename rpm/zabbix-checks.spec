@@ -1,5 +1,5 @@
 Name:		cv-zabbix-checks	
-Version:	0.26
+Version:	0.28
 Release:	0%{?dist}
 Summary:	Zabbix checks by ClusterVision
 
@@ -76,6 +76,10 @@ systemctl restart zabbix-agent
 
 
 %changelog
+* Fri Apr 07 2017 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.28.0
+- Zabbix agent does not log sudo
+* Fri Apr 07 2017 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.27.0
+- Added templates
 * Mon Feb 20 2017 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.26.0
 - Added template for IPMI on Huawei nodes, IPMItool no more return 'na' if there is no data for critical values, IPMItool by default support  filters
 * Mon Feb 20 2017 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.25.2

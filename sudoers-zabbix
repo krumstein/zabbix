@@ -1,4 +1,4 @@
-Defaults:zabbix !requiretty
+Defaults:zabbix !requiretty, !syslog
 Cmnd_Alias ZABBIX_CMD = /var/lib/zabbix/userparameters/pacemaker, \
     /var/lib/zabbix/userparameters/perc, \
     /var/lib/zabbix/userparameters/smcli, \
@@ -19,5 +19,6 @@ Cmnd_Alias ZABBIX_CMD = /var/lib/zabbix/userparameters/pacemaker, \
     /usr/sbin/pcs, \
     /usr/bin/mysql, \
     /bin/sh, \
+    /bin/grep, \
     /usr/bin/scontrol
 zabbix ALL = (root) NOPASSWD: ZABBIX_CMD
