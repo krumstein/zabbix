@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
-   <version>3.0</version>
+   <version>3.2</version>
    <date>2016-11-26T07:06:35Z</date>
    <groups>
       <group>
@@ -288,6 +288,24 @@
          <screens />
       </template>
    </templates>
+   <triggers>
+    <trigger>
+      <expression>{CV OS Memory:vm.memory.size[available].last(0)}&lt;500M</expression>
+      <recovery_mode>0</recovery_mode>
+      <recovery_expression/>
+      <name>Lack of available memory on server {HOST.NAME}</name>
+      <correlation_mode>0</correlation_mode>
+      <correlation_tag/>
+      <url/>
+      <status>0</status>
+      <priority>1</priority>
+      <description/>
+      <type>0</type>
+      <manual_close>0</manual_close>
+      <dependencies/>
+      <tags/>
+    </trigger>
+   </triggers>
    <graphs>
       <graph>
          <name>Memory usage</name>

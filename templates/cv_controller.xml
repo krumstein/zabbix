@@ -48,6 +48,10 @@
         <application>
           <name>Security</name>
         </application>
+        <application>
+          <name>Memory</name>
+        </application>
+
       </applications>
       <items>
         <item>
@@ -1858,22 +1862,6 @@
       <status>0</status>
       <priority>1</priority>
       <description>OS spends significant time waiting for I/O (input/output) operations. It could be indicator of performance issues with storage system.</description>
-      <type>0</type>
-      <manual_close>0</manual_close>
-      <dependencies/>
-      <tags/>
-    </trigger>
-    <trigger>
-      <expression>{CV Controller:vm.memory.size[available].last(0)}&lt;500M</expression>
-      <recovery_mode>0</recovery_mode>
-      <recovery_expression/>
-      <name>Lack of available memory on server {HOST.NAME}</name>
-      <correlation_mode>0</correlation_mode>
-      <correlation_tag/>
-      <url/>
-      <status>0</status>
-      <priority>1</priority>
-      <description/>
       <type>0</type>
       <manual_close>0</manual_close>
       <dependencies/>

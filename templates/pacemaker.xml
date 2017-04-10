@@ -121,7 +121,6 @@
                             <priority>1</priority>
                             <description/>
                             <type>0</type>
-                            <status>0</status>
                             <dependencies/>
                         </trigger_prototype>
                     </trigger_prototypes>
