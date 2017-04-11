@@ -1,6 +1,6 @@
 Name:		cv-zabbix-checks	
 Version:	0.33
-Release:	0%{?dist}
+Release:	1%{?dist}
 Summary:	Zabbix checks by ClusterVision
 
 Group:		CV	
@@ -35,7 +35,10 @@ install -m 0755 -d $RPM_BUILD_ROOT/usr/lib/zabbix/templates/
 install -m 0644  templates/*.xml $RPM_BUILD_ROOT/usr/lib/zabbix/templates/
 
 install -m 0755 -d $RPM_BUILD_ROOT/usr/lib/zabbix/utils
-install -m 0755 utils/* $RPM_BUILD_ROOT/usr/lib/zabbix/utils/
+install -m 0755 utils/*.sh $RPM_BUILD_ROOT/usr/lib/zabbix/utils/
+
+install -m 0755 -d $RPM_BUILD_ROOT/usr/lib/zabbix/utils/gpfs_snmp
+install -m 0755 utils/gpfs_snmp/* $RPM_BUILD_ROOT/usr/lib/zabbix/utils/gpfs_snmp/
 
 
 install -m 0755 -d $RPM_BUILD_ROOT/usr/lib/zabbix/externalscripts/
@@ -75,6 +78,8 @@ systemctl restart zabbix-agent
 
 
 %changelog
+* Tue Apr 11 2017 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.33.1
+- Fixed gpfs_snmp installation
 * Tue Apr 11 2017 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.33.0
 - Utils are now installed
 * Mon Apr 10 2017 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.32.0
