@@ -10,7 +10,7 @@ if [  $# -lt 1  ]
                 exit 1
 fi
 
-source /trinity/trinity.shadow
+source /trinity/local/trinity.shadow
 echo "getting token"
 TOKEN=$(curl -s localhost/zabbix/api_jsonrpc.php \
               -H 'Content-Type: application/json-rpc' \

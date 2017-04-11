@@ -1,5 +1,5 @@
 Name:		cv-zabbix-checks	
-Version:	0.31
+Version:	0.33
 Release:	0%{?dist}
 Summary:	Zabbix checks by ClusterVision
 
@@ -35,8 +35,7 @@ install -m 0755 -d $RPM_BUILD_ROOT/usr/lib/zabbix/templates/
 install -m 0644  templates/*.xml $RPM_BUILD_ROOT/usr/lib/zabbix/templates/
 
 install -m 0755 -d $RPM_BUILD_ROOT/usr/lib/zabbix/utils
-install -m 0755 utils/import.sh $RPM_BUILD_ROOT/usr/lib/zabbix/utils/
-install -m 0755 utils/add_group.sh $RPM_BUILD_ROOT/usr/lib/zabbix/utils/
+install -m 0755 utils/* $RPM_BUILD_ROOT/usr/lib/zabbix/utils/
 
 
 install -m 0755 -d $RPM_BUILD_ROOT/usr/lib/zabbix/externalscripts/
@@ -76,6 +75,13 @@ systemctl restart zabbix-agent
 
 
 %changelog
+* Tue Apr 11 2017 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.33.0
+- Utils are now installed
+* Mon Apr 10 2017 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.32.0
+- Fixed Zabbix templates: they're imported without errors
+- Added a scripts to link a templates to another template
+- Added a script to make agent listen for any controller IP
+- Added a script to change auto registration action
 * Fri Apr 07 2017 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.31.0
 - Fixed export script ( encoding problem ) and ansible .yml for SNMP configure of GPFS
 * Fri Apr 07 2017 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.30.0
