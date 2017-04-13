@@ -1,0 +1,74 @@
+---
+- hosts: localhost
+  strategy: debug
+  tasks:
+    - name: Source variables and password
+      shell: source /trinity/local/trinity.shadow && echo $ZABBIX_ADMIN_PASSWORD
+      register: ZABBIX_ADMIN_PASSWORD
+
+    - name: Source variables and password
+      shell: source /etc/trinity.sh && echo $TRIX_CTRL_IP
+      register: TRIX_CTRL_IP
+
+
+    - name: Test getting value 
+      myzabbix: 
+          username: "Admin"
+          password: "{{ ZABBIX_ADMIN_PASSWORD.stdout  }}"
+          hostname: "{{ TRIX_CTRL_IP.stdout  }}"
+          object: "mediatype"
+          action: "get"
+      register: result
+    - name: Get output
+      debug: var=result
+
+    - name: Test setting value
+      myzabbix: 
+          username: "Admin"
+          password: "{{ ZABBIX_ADMIN_PASSWORD.stdout  }}"
+          hostname: "{{ TRIX_CTRL_IP.stdout  }}"
+          object: "mediatype"
+          action: "update"
+          params: 
+             mediatypeid: 4
+             smtp_server: '127.0.0.1'  
+      register: result
+    - name: Get output
+      debug: var=result
+
+    - name: Test getting action
+      myzabbix: 
+          username: "Admin"
+          password: "{{ ZABBIX_ADMIN_PASSWORD.stdout  }}"
+          hostname: "{{ TRIX_CTRL_IP.stdout  }}"
+          object: "action"
+          action: "get"
+          params: 
+              filter:
+                 name : "Auto registration"
+      register: action
+    - name: Get output
+      debug: var=action
+
+    - name: Test setting action
+      myzabbix: 
+          username: "Admin"
+          password: "{{ ZABBIX_ADMIN_PASSWORD.stdout  }}"
+          hostname: "{{ TRIX_CTRL_IP.stdout  }}"
+          object: "action"
+          action: "update"
+          params: 
+              actionid: "{{action.result[0].actionid}}"
+              operations:
+                  - actionid: "{{action.result[0].actionid}}"
+                    operationid: 13
+                    operationtype: 6
+                    optemplate: 
+                     - operationid: 13
+                       templateid: 10102
+                     - operationid: 13
+                       templateid: 10104
+                    recovery: 0
+      register: result
+    - name: Get output
+      debug: var=result
