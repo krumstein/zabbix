@@ -49,8 +49,8 @@ install -m 0644 gpfs_fileset_usage  $RPM_BUILD_ROOT/etc/cron.d/
 
 install -m 0755 -d   $RPM_BUILD_ROOT/usr/lib/zabbix/ansible
 install -m 0755 -d   $RPM_BUILD_ROOT/usr/lib/zabbix/ansible/library
-install -m 0644 ansible/* $RPM_BUILD_ROOT/var/lib/zabbix/ansible
-install -m 0644 ansible/library/* $RPM_BUILD_ROOT/var/lib/zabbix/ansible/library
+install -m 0644 ansible/* $RPM_BUILD_ROOT/usr/lib/zabbix/ansible
+install -m 0644 ansible/library/* $RPM_BUILD_ROOT/usr/lib/zabbix/ansible/library
 
 
 mkdir $RPM_BUILD_ROOT/tmp
