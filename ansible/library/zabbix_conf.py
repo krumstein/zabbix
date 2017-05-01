@@ -31,10 +31,16 @@ def main():
             if len(found_objects) == 0 :
                 module.fail_json("Could not find object")
             else:
-                #map(lambda x: result.append(object.update(x.update(module.params['params']))),found_objects)
-                #map(lambda x: result.append(dict({k:v for k,v in x.items() if k.endswith('id')} , **module.params['params'])),found_objects)
                 map(lambda x: result.append(object.update(dict({k:v for k,v in x.items() if k.endswith('id')}, **module.params['params']))),found_objects)
-    
+        elif module.params['action'] == 'create':
+            try:
+                method = getattr(object, module.params['action'])
+                result =  method(module.params['params'])
+            except ZabbixAPIException as e:
+                if "already exists." in str(e):
+                    module.exit_json(changed=False,  result=result,msg=msg)
+                else:
+                    module.fail_json(msg="Zabbix API exception:{}".format(e))
         else:
             method = getattr(object, module.params['action'])
             result =  method(module.params['params'])

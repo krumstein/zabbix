@@ -1,0 +1,109 @@
+---
+- hosts: localhost
+  tasks:
+    - name: install python2-zabbix-api
+      yum:
+            name: python2-zabbix-api
+            state: present
+    - name: Source variables and password
+      shell: source /trinity/local/trinity.shadow && echo $ZABBIX_ADMIN_PASSWORD
+      register: ZABBIX_ADMIN_PASSWORD
+
+    - name: Source variables and password
+      shell: source /etc/trinity.sh && echo $TRIX_CTRL_IP
+      register: TRIX_CTRL_IP
+
+    - name: Import all templates
+      zabbix_conf:
+          username: "Admin"
+          password: "{{ ZABBIX_ADMIN_PASSWORD.stdout  }}"
+          hostname: "{{ TRIX_CTRL_IP.stdout  }}"
+          object:   "configuration"
+          action:   "import"
+          query:    {}
+          params:   
+               format: "xml"
+               rules: 
+                      hosts:
+                            createMissing: "true"
+                            updateExisting: "true"
+                      templates: 
+                            createMissing: "true"
+                            updateExisting: "true"
+                      applications:
+                            createMissing: "true"
+                            updateExisting: "true"
+                      discoveryRules: 
+                            createMissing: "true"
+                            updateExisting: "true"
+                      graphs: 
+                            createMissing: "true"
+                            updateExisting: "true"
+                      triggers: 
+                            createMissing: "true"
+                            updateExisting: "true"
+                      items: 
+                            createMissing: "true"
+                            updateExisting: "true"
+                            deleteMissing: "true"
+               source: "{{ lookup('file', item )}}"
+      with_fileglob:
+          - "/usr/lib/zabbix/templates/*.xml"
+
+    - name: Get template IDs
+      zabbix_conf: 
+          username: "Admin"
+          password: "{{ ZABBIX_ADMIN_PASSWORD.stdout  }}"
+          hostname: "{{ TRIX_CTRL_IP.stdout  }}"
+          object:   "{{item.object}}"
+          action:   "{{item.action}}"
+          query:    "{{item.query}}"
+          params:   "{{item.params}}"
+      with_items:
+          - {object: "template", action: "get", query: { }, params: {filter: { host: "CV App DRBD" }  } }
+          - {object: "template", action: "get", query: { }, params: {filter: { host: "CV App Pacemaker" }  } }
+          - {object: "template", action: "get", query: { }, params: {filter: { host: "CV Slurm" }  } }
+      register: templates
+
+    - name: Link template to TrinintyX template
+      zabbix_conf: 
+          username: "Admin"
+          password: "{{ ZABBIX_ADMIN_PASSWORD.stdout  }}"
+          hostname: "{{ TRIX_CTRL_IP.stdout  }}"
+          object:   "template"
+          action:   "update"
+          query:    {}
+          params:   { templateid: "{{ item.result.0.templateid }}" } 
+      with_items: "{{ templates.results }}"
+
+    - name: Configuring mail forwarding, creating host groups and chaging default auto registration default rule
+      zabbix_conf: 
+          username: "Admin"
+          password: "{{ ZABBIX_ADMIN_PASSWORD.stdout  }}"
+          hostname: "{{ TRIX_CTRL_IP.stdout  }}"
+          object:   "{{item.object}}"
+          action:   "{{item.action}}"
+          query:    "{{item.query}}"
+          params:   "{{item.params}}"
+      with_items:
+          - {object: "mediatype", action: "find_update", query: { name: "Local e-mail" } , params: { smtp_server: "127.0.0.1" } }
+          - {object: "hostgroup", action: "create", query: {  } , params: { name: "Compute" } }
+          - {object: "hostgroup", action: "create", query: {  } , params: { name: "Controller" } }
+          - {object: "hostgroup", action: "create", query: {  } , params: { name: "Login" } }
+          - {object: "hostgroup", action: "create", query: {  } , params: { name: "Storage" } }
+          - {object: "hostgroup", action: "create", query: {  } , params: { name: "Test" } }
+          - object: "action"
+            action: "find_update"
+            query: 
+                 name: "Auto registration"
+            params:  
+                 operations:
+                     - actionid: 7
+                       operationid: 13
+                       operationtype: 6
+                       optemplate: 
+                          - operationid: 13
+                            templateid:  10102
+                          - operationid: 13
+                            templateid:  10104
+                       recovery: 0 

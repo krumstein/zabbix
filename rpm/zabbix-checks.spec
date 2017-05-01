@@ -1,6 +1,6 @@
 Name:		cv-zabbix-checks	
-Version:	0.33
-Release:	1%{?dist}
+Version:	0.34
+Release:	0%{?dist}
 Summary:	Zabbix checks by ClusterVision
 
 Group:		CV	
@@ -47,6 +47,11 @@ install -m 0755 externalscripts/* $RPM_BUILD_ROOT/usr/lib/zabbix/externalscripts
 install -m 0755 -d   $RPM_BUILD_ROOT/etc/cron.d/
 install -m 0644 gpfs_fileset_usage  $RPM_BUILD_ROOT/etc/cron.d/
 
+install -m 0755 -d   $RPM_BUILD_ROOT/usr/lib/zabbix/ansible
+install -m 0755 -d   $RPM_BUILD_ROOT/usr/lib/zabbix/ansible/library
+install -m 0644 ansible/* $RPM_BUILD_ROOT/var/lib/zabbix/ansible
+install -m 0644 ansible/library/* $RPM_BUILD_ROOT/var/lib/zabbix/ansible/library
+
 
 mkdir $RPM_BUILD_ROOT/tmp
 touch $RPM_BUILD_ROOT/tmp/ipmitool.cache
@@ -71,6 +76,8 @@ systemctl restart zabbix-agent
 %attr(-,root,root) /tmp/gpfs_filset_usage
 %attr(-,root,root) /usr/lib/zabbix/templates/*
 %attr(-,root,root) /usr/lib/zabbix/utils/*
+%attr(-,root,root) /usr/lib/zabbix/ansible/*
+%attr(-,root,root) /usr/lib/zabbix/ansible/library/*
 %config(noreplace) /etc/cron.d/gpfs_fileset_usage
 
 %doc
@@ -78,6 +85,8 @@ systemctl restart zabbix-agent
 
 
 %changelog
+* Mon May 01 2017 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.34.0
+- Added ansible module
 * Tue Apr 11 2017 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.33.1
 - Fixed gpfs_snmp installation
 * Tue Apr 11 2017 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.33.0
