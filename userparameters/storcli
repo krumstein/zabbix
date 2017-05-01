@@ -41,10 +41,36 @@ class STORCLI(object):
                 if tmp_arr and re.search(r'\d+/\d+',tmp_arr[0]):
                     pdisk = {'{#C_PDISK}': str(controller) + "_" + tmp_arr[0]}
                     data.append(pdisk)
+            proc = subprocess.Popen([cls.EXECUTABLE, '/c%d'%controller, '/dall','show'], stdout=subprocess.PIPE, close_fds=True) 
+            for line in proc.communicate()[0].split('\n'):
+                tmp_arr = [s.strip() for s in line.split(' ') if s.strip()]
+                if tmp_arr and len(tmp_arr) > 3:
+                    if re.search(r'\d+:\d+',tmp_arr[3]):
+                        pdisk = {'{#C_PDISK}': '{0}_{1}'.format(str(controller), tmp_arr[3]) }
+                        data.append(pdisk)
+
         return json.dumps({'data': data}, separators=(',', ':'))
+    
+    @classmethod
+    def getdrivestate(cls, args, parm):
+        controller = args.vdisk.split('_')[0]
+        encl = args.vdisk.split('_')[1].split(':')[0]
+        slot = args.vdisk.split('_')[1].split(':')[1]
+        proc = subprocess.Popen([ cls.EXECUTABLE, '/c%d'%int(controller), '/e{0}'.format(encl),'/s{0}'.format(slot),'show'], \
+                                stdout=subprocess.PIPE, close_fds=True)
+        if proc.returncode:
+            sys.exit(1)
+        for line in proc.communicate()[0].split('\n'):
+            tmp_arr = [s.strip() for s in line.split(' ') if s.strip()]
+            if len(tmp_arr) > 3:
+                if tmp_arr[0] == "{0}:{1}".format(encl,slot):
+                    return tmp_arr[parm]
+
 
     @classmethod
-    def getstate(cls, args, parm):
+    def getvdrivestate(cls, args, parm):
+        if ":" in args.vdisk:
+            return cls.getdrivestate(args,parm)
         controller = args.vdisk.split('_')[0]
         pdisk = args.vdisk.split('_')[1]
         proc = subprocess.Popen([ cls.EXECUTABLE, '/c%d'%int(controller), '/vall','show'], stdout=subprocess.PIPE, close_fds=True)
@@ -58,19 +84,35 @@ class STORCLI(object):
 
     @classmethod
     def vdrivestate(cls, args):
-        return cls.getstate(args, 2)
+        return cls.getvdrivestate(args, 2)
 
     @classmethod
     def vdrivetype(cls, args):
-        return cls.getstate(args, 1)
+        return cls.getvdrivestate(args, 1)
 
     @classmethod
     def vdrivesize(cls, args):
-        return cls.getstate(args, 8)
+        return cls.getvdrivestate(args, 8)
 
     @classmethod
     def vdrivename(cls, args):
-        return cls.getstate(args, 10)
+        return cls.getvdrivestate(args, 10)
+
+    @classmethod
+    def drivestate(cls, args):
+        return cls.getdrivestate(args, 2)
+
+    @classmethod
+    def drivetype(cls, args):
+        return cls.getdrivestate(args, 6)
+
+    @classmethod
+    def drivesize(cls, args):
+        return cls.getdrivestate(args, 4)
+
+    @classmethod
+    def drivename(cls, args):
+        return cls.getdrivestate(args, 11)
 
 
 def parse_args():
@@ -81,7 +123,7 @@ def parse_args():
 
     subparser_discovery = subparsers.add_parser('discovery')
     subparser_discovery.set_defaults(func=STORCLI.discovery_cntrl)
-
+    
     subparser_powerstate = subparsers.add_parser('vdrivestate')
     subparser_powerstate.set_defaults(func=STORCLI.vdrivestate)
     subparser_powerstate.add_argument('vdisk')
@@ -98,6 +140,7 @@ def parse_args():
     subparser_powerstate.set_defaults(func=STORCLI.vdrivename)
     subparser_powerstate.add_argument('vdisk')
 
+   
     return parser.parse_known_args()[0]
 
 def main():

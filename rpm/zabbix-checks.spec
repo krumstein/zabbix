@@ -1,5 +1,5 @@
 Name:		cv-zabbix-checks	
-Version:	0.34
+Version:	0.35
 Release:	0%{?dist}
 Summary:	Zabbix checks by ClusterVision
 
@@ -85,6 +85,8 @@ systemctl restart zabbix-agent
 
 
 %changelog
+* Mon May 01 2017 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.35.0
+- Added disk monitoring for storcli
 * Mon May 01 2017 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.34.0
 - Added ansible module
 * Tue Apr 11 2017 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.33.1
