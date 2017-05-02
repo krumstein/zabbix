@@ -62,6 +62,8 @@
 
                source: "{{ lookup('file', item )}}"
       with_fileglob:
+          - "/usr/lib/zabbix/templates/01*.xml"
+          - "/usr/lib/zabbix/templates/02*.xml"
           - "/usr/lib/zabbix/templates/*.xml"
 
     - name: Get template IDs
@@ -74,45 +76,8 @@
           query:    "{{item.query}}"
           params:   "{{item.params}}"
       with_items:
-          - {object: "template", action: "get", query: { }, params: {filter: { host: "CV TrinityX controller" }  } }
           - {object: "template", action: "get", query: { }, params: {filter: { host: "CV Controller" }  } }
-          - {object: "template", action: "get", query: { }, params: {filter: { host: "CV App DRBD" }  } }
-          - {object: "template", action: "get", query: { }, params: {filter: { host: "CV App Pacemaker" }  } }
-          - {object: "template", action: "get", query: { }, params: {filter: { host: "CV Slurm" }  } }
-          - {object: "template", action: "get", query: { }, params: {filter: { host: "CV Luna" }  } }
-
-          
-
       register: templates
-    - name: Link template to TrinintyX template
-      zabbix_conf: 
-          username: "Admin"
-          password: "{{ ZABBIX_ADMIN_PASSWORD.stdout  }}"
-          hostname: "{{ TRIX_CTRL_IP.stdout  }}"
-          object:   "template"
-          action:   "update"
-          query:    {}
-          params:   
-              templateid: "{{ templates.results.0.result.0.templateid }}"  
-              templates:
-                  - "{{ templates.results.2.result.0.templateid }}"
-                  - "{{ templates.results.3.result.0.templateid }}"
-                  - "{{ templates.results.4.result.0.templateid }}"
-                  - "{{ templates.results.5.result.0.templateid }}"
-
-
-    - name: Link TrinintyX template to Controller template
-      zabbix_conf: 
-          username: "Admin"
-          password: "{{ ZABBIX_ADMIN_PASSWORD.stdout  }}"
-          hostname: "{{ TRIX_CTRL_IP.stdout  }}"
-          object:   "template"
-          action:   "update"
-          query:    {}
-          params:   
-              templateid: "{{ templates.results.1.result.0.templateid }}"  
-              templates:
-                  - "{{ templates.results.0.result.0.templateid }}"
 
     - name: Add templates to controller
       zabbix_conf:
@@ -124,7 +89,7 @@
           query:    {"host": "{{ TRIX_CTRL_HOSTNAME.stdout }}" }
           params:
               templates:
-                  - {templateid:  "{{ templates.results.1.result.0.templateid }}" }    
+                  - {templateid:  "{{ templates.results.0.result.0.templateid }}" }    
                   - {templateid:  10102 }    
                   - {templateid:  10104 }    
 
@@ -143,7 +108,6 @@
           - {object: "hostgroup", action: "create", query: {  } , params: { name: "Controller" } }
           - {object: "hostgroup", action: "create", query: {  } , params: { name: "Login" } }
           - {object: "hostgroup", action: "create", query: {  } , params: { name: "Storage" } }
-          - {object: "hostgroup", action: "create", query: {  } , params: { name: "Test" } }
           - object: "action"
             action: "find_update"
             query: 
