@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
   <version>3.2</version>
-  <date>2017-05-01T14:51:07Z</date>
+  <date>2017-05-02T09:26:36Z</date>
   <groups>
     <group>
       <name>Templates</name>
@@ -54,7 +54,7 @@
             <formula/>
             <conditions/>
           </filter>
-          <lifetime>0</lifetime>
+          <lifetime>365</lifetime>
           <description/>
           <item_prototypes>
             <item_prototype>
