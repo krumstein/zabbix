@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
   <version>3.2</version>
-  <date>2017-04-07T15:32:59Z</date>
+  <date>2017-05-02T10:58:45Z</date>
   <groups>
     <group>
       <name>Templates</name>
@@ -34,6 +34,9 @@
           <name>Luna</name>
         </application>
         <application>
+          <name>Memory</name>
+        </application>
+        <application>
           <name>Network interfaces</name>
         </application>
         <application>
@@ -48,10 +51,6 @@
         <application>
           <name>Security</name>
         </application>
-        <application>
-          <name>Memory</name>
-        </application>
-
       </applications>
       <items>
         <item>
@@ -193,7 +192,7 @@
           <delay>300</delay>
           <history>90</history>
           <trends>365</trends>
-          <status>0</status>
+          <status>1</status>
           <value_type>3</value_type>
           <allowed_hosts/>
           <units/>
@@ -1802,15 +1801,6 @@
       <httptests/>
       <macros/>
       <templates>
-        <template>
-          <name>CV Chrony daemon</name>
-        </template>
-        <template>
-          <name>CV IPMItool</name>
-        </template>
-        <template>
-          <name>CV OS Memory</name>
-        </template>
         <template>
           <name>CV TrinityX controller</name>
         </template>

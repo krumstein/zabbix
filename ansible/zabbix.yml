@@ -13,6 +13,11 @@
       shell: source /etc/trinity.sh && echo $TRIX_CTRL_IP
       register: TRIX_CTRL_IP
 
+    - name: Source variables and password
+      shell: source /etc/trinity.sh && echo $TRIX_CTRL_HOSTNAME
+      register: TRIX_CTRL_HOSTNAME
+
+
     - name: Import all templates
       zabbix_conf:
           username: "Admin"
@@ -46,6 +51,15 @@
                             createMissing: "true"
                             updateExisting: "true"
                             deleteMissing: "true"
+                      templateLinkage: 
+                            createMissing: "true"
+                            updateExisting: "true"
+                            deleteMissing: "true"
+                      httptests: 
+                            createMissing: "true"
+                            updateExisting: "true"
+                            deleteMissing: "true"
+
                source: "{{ lookup('file', item )}}"
       with_fileglob:
           - "/usr/lib/zabbix/templates/*.xml"
@@ -60,11 +74,16 @@
           query:    "{{item.query}}"
           params:   "{{item.params}}"
       with_items:
+          - {object: "template", action: "get", query: { }, params: {filter: { host: "CV TrinityX controller" }  } }
+          - {object: "template", action: "get", query: { }, params: {filter: { host: "CV Controller" }  } }
           - {object: "template", action: "get", query: { }, params: {filter: { host: "CV App DRBD" }  } }
           - {object: "template", action: "get", query: { }, params: {filter: { host: "CV App Pacemaker" }  } }
           - {object: "template", action: "get", query: { }, params: {filter: { host: "CV Slurm" }  } }
-      register: templates
+          - {object: "template", action: "get", query: { }, params: {filter: { host: "CV Luna" }  } }
 
+          
+
+      register: templates
     - name: Link template to TrinintyX template
       zabbix_conf: 
           username: "Admin"
@@ -73,8 +92,41 @@
           object:   "template"
           action:   "update"
           query:    {}
-          params:   { templateid: "{{ item.result.0.templateid }}" } 
-      with_items: "{{ templates.results }}"
+          params:   
+              templateid: "{{ templates.results.0.result.0.templateid }}"  
+              templates:
+                  - "{{ templates.results.2.result.0.templateid }}"
+                  - "{{ templates.results.3.result.0.templateid }}"
+                  - "{{ templates.results.4.result.0.templateid }}"
+                  - "{{ templates.results.5.result.0.templateid }}"
+
+
+    - name: Link TrinintyX template to Controller template
+      zabbix_conf: 
+          username: "Admin"
+          password: "{{ ZABBIX_ADMIN_PASSWORD.stdout  }}"
+          hostname: "{{ TRIX_CTRL_IP.stdout  }}"
+          object:   "template"
+          action:   "update"
+          query:    {}
+          params:   
+              templateid: "{{ templates.results.1.result.0.templateid }}"  
+              templates:
+                  - "{{ templates.results.0.result.0.templateid }}"
+
+    - name: Add templates to controller
+      zabbix_conf:
+          username: "Admin"
+          password: "{{ ZABBIX_ADMIN_PASSWORD.stdout  }}"
+          hostname: "{{ TRIX_CTRL_IP.stdout  }}"
+          object:   "host"
+          action:   "find_update"
+          query:    {"host": "{{ TRIX_CTRL_HOSTNAME.stdout }}" }
+          params:
+              templates:
+                  - {templateid:  "{{ templates.results.1.result.0.templateid }}" }    
+                  - {templateid:  10102 }    
+                  - {templateid:  10104 }    
 
     - name: Configuring mail forwarding, creating host groups and chaging default auto registration default rule
       zabbix_conf: 

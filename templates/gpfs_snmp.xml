@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
-  <version>3.2</version>
-  <date>2017-05-02T09:22:58Z</date>
+  <version>2.0</version>
+  <date>2015-07-22T09:12:54Z</date>
   <groups>
     <group>
       <name>Templates</name>
@@ -47,7 +47,7 @@
           <key>gpfsClusterName_ping</key>
           <delay>300</delay>
           <history>3</history>
-          <trends>0</trends>
+          <trends>365</trends>
           <status>0</status>
           <value_type>4</value_type>
           <allowed_hosts/>
@@ -128,7 +128,7 @@
               <key>gpfsClusterId[{#SNMPVALUE}]</key>
               <delay>3600</delay>
               <history>365</history>
-              <trends>0</trends>
+              <trends>365</trends>
               <status>0</status>
               <value_type>4</value_type>
               <allowed_hosts/>
@@ -161,7 +161,6 @@
               </applications>
               <valuemap/>
               <logtimefmt/>
-              <application_prototypes/>
             </item_prototype>
             <item_prototype>
               <name>$1: MinReleaseLevel</name>
@@ -172,7 +171,7 @@
               <key>gpfsClusterMinReleaseLevel[{#SNMPVALUE}]</key>
               <delay>3600</delay>
               <history>365</history>
-              <trends>0</trends>
+              <trends>365</trends>
               <status>0</status>
               <value_type>4</value_type>
               <allowed_hosts/>
@@ -205,7 +204,6 @@
               </applications>
               <valuemap/>
               <logtimefmt/>
-              <application_prototypes/>
             </item_prototype>
             <item_prototype>
               <name>$1: Name</name>
@@ -216,7 +214,7 @@
               <key>gpfsClusterName[{#SNMPVALUE}]</key>
               <delay>3600</delay>
               <history>365</history>
-              <trends>0</trends>
+              <trends>365</trends>
               <status>0</status>
               <value_type>4</value_type>
               <allowed_hosts/>
@@ -249,7 +247,6 @@
               </applications>
               <valuemap/>
               <logtimefmt/>
-              <application_prototypes/>
             </item_prototype>
             <item_prototype>
               <name>$1: Number of File Systems</name>
@@ -293,7 +290,6 @@
               </applications>
               <valuemap/>
               <logtimefmt/>
-              <application_prototypes/>
             </item_prototype>
             <item_prototype>
               <name>$1: Number of Nodes</name>
@@ -337,7 +333,6 @@
               </applications>
               <valuemap/>
               <logtimefmt/>
-              <application_prototypes/>
             </item_prototype>
           </item_prototypes>
           <trigger_prototypes/>
@@ -378,193 +373,17 @@
           <description/>
           <item_prototypes>
             <item_prototype>
-              <name>$1: Bytes Read Higher</name>
+              <name>$1: Executable Status</name>
               <type>4</type>
               <snmp_community>public</snmp_community>
               <multiplier>0</multiplier>
-              <snmp_oid>gpfsFileSystemBytesReadH.{#SNMPINDEX}</snmp_oid>
-              <key>gpfsFileSystemBytesReadH[{#SNMPVALUE}]</key>
-              <delay>30</delay>
+              <snmp_oid>.1.3.6.1.4.1.2.6.212.1.6.1.3.{#SNMPINDEX}</snmp_oid>
+              <key>gpfsFileSystemXstatus[{#SNMPVALUE}]</key>
+              <delay>3600</delay>
               <history>90</history>
               <trends>365</trends>
-              <status>1</status>
-              <value_type>3</value_type>
-              <allowed_hosts/>
-              <units/>
-              <delta>0</delta>
-              <snmpv3_contextname/>
-              <snmpv3_securityname/>
-              <snmpv3_securitylevel>0</snmpv3_securitylevel>
-              <snmpv3_authprotocol>0</snmpv3_authprotocol>
-              <snmpv3_authpassphrase/>
-              <snmpv3_privprotocol>0</snmpv3_privprotocol>
-              <snmpv3_privpassphrase/>
-              <formula>1</formula>
-              <delay_flex/>
-              <params/>
-              <ipmi_sensor/>
-              <data_type>0</data_type>
-              <authtype>0</authtype>
-              <username/>
-              <password/>
-              <publickey/>
-              <privatekey/>
-              <port/>
-              <description>GPFS Bytes Read Higher 32 bits</description>
-              <inventory_link>0</inventory_link>
-              <applications>
-                <application>
-                  <name>GPFS Filesystem</name>
-                </application>
-              </applications>
-              <valuemap/>
-              <logtimefmt/>
-              <application_prototypes/>
-            </item_prototype>
-            <item_prototype>
-              <name>$1: Bytes Read Lower</name>
-              <type>4</type>
-              <snmp_community>public</snmp_community>
-              <multiplier>0</multiplier>
-              <snmp_oid>gpfsFileSystemBytesReadL.{#SNMPINDEX}</snmp_oid>
-              <key>gpfsFileSystemBytesReadL[{#SNMPVALUE}]</key>
-              <delay>30</delay>
-              <history>90</history>
-              <trends>365</trends>
-              <status>1</status>
-              <value_type>3</value_type>
-              <allowed_hosts/>
-              <units/>
-              <delta>0</delta>
-              <snmpv3_contextname/>
-              <snmpv3_securityname/>
-              <snmpv3_securitylevel>0</snmpv3_securitylevel>
-              <snmpv3_authprotocol>0</snmpv3_authprotocol>
-              <snmpv3_authpassphrase/>
-              <snmpv3_privprotocol>0</snmpv3_privprotocol>
-              <snmpv3_privpassphrase/>
-              <formula>1</formula>
-              <delay_flex/>
-              <params/>
-              <ipmi_sensor/>
-              <data_type>0</data_type>
-              <authtype>0</authtype>
-              <username/>
-              <password/>
-              <publickey/>
-              <privatekey/>
-              <port/>
-              <description>GPFS Bytes Read Lower 32 bits</description>
-              <inventory_link>0</inventory_link>
-              <applications>
-                <application>
-                  <name>GPFS Filesystem</name>
-                </application>
-              </applications>
-              <valuemap/>
-              <logtimefmt/>
-              <application_prototypes/>
-            </item_prototype>
-            <item_prototype>
-              <name>$1: Bytes Write Higher</name>
-              <type>4</type>
-              <snmp_community>public</snmp_community>
-              <multiplier>0</multiplier>
-              <snmp_oid>gpfsFileSystemBytesWriteH.{#SNMPINDEX}</snmp_oid>
-              <key>gpfsFileSystemBytesWriteH[{#SNMPVALUE}]</key>
-              <delay>30</delay>
-              <history>90</history>
-              <trends>365</trends>
-              <status>1</status>
-              <value_type>3</value_type>
-              <allowed_hosts/>
-              <units/>
-              <delta>0</delta>
-              <snmpv3_contextname/>
-              <snmpv3_securityname/>
-              <snmpv3_securitylevel>0</snmpv3_securitylevel>
-              <snmpv3_authprotocol>0</snmpv3_authprotocol>
-              <snmpv3_authpassphrase/>
-              <snmpv3_privprotocol>0</snmpv3_privprotocol>
-              <snmpv3_privpassphrase/>
-              <formula>1</formula>
-              <delay_flex/>
-              <params/>
-              <ipmi_sensor/>
-              <data_type>0</data_type>
-              <authtype>0</authtype>
-              <username/>
-              <password/>
-              <publickey/>
-              <privatekey/>
-              <port/>
-              <description>GPFS Bytes Write Higher 32 bits</description>
-              <inventory_link>0</inventory_link>
-              <applications>
-                <application>
-                  <name>GPFS Filesystem</name>
-                </application>
-              </applications>
-              <valuemap/>
-              <logtimefmt/>
-              <application_prototypes/>
-            </item_prototype>
-            <item_prototype>
-              <name>$1: Bytes Write Lower</name>
-              <type>4</type>
-              <snmp_community>public</snmp_community>
-              <multiplier>0</multiplier>
-              <snmp_oid>gpfsFileSystemBytesWriteL.{#SNMPINDEX}</snmp_oid>
-              <key>gpfsFileSystemBytesWriteL[{#SNMPVALUE}]</key>
-              <delay>30</delay>
-              <history>90</history>
-              <trends>365</trends>
-              <status>1</status>
-              <value_type>3</value_type>
-              <allowed_hosts/>
-              <units/>
-              <delta>0</delta>
-              <snmpv3_contextname/>
-              <snmpv3_securityname/>
-              <snmpv3_securitylevel>0</snmpv3_securitylevel>
-              <snmpv3_authprotocol>0</snmpv3_authprotocol>
-              <snmpv3_authpassphrase/>
-              <snmpv3_privprotocol>0</snmpv3_privprotocol>
-              <snmpv3_privpassphrase/>
-              <formula>1</formula>
-              <delay_flex/>
-              <params/>
-              <ipmi_sensor/>
-              <data_type>0</data_type>
-              <authtype>0</authtype>
-              <username/>
-              <password/>
-              <publickey/>
-              <privatekey/>
-              <port/>
-              <description>GPFS Bytes Write Higher 32 bits</description>
-              <inventory_link>0</inventory_link>
-              <applications>
-                <application>
-                  <name>GPFS Filesystem</name>
-                </application>
-              </applications>
-              <valuemap/>
-              <logtimefmt/>
-              <application_prototypes/>
-            </item_prototype>
-            <item_prototype>
-              <name>$1: Free Space Higher</name>
-              <type>4</type>
-              <snmp_community>public</snmp_community>
-              <multiplier>0</multiplier>
-              <snmp_oid>.1.3.6.1.4.1.2.6.212.1.6.1.9.{#SNMPINDEX}</snmp_oid>
-              <key>gpfsFileSystemFreeSpaceH[{#SNMPVALUE}]</key>
-              <delay>300</delay>
-              <history>90</history>
-              <trends>1095</trends>
               <status>0</status>
-              <value_type>3</value_type>
+              <value_type>4</value_type>
               <allowed_hosts/>
               <units/>
               <delta>0</delta>
@@ -586,7 +405,7 @@
               <publickey/>
               <privatekey/>
               <port/>
-              <description>The free disk space of the file system in kilobytes (high 32 bits).</description>
+              <description>The executable status of the file system.</description>
               <inventory_link>0</inventory_link>
               <applications>
                 <application>
@@ -595,229 +414,6 @@
               </applications>
               <valuemap/>
               <logtimefmt/>
-              <application_prototypes/>
-            </item_prototype>
-            <item_prototype>
-              <name>$1: Free Space Lower</name>
-              <type>4</type>
-              <snmp_community>public</snmp_community>
-              <multiplier>0</multiplier>
-              <snmp_oid>.1.3.6.1.4.1.2.6.212.1.6.1.8.{#SNMPINDEX}</snmp_oid>
-              <key>gpfsFileSystemFreeSpaceL[{#SNMPVALUE}]</key>
-              <delay>300</delay>
-              <history>90</history>
-              <trends>1095</trends>
-              <status>0</status>
-              <value_type>3</value_type>
-              <allowed_hosts/>
-              <units/>
-              <delta>0</delta>
-              <snmpv3_contextname/>
-              <snmpv3_securityname/>
-              <snmpv3_securitylevel>0</snmpv3_securitylevel>
-              <snmpv3_authprotocol>0</snmpv3_authprotocol>
-              <snmpv3_authpassphrase/>
-              <snmpv3_privprotocol>0</snmpv3_privprotocol>
-              <snmpv3_privpassphrase/>
-              <formula>1</formula>
-              <delay_flex/>
-              <params/>
-              <ipmi_sensor/>
-              <data_type>0</data_type>
-              <authtype>0</authtype>
-              <username/>
-              <password/>
-              <publickey/>
-              <privatekey/>
-              <port/>
-              <description>The free disk space of the file system in kilobytes (low 32 bits).</description>
-              <inventory_link>0</inventory_link>
-              <applications>
-                <application>
-                  <name>GPFS Filesystem</name>
-                </application>
-              </applications>
-              <valuemap/>
-              <logtimefmt/>
-              <application_prototypes/>
-            </item_prototype>
-            <item_prototype>
-              <name>$1: Free Space Calculated</name>
-              <type>15</type>
-              <snmp_community/>
-              <multiplier>1</multiplier>
-              <snmp_oid/>
-              <key>gpfsFileSystemFreeSpace[{#SNMPVALUE}]</key>
-              <delay>300</delay>
-              <history>90</history>
-              <trends>1095</trends>
-              <status>0</status>
-              <value_type>3</value_type>
-              <allowed_hosts/>
-              <units>B</units>
-              <delta>0</delta>
-              <snmpv3_contextname/>
-              <snmpv3_securityname/>
-              <snmpv3_securitylevel>0</snmpv3_securitylevel>
-              <snmpv3_authprotocol>0</snmpv3_authprotocol>
-              <snmpv3_authpassphrase/>
-              <snmpv3_privprotocol>0</snmpv3_privprotocol>
-              <snmpv3_privpassphrase/>
-              <formula>1024</formula>
-              <delay_flex/>
-              <params>last("gpfsFileSystemFreeSpaceL[{#SNMPVALUE}]")&#13;
-+&#13;
-(last("gpfsFileSystemFreeSpaceH[{#SNMPVALUE}]")*4294967296)*1</params>
-              <ipmi_sensor/>
-              <data_type>0</data_type>
-              <authtype>0</authtype>
-              <username/>
-              <password/>
-              <publickey/>
-              <privatekey/>
-              <port/>
-              <description>The free disk space of the file system in kilobytes.</description>
-              <inventory_link>0</inventory_link>
-              <applications>
-                <application>
-                  <name>GPFS Filesystem</name>
-                </application>
-              </applications>
-              <valuemap/>
-              <logtimefmt/>
-              <application_prototypes/>
-            </item_prototype>
-            <item_prototype>
-              <name>$1: Free Space Calculated per second</name>
-              <type>15</type>
-              <snmp_community/>
-              <multiplier>1</multiplier>
-              <snmp_oid/>
-              <key>gpfsFileSystemFreeSpace_delta[{#SNMPVALUE}]</key>
-              <delay>300</delay>
-              <history>90</history>
-              <trends>1095</trends>
-              <status>0</status>
-              <value_type>3</value_type>
-              <allowed_hosts/>
-              <units>B</units>
-              <delta>1</delta>
-              <snmpv3_contextname/>
-              <snmpv3_securityname/>
-              <snmpv3_securitylevel>0</snmpv3_securitylevel>
-              <snmpv3_authprotocol>0</snmpv3_authprotocol>
-              <snmpv3_authpassphrase/>
-              <snmpv3_privprotocol>0</snmpv3_privprotocol>
-              <snmpv3_privpassphrase/>
-              <formula>1024</formula>
-              <delay_flex/>
-              <params>last("gpfsFileSystemFreeSpace[{#SNMPVALUE}]")</params>
-              <ipmi_sensor/>
-              <data_type>0</data_type>
-              <authtype>0</authtype>
-              <username/>
-              <password/>
-              <publickey/>
-              <privatekey/>
-              <port/>
-              <description>The free disk space of the file system in kilobytes.</description>
-              <inventory_link>0</inventory_link>
-              <applications>
-                <application>
-                  <name>GPFS Filesystem</name>
-                </application>
-              </applications>
-              <valuemap/>
-              <logtimefmt/>
-              <application_prototypes/>
-            </item_prototype>
-            <item_prototype>
-              <name>$1: Free Inodes Higher</name>
-              <type>4</type>
-              <snmp_community>public</snmp_community>
-              <multiplier>0</multiplier>
-              <snmp_oid>.1.3.6.1.4.1.2.6.212.1.6.1.11.{#SNMPINDEX}</snmp_oid>
-              <key>gpfsFileSystemNumFreeInodesH[{#SNMPVALUE}]</key>
-              <delay>300</delay>
-              <history>90</history>
-              <trends>1095</trends>
-              <status>0</status>
-              <value_type>3</value_type>
-              <allowed_hosts/>
-              <units/>
-              <delta>0</delta>
-              <snmpv3_contextname/>
-              <snmpv3_securityname/>
-              <snmpv3_securitylevel>0</snmpv3_securitylevel>
-              <snmpv3_authprotocol>0</snmpv3_authprotocol>
-              <snmpv3_authpassphrase/>
-              <snmpv3_privprotocol>0</snmpv3_privprotocol>
-              <snmpv3_privpassphrase/>
-              <formula>1</formula>
-              <delay_flex/>
-              <params/>
-              <ipmi_sensor/>
-              <data_type>0</data_type>
-              <authtype>0</authtype>
-              <username/>
-              <password/>
-              <publickey/>
-              <privatekey/>
-              <port/>
-              <description>The number of free file system inodes (high 32 bits).</description>
-              <inventory_link>0</inventory_link>
-              <applications>
-                <application>
-                  <name>GPFS Filesystem</name>
-                </application>
-              </applications>
-              <valuemap/>
-              <logtimefmt/>
-              <application_prototypes/>
-            </item_prototype>
-            <item_prototype>
-              <name>$1: Free Inodes Lower</name>
-              <type>4</type>
-              <snmp_community>public</snmp_community>
-              <multiplier>0</multiplier>
-              <snmp_oid>.1.3.6.1.4.1.2.6.212.1.6.1.10.{#SNMPINDEX}</snmp_oid>
-              <key>gpfsFileSystemNumFreeInodesL[{#SNMPVALUE}]</key>
-              <delay>300</delay>
-              <history>90</history>
-              <trends>1095</trends>
-              <status>0</status>
-              <value_type>3</value_type>
-              <allowed_hosts/>
-              <units/>
-              <delta>0</delta>
-              <snmpv3_contextname/>
-              <snmpv3_securityname/>
-              <snmpv3_securitylevel>0</snmpv3_securitylevel>
-              <snmpv3_authprotocol>0</snmpv3_authprotocol>
-              <snmpv3_authpassphrase/>
-              <snmpv3_privprotocol>0</snmpv3_privprotocol>
-              <snmpv3_privpassphrase/>
-              <formula>1</formula>
-              <delay_flex/>
-              <params/>
-              <ipmi_sensor/>
-              <data_type>0</data_type>
-              <authtype>0</authtype>
-              <username/>
-              <password/>
-              <publickey/>
-              <privatekey/>
-              <port/>
-              <description>The number of free file system inodes (low 32 bits).</description>
-              <inventory_link>0</inventory_link>
-              <applications>
-                <application>
-                  <name>GPFS Filesystem</name>
-                </application>
-              </applications>
-              <valuemap/>
-              <logtimefmt/>
-              <application_prototypes/>
             </item_prototype>
             <item_prototype>
               <name>$1: Free Inodes Calculated</name>
@@ -845,7 +441,7 @@
               <delay_flex/>
               <params>last("gpfsFileSystemNumFreeInodesL[{#SNMPVALUE}]")&#13;
 +&#13;
-(last("gpfsFileSystemNumFreeInodesH[{#SNMPVALUE}]")*4294967296)*1</params>
+(last("gpfsFileSystemNumFreeInodesH[{#SNMPVALUE}]")*4294967296)</params>
               <ipmi_sensor/>
               <data_type>0</data_type>
               <authtype>0</authtype>
@@ -863,7 +459,6 @@
               </applications>
               <valuemap/>
               <logtimefmt/>
-              <application_prototypes/>
             </item_prototype>
             <item_prototype>
               <name>$1: Free Inodes Calculated per second</name>
@@ -907,7 +502,354 @@
               </applications>
               <valuemap/>
               <logtimefmt/>
-              <application_prototypes/>
+            </item_prototype>
+            <item_prototype>
+              <name>$1: Free Inodes Higher</name>
+              <type>4</type>
+              <snmp_community>public</snmp_community>
+              <multiplier>0</multiplier>
+              <snmp_oid>.1.3.6.1.4.1.2.6.212.1.6.1.11.{#SNMPINDEX}</snmp_oid>
+              <key>gpfsFileSystemNumFreeInodesH[{#SNMPVALUE}]</key>
+              <delay>300</delay>
+              <history>90</history>
+              <trends>1095</trends>
+              <status>0</status>
+              <value_type>3</value_type>
+              <allowed_hosts/>
+              <units/>
+              <delta>0</delta>
+              <snmpv3_contextname/>
+              <snmpv3_securityname/>
+              <snmpv3_securitylevel>0</snmpv3_securitylevel>
+              <snmpv3_authprotocol>0</snmpv3_authprotocol>
+              <snmpv3_authpassphrase/>
+              <snmpv3_privprotocol>0</snmpv3_privprotocol>
+              <snmpv3_privpassphrase/>
+              <formula>1</formula>
+              <delay_flex/>
+              <params/>
+              <ipmi_sensor/>
+              <data_type>0</data_type>
+              <authtype>0</authtype>
+              <username/>
+              <password/>
+              <publickey/>
+              <privatekey/>
+              <port/>
+              <description>The number of free file system inodes (high 32 bits).</description>
+              <inventory_link>0</inventory_link>
+              <applications>
+                <application>
+                  <name>GPFS Filesystem</name>
+                </application>
+              </applications>
+              <valuemap/>
+              <logtimefmt/>
+            </item_prototype>
+            <item_prototype>
+              <name>$1: Free Inodes Lower</name>
+              <type>4</type>
+              <snmp_community>public</snmp_community>
+              <multiplier>0</multiplier>
+              <snmp_oid>.1.3.6.1.4.1.2.6.212.1.6.1.10.{#SNMPINDEX}</snmp_oid>
+              <key>gpfsFileSystemNumFreeInodesL[{#SNMPVALUE}]</key>
+              <delay>300</delay>
+              <history>90</history>
+              <trends>1095</trends>
+              <status>0</status>
+              <value_type>3</value_type>
+              <allowed_hosts/>
+              <units/>
+              <delta>0</delta>
+              <snmpv3_contextname/>
+              <snmpv3_securityname/>
+              <snmpv3_securitylevel>0</snmpv3_securitylevel>
+              <snmpv3_authprotocol>0</snmpv3_authprotocol>
+              <snmpv3_authpassphrase/>
+              <snmpv3_privprotocol>0</snmpv3_privprotocol>
+              <snmpv3_privpassphrase/>
+              <formula>1</formula>
+              <delay_flex/>
+              <params/>
+              <ipmi_sensor/>
+              <data_type>0</data_type>
+              <authtype>0</authtype>
+              <username/>
+              <password/>
+              <publickey/>
+              <privatekey/>
+              <port/>
+              <description>The number of free file system inodes (low 32 bits).</description>
+              <inventory_link>0</inventory_link>
+              <applications>
+                <application>
+                  <name>GPFS Filesystem</name>
+                </application>
+              </applications>
+              <valuemap/>
+              <logtimefmt/>
+            </item_prototype>
+            <item_prototype>
+              <name>$1: Free Space Calculated</name>
+              <type>15</type>
+              <snmp_community/>
+              <multiplier>1</multiplier>
+              <snmp_oid/>
+              <key>gpfsFileSystemFreeSpace[{#SNMPVALUE}]</key>
+              <delay>300</delay>
+              <history>90</history>
+              <trends>1095</trends>
+              <status>0</status>
+              <value_type>3</value_type>
+              <allowed_hosts/>
+              <units>B</units>
+              <delta>0</delta>
+              <snmpv3_contextname/>
+              <snmpv3_securityname/>
+              <snmpv3_securitylevel>0</snmpv3_securitylevel>
+              <snmpv3_authprotocol>0</snmpv3_authprotocol>
+              <snmpv3_authpassphrase/>
+              <snmpv3_privprotocol>0</snmpv3_privprotocol>
+              <snmpv3_privpassphrase/>
+              <formula>1024</formula>
+              <delay_flex/>
+              <params>last("gpfsFileSystemFreeSpaceL[{#SNMPVALUE}]")&#13;
++&#13;
+(last("gpfsFileSystemFreeSpaceH[{#SNMPVALUE}]")*4294967296)</params>
+              <ipmi_sensor/>
+              <data_type>0</data_type>
+              <authtype>0</authtype>
+              <username/>
+              <password/>
+              <publickey/>
+              <privatekey/>
+              <port/>
+              <description>The free disk space of the file system in kilobytes.</description>
+              <inventory_link>0</inventory_link>
+              <applications>
+                <application>
+                  <name>GPFS Filesystem</name>
+                </application>
+              </applications>
+              <valuemap/>
+              <logtimefmt/>
+            </item_prototype>
+            <item_prototype>
+              <name>$1: Free Space Calculated per second</name>
+              <type>15</type>
+              <snmp_community/>
+              <multiplier>1</multiplier>
+              <snmp_oid/>
+              <key>gpfsFileSystemFreeSpace_delta[{#SNMPVALUE}]</key>
+              <delay>300</delay>
+              <history>90</history>
+              <trends>1095</trends>
+              <status>0</status>
+              <value_type>3</value_type>
+              <allowed_hosts/>
+              <units>B</units>
+              <delta>1</delta>
+              <snmpv3_contextname/>
+              <snmpv3_securityname/>
+              <snmpv3_securitylevel>0</snmpv3_securitylevel>
+              <snmpv3_authprotocol>0</snmpv3_authprotocol>
+              <snmpv3_authpassphrase/>
+              <snmpv3_privprotocol>0</snmpv3_privprotocol>
+              <snmpv3_privpassphrase/>
+              <formula>1024</formula>
+              <delay_flex/>
+              <params>last("gpfsFileSystemFreeSpace[{#SNMPVALUE}]")</params>
+              <ipmi_sensor/>
+              <data_type>0</data_type>
+              <authtype>0</authtype>
+              <username/>
+              <password/>
+              <publickey/>
+              <privatekey/>
+              <port/>
+              <description>The free disk space of the file system in kilobytes.</description>
+              <inventory_link>0</inventory_link>
+              <applications>
+                <application>
+                  <name>GPFS Filesystem</name>
+                </application>
+              </applications>
+              <valuemap/>
+              <logtimefmt/>
+            </item_prototype>
+            <item_prototype>
+              <name>$1: Free Space Higher</name>
+              <type>4</type>
+              <snmp_community>public</snmp_community>
+              <multiplier>0</multiplier>
+              <snmp_oid>.1.3.6.1.4.1.2.6.212.1.6.1.9.{#SNMPINDEX}</snmp_oid>
+              <key>gpfsFileSystemFreeSpaceH[{#SNMPVALUE}]</key>
+              <delay>300</delay>
+              <history>90</history>
+              <trends>1095</trends>
+              <status>0</status>
+              <value_type>3</value_type>
+              <allowed_hosts/>
+              <units/>
+              <delta>0</delta>
+              <snmpv3_contextname/>
+              <snmpv3_securityname/>
+              <snmpv3_securitylevel>0</snmpv3_securitylevel>
+              <snmpv3_authprotocol>0</snmpv3_authprotocol>
+              <snmpv3_authpassphrase/>
+              <snmpv3_privprotocol>0</snmpv3_privprotocol>
+              <snmpv3_privpassphrase/>
+              <formula>1</formula>
+              <delay_flex/>
+              <params/>
+              <ipmi_sensor/>
+              <data_type>0</data_type>
+              <authtype>0</authtype>
+              <username/>
+              <password/>
+              <publickey/>
+              <privatekey/>
+              <port/>
+              <description>The free disk space of the file system in kilobytes (high 32 bits).</description>
+              <inventory_link>0</inventory_link>
+              <applications>
+                <application>
+                  <name>GPFS Filesystem</name>
+                </application>
+              </applications>
+              <valuemap/>
+              <logtimefmt/>
+            </item_prototype>
+            <item_prototype>
+              <name>$1: Free Space Lower</name>
+              <type>4</type>
+              <snmp_community>public</snmp_community>
+              <multiplier>0</multiplier>
+              <snmp_oid>.1.3.6.1.4.1.2.6.212.1.6.1.8.{#SNMPINDEX}</snmp_oid>
+              <key>gpfsFileSystemFreeSpaceL[{#SNMPVALUE}]</key>
+              <delay>300</delay>
+              <history>90</history>
+              <trends>1095</trends>
+              <status>0</status>
+              <value_type>3</value_type>
+              <allowed_hosts/>
+              <units/>
+              <delta>0</delta>
+              <snmpv3_contextname/>
+              <snmpv3_securityname/>
+              <snmpv3_securitylevel>0</snmpv3_securitylevel>
+              <snmpv3_authprotocol>0</snmpv3_authprotocol>
+              <snmpv3_authpassphrase/>
+              <snmpv3_privprotocol>0</snmpv3_privprotocol>
+              <snmpv3_privpassphrase/>
+              <formula>1</formula>
+              <delay_flex/>
+              <params/>
+              <ipmi_sensor/>
+              <data_type>0</data_type>
+              <authtype>0</authtype>
+              <username/>
+              <password/>
+              <publickey/>
+              <privatekey/>
+              <port/>
+              <description>The free disk space of the file system in kilobytes (low 32 bits).</description>
+              <inventory_link>0</inventory_link>
+              <applications>
+                <application>
+                  <name>GPFS Filesystem</name>
+                </application>
+              </applications>
+              <valuemap/>
+              <logtimefmt/>
+            </item_prototype>
+            <item_prototype>
+              <name>$1: Status</name>
+              <type>4</type>
+              <snmp_community>public</snmp_community>
+              <multiplier>0</multiplier>
+              <snmp_oid>.1.3.6.1.4.1.2.6.212.1.6.1.2.{#SNMPINDEX}</snmp_oid>
+              <key>gpfsFileSystemStatus[{#SNMPVALUE}]</key>
+              <delay>3600</delay>
+              <history>90</history>
+              <trends>365</trends>
+              <status>0</status>
+              <value_type>4</value_type>
+              <allowed_hosts/>
+              <units/>
+              <delta>0</delta>
+              <snmpv3_contextname/>
+              <snmpv3_securityname/>
+              <snmpv3_securitylevel>0</snmpv3_securitylevel>
+              <snmpv3_authprotocol>0</snmpv3_authprotocol>
+              <snmpv3_authpassphrase/>
+              <snmpv3_privprotocol>0</snmpv3_privprotocol>
+              <snmpv3_privpassphrase/>
+              <formula>1</formula>
+              <delay_flex/>
+              <params/>
+              <ipmi_sensor/>
+              <data_type>0</data_type>
+              <authtype>0</authtype>
+              <username/>
+              <password/>
+              <publickey/>
+              <privatekey/>
+              <port/>
+              <description>The status of the file system.</description>
+              <inventory_link>0</inventory_link>
+              <applications>
+                <application>
+                  <name>GPFS Filesystem</name>
+                </application>
+              </applications>
+              <valuemap/>
+              <logtimefmt/>
+            </item_prototype>
+            <item_prototype>
+              <name>$1: Total Inodes Calculated</name>
+              <type>15</type>
+              <snmp_community/>
+              <multiplier>0</multiplier>
+              <snmp_oid/>
+              <key>gpfsFileSystemNumTotalInodes[{#SNMPVALUE}]</key>
+              <delay>3600</delay>
+              <history>90</history>
+              <trends>1095</trends>
+              <status>0</status>
+              <value_type>3</value_type>
+              <allowed_hosts/>
+              <units>Inodes</units>
+              <delta>0</delta>
+              <snmpv3_contextname/>
+              <snmpv3_securityname/>
+              <snmpv3_securitylevel>0</snmpv3_securitylevel>
+              <snmpv3_authprotocol>0</snmpv3_authprotocol>
+              <snmpv3_authpassphrase/>
+              <snmpv3_privprotocol>0</snmpv3_privprotocol>
+              <snmpv3_privpassphrase/>
+              <formula>1</formula>
+              <delay_flex/>
+              <params>last("gpfsFileSystemNumTotalInodesL[{#SNMPVALUE}]")&#13;
++&#13;
+(last("gpfsFileSystemNumTotalInodesH[{#SNMPVALUE}]")*4294967296)</params>
+              <ipmi_sensor/>
+              <data_type>0</data_type>
+              <authtype>0</authtype>
+              <username/>
+              <password/>
+              <publickey/>
+              <privatekey/>
+              <port/>
+              <description>The total number of file system inodes.</description>
+              <inventory_link>0</inventory_link>
+              <applications>
+                <application>
+                  <name>GPFS Filesystem</name>
+                </application>
+              </applications>
+              <valuemap/>
+              <logtimefmt/>
             </item_prototype>
             <item_prototype>
               <name>$1: Total Inodes Higher</name>
@@ -951,7 +893,6 @@
               </applications>
               <valuemap/>
               <logtimefmt/>
-              <application_prototypes/>
             </item_prototype>
             <item_prototype>
               <name>$1: Total Inodes Lower</name>
@@ -995,114 +936,21 @@
               </applications>
               <valuemap/>
               <logtimefmt/>
-              <application_prototypes/>
             </item_prototype>
             <item_prototype>
-              <name>$1: Total Inodes Calculated</name>
+              <name>$1: Total Space Calculated</name>
               <type>15</type>
               <snmp_community/>
-              <multiplier>0</multiplier>
+              <multiplier>1</multiplier>
               <snmp_oid/>
-              <key>gpfsFileSystemNumTotalInodes[{#SNMPVALUE}]</key>
+              <key>gpfsFileSystemTotalSpace[{#SNMPVALUE}]</key>
               <delay>3600</delay>
               <history>90</history>
               <trends>1095</trends>
               <status>0</status>
-              <value_type>3</value_type>
-              <allowed_hosts/>
-              <units>Inodes</units>
-              <delta>0</delta>
-              <snmpv3_contextname/>
-              <snmpv3_securityname/>
-              <snmpv3_securitylevel>0</snmpv3_securitylevel>
-              <snmpv3_authprotocol>0</snmpv3_authprotocol>
-              <snmpv3_authpassphrase/>
-              <snmpv3_privprotocol>0</snmpv3_privprotocol>
-              <snmpv3_privpassphrase/>
-              <formula>1</formula>
-              <delay_flex/>
-              <params>last("gpfsFileSystemNumTotalInodesL[{#SNMPVALUE}]")&#13;
-+&#13;
-(last("gpfsFileSystemNumTotalInodesH[{#SNMPVALUE}]")*4294967296) add_group.sh export.sh import.sh 1</params>
-              <ipmi_sensor/>
-              <data_type>0</data_type>
-              <authtype>0</authtype>
-              <username/>
-              <password/>
-              <publickey/>
-              <privatekey/>
-              <port/>
-              <description>The total number of file system inodes.</description>
-              <inventory_link>0</inventory_link>
-              <applications>
-                <application>
-                  <name>GPFS Filesystem</name>
-                </application>
-              </applications>
-              <valuemap/>
-              <logtimefmt/>
-              <application_prototypes/>
-            </item_prototype>
-            <item_prototype>
-              <name>$1: Read Calculated</name>
-              <type>15</type>
-              <snmp_community/>
-              <multiplier>0</multiplier>
-              <snmp_oid/>
-              <key>gpfsFileSystemRead[{#SNMPVALUE}]</key>
-              <delay>30</delay>
-              <history>90</history>
-              <trends>1095</trends>
-              <status>1</status>
               <value_type>3</value_type>
               <allowed_hosts/>
               <units>B</units>
-              <delta>1</delta>
-              <snmpv3_contextname/>
-              <snmpv3_securityname/>
-              <snmpv3_securitylevel>0</snmpv3_securitylevel>
-              <snmpv3_authprotocol>0</snmpv3_authprotocol>
-              <snmpv3_authpassphrase/>
-              <snmpv3_privprotocol>0</snmpv3_privprotocol>
-              <snmpv3_privpassphrase/>
-              <formula>1</formula>
-              <delay_flex/>
-              <params>last("gpfsFileSystemBytesReadL[{#SNMPVALUE}]")&#13;
-+&#13;
-(last("gpfsFileSystemBytesReadH[{#SNMPVALUE}]")*4294967296)</params>
-              <ipmi_sensor/>
-              <data_type>0</data_type>
-              <authtype>0</authtype>
-              <username/>
-              <password/>
-              <publickey/>
-              <privatekey/>
-              <port/>
-              <description>Read bytes/s</description>
-              <inventory_link>0</inventory_link>
-              <applications>
-                <application>
-                  <name>GPFS Filesystem</name>
-                </application>
-              </applications>
-              <valuemap/>
-              <logtimefmt/>
-              <application_prototypes/>
-            </item_prototype>
-            <item_prototype>
-              <name>$1: Status</name>
-              <type>4</type>
-              <snmp_community>public</snmp_community>
-              <multiplier>0</multiplier>
-              <snmp_oid>.1.3.6.1.4.1.2.6.212.1.6.1.2.{#SNMPINDEX}</snmp_oid>
-              <key>gpfsFileSystemStatus[{#SNMPVALUE}]</key>
-              <delay>3600</delay>
-              <history>90</history>
-              <trends>0</trends>
-              <status>0</status>
-              <value_type>4</value_type>
-              <allowed_hosts/>
-              <units/>
               <delta>0</delta>
               <snmpv3_contextname/>
               <snmpv3_securityname/>
@@ -1111,9 +959,11 @@
               <snmpv3_authpassphrase/>
               <snmpv3_privprotocol>0</snmpv3_privprotocol>
               <snmpv3_privpassphrase/>
-              <formula>1</formula>
+              <formula>1024</formula>
               <delay_flex/>
-              <params/>
+              <params>last("gpfsFileSystemTotalSpaceL[{#SNMPVALUE}]")&#13;
++&#13;
+(last("gpfsFileSystemTotalSpaceH[{#SNMPVALUE}]")*4294967296)</params>
               <ipmi_sensor/>
               <data_type>0</data_type>
               <authtype>0</authtype>
@@ -1122,7 +972,7 @@
               <publickey/>
               <privatekey/>
               <port/>
-              <description>The status of the file system.</description>
+              <description>The total disk space of the file system in kilobytes.</description>
               <inventory_link>0</inventory_link>
               <applications>
                 <application>
@@ -1131,7 +981,6 @@
               </applications>
               <valuemap/>
               <logtimefmt/>
-              <application_prototypes/>
             </item_prototype>
             <item_prototype>
               <name>$1: Total Space Higher</name>
@@ -1175,7 +1024,6 @@
               </applications>
               <valuemap/>
               <logtimefmt/>
-              <application_prototypes/>
             </item_prototype>
             <item_prototype>
               <name>$1: Total Space Lower</name>
@@ -1219,143 +1067,6 @@
               </applications>
               <valuemap/>
               <logtimefmt/>
-              <application_prototypes/>
-            </item_prototype>
-            <item_prototype>
-              <name>$1: Total Space Calculated</name>
-              <type>15</type>
-              <snmp_community/>
-              <multiplier>1</multiplier>
-              <snmp_oid/>
-              <key>gpfsFileSystemTotalSpace[{#SNMPVALUE}]</key>
-              <delay>3600</delay>
-              <history>90</history>
-              <trends>1095</trends>
-              <status>0</status>
-              <value_type>3</value_type>
-              <allowed_hosts/>
-              <units>B</units>
-              <delta>0</delta>
-              <snmpv3_contextname/>
-              <snmpv3_securityname/>
-              <snmpv3_securitylevel>0</snmpv3_securitylevel>
-              <snmpv3_authprotocol>0</snmpv3_authprotocol>
-              <snmpv3_authpassphrase/>
-              <snmpv3_privprotocol>0</snmpv3_privprotocol>
-              <snmpv3_privpassphrase/>
-              <formula>1024</formula>
-              <delay_flex/>
-              <params>last("gpfsFileSystemTotalSpaceL[{#SNMPVALUE}]")&#13;
-+&#13;
-(last("gpfsFileSystemTotalSpaceH[{#SNMPVALUE}]")*4294967296) add_group.sh export.sh import.sh 1</params>
-              <ipmi_sensor/>
-              <data_type>0</data_type>
-              <authtype>0</authtype>
-              <username/>
-              <password/>
-              <publickey/>
-              <privatekey/>
-              <port/>
-              <description>The total disk space of the file system in kilobytes.</description>
-              <inventory_link>0</inventory_link>
-              <applications>
-                <application>
-                  <name>GPFS Filesystem</name>
-                </application>
-              </applications>
-              <valuemap/>
-              <logtimefmt/>
-              <application_prototypes/>
-            </item_prototype>
-            <item_prototype>
-              <name>$1: Write Calculated</name>
-              <type>15</type>
-              <snmp_community/>
-              <multiplier>0</multiplier>
-              <snmp_oid/>
-              <key>gpfsFileSystemWrite[{#SNMPVALUE}]</key>
-              <delay>30</delay>
-              <history>90</history>
-              <trends>1095</trends>
-              <status>1</status>
-              <value_type>3</value_type>
-              <allowed_hosts/>
-              <units>B</units>
-              <delta>1</delta>
-              <snmpv3_contextname/>
-              <snmpv3_securityname/>
-              <snmpv3_securitylevel>0</snmpv3_securitylevel>
-              <snmpv3_authprotocol>0</snmpv3_authprotocol>
-              <snmpv3_authpassphrase/>
-              <snmpv3_privprotocol>0</snmpv3_privprotocol>
-              <snmpv3_privpassphrase/>
-              <formula>1</formula>
-              <delay_flex/>
-              <params>last("gpfsFileSystemWriteReadL[{#SNMPVALUE}]")&#13;
-+&#13;
-(last("gpfsFileSystemBytesWriteH[{#SNMPVALUE}]")*4294967296)</params>
-              <ipmi_sensor/>
-              <data_type>0</data_type>
-              <authtype>0</authtype>
-              <username/>
-              <password/>
-              <publickey/>
-              <privatekey/>
-              <port/>
-              <description>GPFS filesystem write bytes/s</description>
-              <inventory_link>0</inventory_link>
-              <applications>
-                <application>
-                  <name>GPFS Filesystem</name>
-                </application>
-              </applications>
-              <valuemap/>
-              <logtimefmt/>
-              <application_prototypes/>
-            </item_prototype>
-            <item_prototype>
-              <name>$1: Executable Status</name>
-              <type>4</type>
-              <snmp_community>public</snmp_community>
-              <multiplier>0</multiplier>
-              <snmp_oid>.1.3.6.1.4.1.2.6.212.1.6.1.3.{#SNMPINDEX}</snmp_oid>
-              <key>gpfsFileSystemXstatus[{#SNMPVALUE}]</key>
-              <delay>3600</delay>
-              <history>90</history>
-              <trends>0</trends>
-              <status>0</status>
-              <value_type>4</value_type>
-              <allowed_hosts/>
-              <units/>
-              <delta>0</delta>
-              <snmpv3_contextname/>
-              <snmpv3_securityname/>
-              <snmpv3_securitylevel>0</snmpv3_securitylevel>
-              <snmpv3_authprotocol>0</snmpv3_authprotocol>
-              <snmpv3_authpassphrase/>
-              <snmpv3_privprotocol>0</snmpv3_privprotocol>
-              <snmpv3_privpassphrase/>
-              <formula>1</formula>
-              <delay_flex/>
-              <params/>
-              <ipmi_sensor/>
-              <data_type>0</data_type>
-              <authtype>0</authtype>
-              <username/>
-              <password/>
-              <publickey/>
-              <privatekey/>
-              <port/>
-              <description>The executable status of the file system.</description>
-              <inventory_link>0</inventory_link>
-              <applications>
-                <application>
-                  <name>GPFS Filesystem</name>
-                </application>
-              </applications>
-              <valuemap/>
-              <logtimefmt/>
-              <application_prototypes/>
             </item_prototype>
           </item_prototypes>
           <trigger_prototypes/>
@@ -1395,6 +1106,137 @@
           <lifetime>90</lifetime>
           <description/>
           <item_prototypes>
+            <item_prototype>
+              <name>$1: Belongs to</name>
+              <type>4</type>
+              <snmp_community>public</snmp_community>
+              <multiplier>0</multiplier>
+              <snmp_oid>.1.3.6.1.4.1.2.6.212.1.8.1.2.{#SNMPINDEX}</snmp_oid>
+              <key>gpfsStgPoolFSName[{#SNMPVALUE}]</key>
+              <delay>3600</delay>
+              <history>90</history>
+              <trends>365</trends>
+              <status>0</status>
+              <value_type>4</value_type>
+              <allowed_hosts/>
+              <units/>
+              <delta>0</delta>
+              <snmpv3_contextname/>
+              <snmpv3_securityname/>
+              <snmpv3_securitylevel>0</snmpv3_securitylevel>
+              <snmpv3_authprotocol>0</snmpv3_authprotocol>
+              <snmpv3_authpassphrase/>
+              <snmpv3_privprotocol>0</snmpv3_privprotocol>
+              <snmpv3_privpassphrase/>
+              <formula>1</formula>
+              <delay_flex/>
+              <params/>
+              <ipmi_sensor/>
+              <data_type>0</data_type>
+              <authtype>0</authtype>
+              <username/>
+              <password/>
+              <publickey/>
+              <privatekey/>
+              <port/>
+              <description>The name of the file system to which the storage pool belongs.</description>
+              <inventory_link>0</inventory_link>
+              <applications>
+                <application>
+                  <name>GPFS Storage Pool</name>
+                </application>
+              </applications>
+              <valuemap/>
+              <logtimefmt/>
+            </item_prototype>
+            <item_prototype>
+              <name>$1: Free Disk Space Calculated</name>
+              <type>15</type>
+              <snmp_community/>
+              <multiplier>0</multiplier>
+              <snmp_oid/>
+              <key>gpfsStgPoolFreeSpace[{#SNMPVALUE}]</key>
+              <delay>300</delay>
+              <history>90</history>
+              <trends>1095</trends>
+              <status>0</status>
+              <value_type>3</value_type>
+              <allowed_hosts/>
+              <units>kB</units>
+              <delta>0</delta>
+              <snmpv3_contextname/>
+              <snmpv3_securityname/>
+              <snmpv3_securitylevel>0</snmpv3_securitylevel>
+              <snmpv3_authprotocol>0</snmpv3_authprotocol>
+              <snmpv3_authpassphrase/>
+              <snmpv3_privprotocol>0</snmpv3_privprotocol>
+              <snmpv3_privpassphrase/>
+              <formula>1</formula>
+              <delay_flex/>
+              <params>last("gpfsStgPoolFreeSpaceL[{#SNMPVALUE}]")&#13;
++&#13;
+(last("gpfsStgPoolFreeSpaceH[{#SNMPVALUE}]")*4294967296)</params>
+              <ipmi_sensor/>
+              <data_type>0</data_type>
+              <authtype>0</authtype>
+              <username/>
+              <password/>
+              <publickey/>
+              <privatekey/>
+              <port/>
+              <description>The free disk space in the storage pool in kilobytes.</description>
+              <inventory_link>0</inventory_link>
+              <applications>
+                <application>
+                  <name>GPFS Storage Pool</name>
+                </application>
+              </applications>
+              <valuemap/>
+              <logtimefmt/>
+            </item_prototype>
+            <item_prototype>
+              <name>$1: Free Disk Space Calculated per second</name>
+              <type>15</type>
+              <snmp_community/>
+              <multiplier>0</multiplier>
+              <snmp_oid/>
+              <key>gpfsStgPoolFreeSpace_delta[{#SNMPVALUE}]</key>
+              <delay>300</delay>
+              <history>90</history>
+              <trends>1095</trends>
+              <status>0</status>
+              <value_type>3</value_type>
+              <allowed_hosts/>
+              <units>kB</units>
+              <delta>1</delta>
+              <snmpv3_contextname/>
+              <snmpv3_securityname/>
+              <snmpv3_securitylevel>0</snmpv3_securitylevel>
+              <snmpv3_authprotocol>0</snmpv3_authprotocol>
+              <snmpv3_authpassphrase/>
+              <snmpv3_privprotocol>0</snmpv3_privprotocol>
+              <snmpv3_privpassphrase/>
+              <formula>1</formula>
+              <delay_flex/>
+              <params>last("gpfsStgPoolFreeSpace[{#SNMPVALUE}]")</params>
+              <ipmi_sensor/>
+              <data_type>0</data_type>
+              <authtype>0</authtype>
+              <username/>
+              <password/>
+              <publickey/>
+              <privatekey/>
+              <port/>
+              <description>The free disk space in the storage pool in kilobytes.</description>
+              <inventory_link>0</inventory_link>
+              <applications>
+                <application>
+                  <name>GPFS Storage Pool</name>
+                </application>
+              </applications>
+              <valuemap/>
+              <logtimefmt/>
+            </item_prototype>
             <item_prototype>
               <name>$1: Free Disk Space Higher</name>
               <type>4</type>
@@ -1437,7 +1279,6 @@
               </applications>
               <valuemap/>
               <logtimefmt/>
-              <application_prototypes/>
             </item_prototype>
             <item_prototype>
               <name>$1: Free Disk Space Lower</name>
@@ -1481,189 +1322,6 @@
               </applications>
               <valuemap/>
               <logtimefmt/>
-              <application_prototypes/>
-            </item_prototype>
-            <item_prototype>
-              <name>$1: Free Percentage Disk Space Calculated</name>
-              <type>15</type>
-              <snmp_community/>
-              <multiplier>0</multiplier>
-              <snmp_oid/>
-              <key>gpfsStgPoolFreeSpacePercent[{#SNMPVALUE}]</key>
-              <delay>300</delay>
-              <history>90</history>
-              <trends>1095</trends>
-              <status>0</status>
-              <value_type>0</value_type>
-              <allowed_hosts/>
-              <units>%</units>
-              <delta>0</delta>
-              <snmpv3_contextname/>
-              <snmpv3_securityname/>
-              <snmpv3_securitylevel>0</snmpv3_securitylevel>
-              <snmpv3_authprotocol>0</snmpv3_authprotocol>
-              <snmpv3_authpassphrase/>
-              <snmpv3_privprotocol>0</snmpv3_privprotocol>
-              <snmpv3_privpassphrase/>
-              <formula>1</formula>
-              <delay_flex/>
-              <params>100*(last("gpfsStgPoolFreeSpaceL[{#SNMPVALUE}]")&#13;
-+&#13;
-(last("gpfsStgPoolFreeSpaceH[{#SNMPVALUE}]")*4294967296))/(last("gpfsStgPoolTotalSpaceL[{#SNMPVALUE}]")&#13;
-+&#13;
-(last("gpfsStgPoolTotalSpaceH[{#SNMPVALUE}]")*4294967296))</params>
-              <ipmi_sensor/>
-              <data_type>0</data_type>
-              <authtype>0</authtype>
-              <username/>
-              <password/>
-              <publickey/>
-              <privatekey/>
-              <port/>
-              <description>The free disk space percentage in the storage pool in kilobytes.</description>
-              <inventory_link>0</inventory_link>
-              <applications>
-                <application>
-                  <name>GPFS Storage Pool</name>
-                </application>
-              </applications>
-              <valuemap/>
-              <logtimefmt/>
-              <application_prototypes/>
-            </item_prototype>
-            <item_prototype>
-              <name>$1: Free Disk Space Calculated</name>
-              <type>15</type>
-              <snmp_community/>
-              <multiplier>0</multiplier>
-              <snmp_oid/>
-              <key>gpfsStgPoolFreeSpace[{#SNMPVALUE}]</key>
-              <delay>300</delay>
-              <history>90</history>
-              <trends>1095</trends>
-              <status>0</status>
-              <value_type>3</value_type>
-              <allowed_hosts/>
-              <units>B</units>
-              <delta>0</delta>
-              <snmpv3_contextname/>
-              <snmpv3_securityname/>
-              <snmpv3_securitylevel>0</snmpv3_securitylevel>
-              <snmpv3_authprotocol>0</snmpv3_authprotocol>
-              <snmpv3_authpassphrase/>
-              <snmpv3_privprotocol>0</snmpv3_privprotocol>
-              <snmpv3_privpassphrase/>
-              <formula>1</formula>
-              <delay_flex/>
-              <params>1024*(last("gpfsStgPoolFreeSpaceL[{#SNMPVALUE}]")&#13;
-+&#13;
-(last("gpfsStgPoolFreeSpaceH[{#SNMPVALUE}]")*4294967296))</params>
-              <ipmi_sensor/>
-              <data_type>0</data_type>
-              <authtype>0</authtype>
-              <username/>
-              <password/>
-              <publickey/>
-              <privatekey/>
-              <port/>
-              <description>The free disk space in the storage pool in bytes.</description>
-              <inventory_link>0</inventory_link>
-              <applications>
-                <application>
-                  <name>GPFS Storage Pool</name>
-                </application>
-              </applications>
-              <valuemap/>
-              <logtimefmt/>
-              <application_prototypes/>
-            </item_prototype>
-            <item_prototype>
-              <name>$1: Free Disk Space Calculated per second</name>
-              <type>15</type>
-              <snmp_community/>
-              <multiplier>0</multiplier>
-              <snmp_oid/>
-              <key>gpfsStgPoolFreeSpace_delta[{#SNMPVALUE}]</key>
-              <delay>300</delay>
-              <history>90</history>
-              <trends>1095</trends>
-              <status>0</status>
-              <value_type>3</value_type>
-              <allowed_hosts/>
-              <units>B</units>
-              <delta>1</delta>
-              <snmpv3_contextname/>
-              <snmpv3_securityname/>
-              <snmpv3_securitylevel>0</snmpv3_securitylevel>
-              <snmpv3_authprotocol>0</snmpv3_authprotocol>
-              <snmpv3_authpassphrase/>
-              <snmpv3_privprotocol>0</snmpv3_privprotocol>
-              <snmpv3_privpassphrase/>
-              <formula>1</formula>
-              <delay_flex/>
-              <params>1024*last("gpfsStgPoolFreeSpace[{#SNMPVALUE}]")</params>
-              <ipmi_sensor/>
-              <data_type>0</data_type>
-              <authtype>0</authtype>
-              <username/>
-              <password/>
-              <publickey/>
-              <privatekey/>
-              <port/>
-              <description>The free disk space in the storage pool in kilobytes.</description>
-              <inventory_link>0</inventory_link>
-              <applications>
-                <application>
-                  <name>GPFS Storage Pool</name>
-                </application>
-              </applications>
-              <valuemap/>
-              <logtimefmt/>
-              <application_prototypes/>
-            </item_prototype>
-            <item_prototype>
-              <name>$1: Belongs to</name>
-              <type>4</type>
-              <snmp_community>public</snmp_community>
-              <multiplier>0</multiplier>
-              <snmp_oid>.1.3.6.1.4.1.2.6.212.1.8.1.2.{#SNMPINDEX}</snmp_oid>
-              <key>gpfsStgPoolFSName[{#SNMPVALUE}]</key>
-              <delay>3600</delay>
-              <history>90</history>
-              <trends>0</trends>
-              <status>0</status>
-              <value_type>4</value_type>
-              <allowed_hosts/>
-              <units/>
-              <delta>0</delta>
-              <snmpv3_contextname/>
-              <snmpv3_securityname/>
-              <snmpv3_securitylevel>0</snmpv3_securitylevel>
-              <snmpv3_authprotocol>0</snmpv3_authprotocol>
-              <snmpv3_authpassphrase/>
-              <snmpv3_privprotocol>0</snmpv3_privprotocol>
-              <snmpv3_privpassphrase/>
-              <formula>1</formula>
-              <delay_flex/>
-              <params/>
-              <ipmi_sensor/>
-              <data_type>0</data_type>
-              <authtype>0</authtype>
-              <username/>
-              <password/>
-              <publickey/>
-              <privatekey/>
-              <port/>
-              <description>The name of the file system to which the storage pool belongs.</description>
-              <inventory_link>0</inventory_link>
-              <applications>
-                <application>
-                  <name>GPFS Storage Pool</name>
-                </application>
-              </applications>
-              <valuemap/>
-              <logtimefmt/>
-              <application_prototypes/>
             </item_prototype>
             <item_prototype>
               <name>$1: Number of Disks</name>
@@ -1707,7 +1365,51 @@
               </applications>
               <valuemap/>
               <logtimefmt/>
-              <application_prototypes/>
+            </item_prototype>
+            <item_prototype>
+              <name>$1: Total Disk Space Calculated</name>
+              <type>15</type>
+              <snmp_community/>
+              <multiplier>0</multiplier>
+              <snmp_oid/>
+              <key>gpfsStgPoolTotalSpace[{#SNMPVALUE}]</key>
+              <delay>3600</delay>
+              <history>90</history>
+              <trends>1095</trends>
+              <status>0</status>
+              <value_type>3</value_type>
+              <allowed_hosts/>
+              <units>kB</units>
+              <delta>0</delta>
+              <snmpv3_contextname/>
+              <snmpv3_securityname/>
+              <snmpv3_securitylevel>0</snmpv3_securitylevel>
+              <snmpv3_authprotocol>0</snmpv3_authprotocol>
+              <snmpv3_authpassphrase/>
+              <snmpv3_privprotocol>0</snmpv3_privprotocol>
+              <snmpv3_privpassphrase/>
+              <formula>1</formula>
+              <delay_flex/>
+              <params>last("gpfsStgPoolTotalSpaceL[{#SNMPVALUE}]")&#13;
++&#13;
+(last("gpfsStgPoolTotalSpaceH[{#SNMPVALUE}]")*4294967296)</params>
+              <ipmi_sensor/>
+              <data_type>0</data_type>
+              <authtype>0</authtype>
+              <username/>
+              <password/>
+              <publickey/>
+              <privatekey/>
+              <port/>
+              <description>The total disk space in the storage pool in kilobytes.</description>
+              <inventory_link>0</inventory_link>
+              <applications>
+                <application>
+                  <name>GPFS Storage Pool</name>
+                </application>
+              </applications>
+              <valuemap/>
+              <logtimefmt/>
             </item_prototype>
             <item_prototype>
               <name>$1: Total Disk Space Higher</name>
@@ -1751,7 +1453,6 @@
               </applications>
               <valuemap/>
               <logtimefmt/>
-              <application_prototypes/>
             </item_prototype>
             <item_prototype>
               <name>$1: Total Disk Space Lower</name>
@@ -1795,78 +1496,13 @@
               </applications>
               <valuemap/>
               <logtimefmt/>
-              <application_prototypes/>
-            </item_prototype>
-            <item_prototype>
-              <name>$1: Total Disk Space Calculated</name>
-              <type>15</type>
-              <snmp_community/>
-              <multiplier>0</multiplier>
-              <snmp_oid/>
-              <key>gpfsStgPoolTotalSpace[{#SNMPVALUE}]</key>
-              <delay>3600</delay>
-              <history>90</history>
-              <trends>1095</trends>
-              <status>0</status>
-              <value_type>3</value_type>
-              <allowed_hosts/>
-              <units>B</units>
-              <delta>0</delta>
-              <snmpv3_contextname/>
-              <snmpv3_securityname/>
-              <snmpv3_securitylevel>0</snmpv3_securitylevel>
-              <snmpv3_authprotocol>0</snmpv3_authprotocol>
-              <snmpv3_authpassphrase/>
-              <snmpv3_privprotocol>0</snmpv3_privprotocol>
-              <snmpv3_privpassphrase/>
-              <formula>1</formula>
-              <delay_flex/>
-              <params>1024*(last("gpfsStgPoolTotalSpaceL[{#SNMPVALUE}]")&#13;
-+&#13;
-(last("gpfsStgPoolTotalSpaceH[{#SNMPVALUE}]")*4294967296))</params>
-              <ipmi_sensor/>
-              <data_type>0</data_type>
-              <authtype>0</authtype>
-              <username/>
-              <password/>
-              <publickey/>
-              <privatekey/>
-              <port/>
-              <description>The total disk space in the storage pool in bytes.</description>
-              <inventory_link>0</inventory_link>
-              <applications>
-                <application>
-                  <name>GPFS Storage Pool</name>
-                </application>
-              </applications>
-              <valuemap/>
-              <logtimefmt/>
-              <application_prototypes/>
             </item_prototype>
           </item_prototypes>
-          <trigger_prototypes>
-            <trigger_prototype>
-              <expression>{CV Template GPFS Cluster:gpfsStgPoolFreeSpacePercent[{#SNMPVALUE}].last()}&lt;20</expression>
-              <recovery_mode>0</recovery_mode>
-              <recovery_expression/>
-              <name>{#SNMPVALUE}: Free space below 20%</name>
-              <correlation_mode>0</correlation_mode>
-              <correlation_tag/>
-              <url/>
-              <status>0</status>
-              <priority>3</priority>
-              <description/>
-              <type>0</type>
-              <manual_close>0</manual_close>
-              <dependencies/>
-              <tags/>
-            </trigger_prototype>
-          </trigger_prototypes>
+          <trigger_prototypes/>
           <graph_prototypes/>
           <host_prototypes/>
         </discovery_rule>
       </discovery_rules>
-      <httptests/>
       <macros/>
       <templates/>
       <screens/>
@@ -1874,20 +1510,14 @@
   </templates>
   <triggers>
     <trigger>
-      <expression>{CV Template GPFS Cluster:gpfsClusterName_ping.nodata(600)}=1</expression>
-      <recovery_mode>0</recovery_mode>
-      <recovery_expression/>
+      <expression>{CV Template GPFS Cluster:gpfsClusterName_ping.nodata(60)}=1</expression>
       <name>No GPFS SNMP Data available - WE ARE BLIND! Take action.</name>
-      <correlation_mode>0</correlation_mode>
-      <correlation_tag/>
       <url/>
-      <status>0</status>
+      <status>1</status>
       <priority>2</priority>
       <description>No GPFS SNMP data is currently available from this host. You should fix this problem immediatly - we can't get any data necessary for alerting.</description>
-      <type>0</type>
-      <manual_close>0</manual_close>
+      <type>1</type>
       <dependencies/>
-      <tags/>
     </trigger>
   </triggers>
 </zabbix_export>

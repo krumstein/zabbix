@@ -1,5 +1,5 @@
 Name:		cv-zabbix-checks	
-Version:	0.35
+Version:	0.36
 Release:	0%{?dist}
 Summary:	Zabbix checks by ClusterVision
 
@@ -85,6 +85,8 @@ systemctl restart zabbix-agent
 
 
 %changelog
+* Tue May 02 2017 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.36.0
+- Added Luna template, web scenarios and template linking is imported now
 * Mon May 01 2017 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.35.0
 - Added disk monitoring for storcli
 * Mon May 01 2017 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.34.0
