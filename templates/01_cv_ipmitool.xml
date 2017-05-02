@@ -276,7 +276,7 @@
       <macros>
         <macro>
           <macro>{$IPMI_FILTER}</macro>
-          <value>(Inlet Temp|Power|FAN|CPU1 Core Rem|CPU2 Core Rem)</value>
+          <value>(.*Temp|.*Power|.*FAN)</value>
         </macro>
       </macros>
       <templates/>
