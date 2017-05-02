@@ -1,6 +1,6 @@
 Name:		cv-zabbix-checks	
 Version:	0.36
-Release:	0%{?dist}
+Release:	1%{?dist}
 Summary:	Zabbix checks by ClusterVision
 
 Group:		CV	
@@ -85,6 +85,8 @@ systemctl restart zabbix-agent
 
 
 %changelog
+* Tue May 02 2017 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.36.1
+- Fixed perfquery issues with sudo
 * Tue May 02 2017 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.36.0
 - Added Luna template, web scenarios and template linking is imported now
 * Mon May 01 2017 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.35.0

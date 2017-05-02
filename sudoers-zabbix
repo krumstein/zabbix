@@ -20,5 +20,6 @@ Cmnd_Alias ZABBIX_CMD = /var/lib/zabbix/userparameters/pacemaker, \
     /usr/bin/mysql, \
     /bin/sh, \
     /bin/grep, \
+    /usr/sbin/perfquery, \
     /usr/bin/scontrol
 zabbix ALL = (root) NOPASSWD: ZABBIX_CMD
