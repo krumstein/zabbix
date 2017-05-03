@@ -35,6 +35,10 @@
         <template>
           <name>CV Slurm</name>
         </template>
+        <template>
+          <name>CV Luna</name>
+        </template>
+
       </templates>
       <screens/>
     </template>

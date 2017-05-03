@@ -1679,6 +1679,9 @@
           <name>CV Slurm compute</name>
         </template>
         <template>
+          <name>CV IPMItool</name>
+        </template>
+        <template>
           <name>Template App SSH Service</name>
         </template>
         <template>

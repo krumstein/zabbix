@@ -1804,6 +1804,10 @@
         <template>
           <name>CV TrinityX controller</name>
         </template>
+        <template>
+          <name>CV IPMItool</name>
+        </template>
+
       </templates>
       <screens/>
     </template>
