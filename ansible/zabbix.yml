@@ -5,9 +5,19 @@
       yum:
             name: python2-zabbix-api
             state: present
+    - name: install MySQL-python
+      yum:
+            name: MySQL-python.x86_64
+            state: present
+
     - name: Source variables and password
       shell: source /trinity/local/trinity.shadow && echo $ZABBIX_ADMIN_PASSWORD
       register: ZABBIX_ADMIN_PASSWORD
+
+    - name: Source mysql password
+      shell: source /trinity/local/trinity.shadow && echo $ZABBIX_MYSQL_PASSWORD
+      register: ZABBIX_MYSQL_PASSWORD
+
 
     - name: Source variables and password
       shell: source /etc/trinity.sh && echo $TRIX_CTRL_IP
@@ -17,7 +27,14 @@
       shell: source /etc/trinity.sh && echo $TRIX_CTRL_HOSTNAME
       register: TRIX_CTRL_HOSTNAME
 
-
+    - name: Add regexp
+      mysql_db:
+          login_password: "{{ ZABBIX_MYSQL_PASSWORD.stdout }}"
+          login_user: zabbix
+          state: import
+          name: zabbix
+          target: regexp.sql
+ 
     - name: Import all templates
       zabbix_conf:
           username: "Admin"
@@ -93,6 +110,21 @@
                   - {templateid:  10102 }    
                   - {templateid:  10104 }    
 
+    - name: Get controller ID
+      zabbix_conf: 
+          username: "Admin"
+          password: "{{ ZABBIX_ADMIN_PASSWORD.stdout  }}"
+          hostname: "{{ TRIX_CTRL_IP.stdout  }}"
+          object:   "{{item.object}}"
+          action:   "{{item.action}}"
+          query:    "{{item.query}}"
+          params:   "{{item.params}}"
+      with_items:
+          - {object: "host", action: "get", query: { }, params: {filter: { host: "{{ TRIX_CTRL_HOSTNAME.stdout }}" }  } }
+      register: controller
+ 
+   
+
     - name: Configuring mail forwarding, creating host groups and chaging default auto registration default rule
       zabbix_conf: 
           username: "Admin"
@@ -123,3 +155,56 @@
                           - operationid: 13
                             templateid:  10104
                        recovery: 0 
+    - name: Get Group IDs
+      zabbix_conf: 
+          username: "Admin"
+          password: "{{ ZABBIX_ADMIN_PASSWORD.stdout  }}"
+          hostname: "{{ TRIX_CTRL_IP.stdout  }}"
+          object:   "{{item.object}}"
+          action:   "{{item.action}}"
+          query:    "{{item.query}}"
+          params:   "{{item.params}}"
+      with_items:
+          - {object: "hostgroup", action: "get", query: { }, params: {filter: { name: [ "Controller" ]}  } }
+      register: group
+
+
+    - name: Configuring mail forwarding, creating host groups and chaging default auto registration default rule
+      zabbix_conf: 
+          username: "Admin"
+          password: "{{ ZABBIX_ADMIN_PASSWORD.stdout  }}"
+          hostname: "{{ TRIX_CTRL_IP.stdout  }}"
+          object:   "{{item.object}}"
+          action:   "{{item.action}}"
+          query:    "{{item.query}}"
+          params:   "{{item.params}}"
+      with_items:
+          - object: "host"
+            action: "update"
+            query: { } 
+            params: 
+                hostid: "{{ controller.results.0.result.0.hostid}}"
+                groups: 
+                - groupid:  "{{ group.results.0.result.0.groupid  }}"
+    - name: Enable unsafe parameters in zabbix agent
+      lineinfile:
+           path: /etc/zabbix/zabbix_agentd.conf
+           line: 'UnsafeUserParameters=1'
+
+    - name: Restart Zabbix agent
+      service: 
+          name: zabbix-agent
+          state: restarted
+
+    - name: Configure Postfix
+      lineinfile:
+          path: /etc/postfix/main.cf
+          line: 'mydomain = {{ ansible_domain }}'
+    - name: Configure Postfix
+      lineinfile:
+          path: /etc/postfix/main.cf
+          line: 'mydestination = $myhostname, $myhostname.$mydomain'
+
+
+
+

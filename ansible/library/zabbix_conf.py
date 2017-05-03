@@ -32,6 +32,14 @@ def main():
                 module.fail_json("Could not find object")
             else:
                 map(lambda x: result.append(object.update(dict({k:v for k,v in x.items() if k.endswith('id')}, **module.params['params']))),found_objects)
+        elif module.params['action'] == "find_delete":
+            found_objects = object.get({'filter':module.params['query']})
+            msg.append(found_objects)
+            if len(found_objects) == 0 :
+                module.fail_json("Could not find object")
+            else:
+                map(lambda x: result.append(object.delete(dict({k:v for k,v in x.items() if k.endswith('id')})),found_objects))
+
         elif module.params['action'] == 'create':
             try:
                 method = getattr(object, module.params['action'])

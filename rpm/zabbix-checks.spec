@@ -1,5 +1,5 @@
 Name:		cv-zabbix-checks	
-Version:	0.37
+Version:	0.38
 Release:	0%{?dist}
 Summary:	Zabbix checks by ClusterVision
 
@@ -85,6 +85,8 @@ systemctl restart zabbix-agent
 
 
 %changelog
+* Wed May 03 2017 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.38.0
+- Ansible playbooks configures regexp, imports all templates, configs postfix, allows unsafe params for agent
 * Wed May 03 2017 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.37.0
 - CV controller and compute templates now include IPMItool, TrinityX template includes now CV Luna
 * Tue May 02 2017 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.36.1
