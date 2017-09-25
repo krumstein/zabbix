@@ -20,7 +20,7 @@ def main():
             )
     )
     try:
-        zapi = ZabbixAPI('http://{}/zabbix'.format(module.params['hostname'] ))
+        zapi = ZabbixAPI('http://{}/zabbix'.format(module.params['hostname'] ),timeout=120)
         zapi.login(module.params['username'], module.params['password'])
         object = getattr(zapi, module.params['object'])
         result=[]
