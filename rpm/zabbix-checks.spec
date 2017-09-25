@@ -1,6 +1,6 @@
 Name:		cv-zabbix-checks	
 Version:	0.38
-Release:	0%{?dist}
+Release:	1%{?dist}
 Summary:	Zabbix checks by ClusterVision
 
 Group:		CV	
