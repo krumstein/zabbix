@@ -50,6 +50,7 @@ install -m 0644 gpfs_fileset_usage  $RPM_BUILD_ROOT/etc/cron.d/
 install -m 0755 -d   $RPM_BUILD_ROOT/usr/lib/zabbix/ansible
 install -m 0755 -d   $RPM_BUILD_ROOT/usr/lib/zabbix/ansible/library
 install -m 0644 ansible/*.yml $RPM_BUILD_ROOT/usr/lib/zabbix/ansible
+install -m 0644 ansible/*.sql $RPM_BUILD_ROOT/usr/lib/zabbix/ansible
 install -m 0644 ansible/library/* $RPM_BUILD_ROOT/usr/lib/zabbix/ansible/library
 
 
@@ -85,6 +86,8 @@ systemctl restart zabbix-agent
 
 
 %changelog
+* Mon Sep 25 2017 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.38.1
+- Added sql file for ansible
 * Wed May 03 2017 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.38.0
 - Ansible playbooks configures regexp, imports all templates, configs postfix, allows unsafe params for agent
 * Wed May 03 2017 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.37.0
