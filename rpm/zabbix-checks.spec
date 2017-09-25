@@ -1,6 +1,6 @@
 Name:		cv-zabbix-checks	
 Version:	0.38
-Release:	1%{?dist}
+Release:	2%{?dist}
 Summary:	Zabbix checks by ClusterVision
 
 Group:		CV	
@@ -86,6 +86,8 @@ systemctl restart zabbix-agent
 
 
 %changelog
+* Mon Sep 25 2017 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.38.2
+- Increase ZabbixAPI timeout to 120s
 * Mon Sep 25 2017 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.38.1
 - Added sql file for ansible
 * Wed May 03 2017 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.38.0
