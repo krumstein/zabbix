@@ -1,5 +1,5 @@
 Name:		cv-zabbix-checks	
-Version:	0.39
+Version:	0.40
 Release:	0%{?dist}
 Summary:	Zabbix checks by ClusterVision
 
@@ -86,6 +86,8 @@ systemctl restart zabbix-agent
 
 
 %changelog
+* Thu Oct 26 2017 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.40.0
+- Added BeeGFS daemons monitoring
 * Tue Oct 24 2017 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.39.0
 - Changed CV Infiniband template to LLD discovery, supporting multiple ports and HCA's
 * Mon Sep 25 2017 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.38.2
