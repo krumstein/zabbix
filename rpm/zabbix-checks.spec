@@ -1,5 +1,5 @@
 Name:		cv-zabbix-checks	
-Version:	0.40
+Version:	0.41
 Release:	0%{?dist}
 Summary:	Zabbix checks by ClusterVision
 
@@ -86,6 +86,8 @@ systemctl restart zabbix-agent
 
 
 %changelog
+* Tue Dec 05 2017 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.41.0
+- Fixed storcli disk monitoring and added support of storcli-based Dell's perc
 * Thu Oct 26 2017 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.40.0
 - Added BeeGFS daemons monitoring
 * Tue Oct 24 2017 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.39.0

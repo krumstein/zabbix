@@ -236,7 +236,7 @@
                     </item_prototypes>
                     <trigger_prototypes>
                         <trigger_prototype>
-                            <expression>{CV Storcli:storcli[vdrivestate,{#C_PDISK}].regexp(Optl,#1)}&lt;&gt;1</expression>
+                            <expression>{CV Storcli:storcli[vdrivestate,{#C_PDISK}].regexp(Optl|Onln,#1)}&lt;&gt;1</expression>
                             <name>Storcli {#C_PDISK} vdrivestate is not 'Optimal'</name>
                             <url/>
                             <status>0</status>

@@ -8,8 +8,8 @@ import sys
 import re
 
 __author__ = 'Vladimir Krumshtein <vladimir.krumstein@clustervision.com>'
-__date__ = 'Nov 2016'
-__version__ = '1.0.0'
+__date__ = 'Dec 2017'
+__version__ = '1.1.0'
 
 
 class STORCLI(object):
@@ -17,8 +17,10 @@ class STORCLI(object):
     EXECUTABLE = '/opt/MegaRAID/storcli/storcli64'
 
     if not os.path.exists(EXECUTABLE):
-        print "No executable found '%s'. Please install storcli from http://docs.avagotech.com/docs/1.20.15_StorCLI  " % EXECUTABLE
-        sys.exit(1)
+        EXECUTABLE = '/opt/MegaRAID/perccli/perccli64'
+        if not os.path.exists(EXECUTABLE):
+            print "No executable found '%s'. Please install storcli from http://docs.avagotech.com/docs/1.20.15_StorCLI  " % EXECUTABLE
+            sys.exit(1)
 
     @classmethod
     def discovery_cntrl(cls, args):
@@ -88,31 +90,24 @@ class STORCLI(object):
 
     @classmethod
     def vdrivetype(cls, args):
-        return cls.getvdrivestate(args, 1)
+        if ":" in args.vdisk:
+            return cls.getvdrivestate(args,7)
+        else:
+            return cls.getvdrivestate(args, 1)
 
     @classmethod
     def vdrivesize(cls, args):
-        return cls.getvdrivestate(args, 8)
+        if ":" in args.vdisk:
+            return cls.getvdrivestate(args,4)
+        else:
+            return cls.getvdrivestate(args, 8)
 
     @classmethod
     def vdrivename(cls, args):
-        return cls.getvdrivestate(args, 10)
-
-    @classmethod
-    def drivestate(cls, args):
-        return cls.getdrivestate(args, 2)
-
-    @classmethod
-    def drivetype(cls, args):
-        return cls.getdrivestate(args, 6)
-
-    @classmethod
-    def drivesize(cls, args):
-        return cls.getdrivestate(args, 4)
-
-    @classmethod
-    def drivename(cls, args):
-        return cls.getdrivestate(args, 11)
+        if ":" in args.vdisk:
+            return cls.getvdrivestate(args,11)
+        else:
+            return cls.getvdrivestate(args, 10)
 
 
 def parse_args():
