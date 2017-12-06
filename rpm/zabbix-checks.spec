@@ -1,5 +1,5 @@
 Name:		cv-zabbix-checks	
-Version:	0.41
+Version:	0.42
 Release:	0%{?dist}
 Summary:	Zabbix checks by ClusterVision
 
@@ -86,6 +86,8 @@ systemctl restart zabbix-agent
 
 
 %changelog
+* Wed Dec 06 2017 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.42.0
+- Excluded tr17 packages from rpmsdiff
 * Tue Dec 05 2017 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.41.0
 - Fixed storcli disk monitoring and added support of storcli-based Dell's perc
 * Thu Oct 26 2017 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.40.0
