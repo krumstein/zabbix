@@ -1,5 +1,5 @@
 Name:		cv-zabbix-checks	
-Version:	0.42
+Version:	0.43
 Release:	0%{?dist}
 Summary:	Zabbix checks by ClusterVision
 
@@ -86,6 +86,8 @@ systemctl restart zabbix-agent
 
 
 %changelog
+* Fri May 25 2018 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.43.0
+- Fixed IPMItool to return 20M instead on na for upper critical value and enabled sel trigger
 * Wed Dec 06 2017 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.42.0
 - Excluded tr17 packages from rpmsdiff
 * Tue Dec 05 2017 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.41.0
