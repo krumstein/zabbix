@@ -43,36 +43,30 @@
                format: "xml"
                rules: 
                       hosts:
-                            createMissing: "true"
-                            updateExisting: "true"
+                            createMissing: true
+                            updateExisting: true
                       templates: 
-                            createMissing: "true"
-                            updateExisting: "true"
+                            createMissing: true
+                            updateExisting: true
                       applications:
-                            createMissing: "true"
-                            updateExisting: "true"
+                            createMissing: true
                       discoveryRules: 
-                            createMissing: "true"
-                            updateExisting: "true"
+                            createMissing: true
+                            updateExisting: true
                       graphs: 
-                            createMissing: "true"
-                            updateExisting: "true"
+                            createMissing: true
+                            updateExisting: true
                       triggers: 
-                            createMissing: "true"
-                            updateExisting: "true"
+                            createMissing: true
+                            updateExisting: true
                       items: 
-                            createMissing: "true"
-                            updateExisting: "true"
-                            deleteMissing: "true"
+                            createMissing: true
+                            updateExisting: true
+                            deleteMissing: true
                       templateLinkage: 
-                            createMissing: "true"
-                            updateExisting: "true"
-                            deleteMissing: "true"
+                            createMissing: true
                       httptests: 
-                            createMissing: "true"
-                            updateExisting: "true"
-                            deleteMissing: "true"
-
+                            createMissing: true
                source: "{{ lookup('file', item )}}"
       with_fileglob:
           - "/usr/lib/zabbix/templates/01*.xml"
