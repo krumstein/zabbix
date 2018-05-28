@@ -9,27 +9,23 @@
       yum:
             name: MySQL-python.x86_64
             state: present
+    - name: Get mysql password for zabbix from /etc/trinity/passwords
+      set_fact:
+         zabbix_sql_pwd: "{{ lookup('password',
+                          '/etc/trinity/passwords/mysql/zabbix.txt
+                           chars=ascii_letters,digits,hexdigits') }}"
 
-    - name: Source variables and password
-      shell: source /trinity/local/trinity.shadow && echo $ZABBIX_ADMIN_PASSWORD
-      register: ZABBIX_ADMIN_PASSWORD
-
-    - name: Source mysql password
-      shell: source /trinity/local/trinity.shadow && echo $ZABBIX_MYSQL_PASSWORD
-      register: ZABBIX_MYSQL_PASSWORD
+    - name: Aquire zabbix Admin password (generate or use one from /etc/trinity/passwords)
+      set_fact:
+         zabbix_admin_pwd: "{{ lookup('password',
+                            '/etc/trinity/passwords/zabbix/admin.txt
+                             chars=ascii_letters,digits,hexdigits') }}"
 
 
-    - name: Source variables and password
-      shell: source /etc/trinity.sh && echo $TRIX_CTRL_IP
-      register: TRIX_CTRL_IP
-
-    - name: Source variables and password
-      shell: source /etc/trinity.sh && echo $TRIX_CTRL_HOSTNAME
-      register: TRIX_CTRL_HOSTNAME
 
     - name: Add regexp
       mysql_db:
-          login_password: "{{ ZABBIX_MYSQL_PASSWORD.stdout }}"
+          login_password: "{{ zabbix_sql_pwd }}"
           login_user: zabbix
           state: import
           name: zabbix
@@ -38,8 +34,8 @@
     - name: Import all templates
       zabbix_conf:
           username: "Admin"
-          password: "{{ ZABBIX_ADMIN_PASSWORD.stdout  }}"
-          hostname: "{{ TRIX_CTRL_IP.stdout  }}"
+          password: "{{ zabbix_admin_pwd  }}"
+          hostname: "127.0.0.1"
           object:   "configuration"
           action:   "import"
           query:    {}
@@ -86,8 +82,8 @@
     - name: Get template IDs
       zabbix_conf: 
           username: "Admin"
-          password: "{{ ZABBIX_ADMIN_PASSWORD.stdout  }}"
-          hostname: "{{ TRIX_CTRL_IP.stdout  }}"
+          password: "{{ zabbix_admin_pwd  }}"
+          hostname: "127.0.0.1"
           object:   "{{item.object}}"
           action:   "{{item.action}}"
           query:    "{{item.query}}"
@@ -99,8 +95,8 @@
     - name: Add templates to controller
       zabbix_conf:
           username: "Admin"
-          password: "{{ ZABBIX_ADMIN_PASSWORD.stdout  }}"
-          hostname: "{{ TRIX_CTRL_IP.stdout  }}"
+          password: "{{ zabbix_admin_pwd  }}"
+          hostname: "127.0.0.1"
           object:   "host"
           action:   "find_update"
           query:    {"host": "{{ TRIX_CTRL_HOSTNAME.stdout }}" }
@@ -113,8 +109,8 @@
     - name: Get controller ID
       zabbix_conf: 
           username: "Admin"
-          password: "{{ ZABBIX_ADMIN_PASSWORD.stdout  }}"
-          hostname: "{{ TRIX_CTRL_IP.stdout  }}"
+          password: "{{ zabbix_admin_pwd  }}"
+          hostname: "127.0.0.1"
           object:   "{{item.object}}"
           action:   "{{item.action}}"
           query:    "{{item.query}}"
@@ -128,8 +124,8 @@
     - name: Configuring mail forwarding, creating host groups and chaging default auto registration default rule
       zabbix_conf: 
           username: "Admin"
-          password: "{{ ZABBIX_ADMIN_PASSWORD.stdout  }}"
-          hostname: "{{ TRIX_CTRL_IP.stdout  }}"
+          password: "{{ zabbix_admin_pwd  }}"
+          hostname: "127.0.0.1"
           object:   "{{item.object}}"
           action:   "{{item.action}}"
           query:    "{{item.query}}"
@@ -158,8 +154,8 @@
     - name: Get Group IDs
       zabbix_conf: 
           username: "Admin"
-          password: "{{ ZABBIX_ADMIN_PASSWORD.stdout  }}"
-          hostname: "{{ TRIX_CTRL_IP.stdout  }}"
+          password: "{{ zabbix_admin_pwd  }}"
+          hostname: "127.0.0.1"
           object:   "{{item.object}}"
           action:   "{{item.action}}"
           query:    "{{item.query}}"
@@ -172,8 +168,8 @@
     - name: Configuring mail forwarding, creating host groups and chaging default auto registration default rule
       zabbix_conf: 
           username: "Admin"
-          password: "{{ ZABBIX_ADMIN_PASSWORD.stdout  }}"
-          hostname: "{{ TRIX_CTRL_IP.stdout  }}"
+          password: "{{ zabbix_admin_pwd  }}"
+          hostname: "127.0.0.1"
           object:   "{{item.object}}"
           action:   "{{item.action}}"
           query:    "{{item.query}}"
