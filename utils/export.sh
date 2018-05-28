@@ -12,7 +12,7 @@ fi
 
 
 TEMPLATE_ID=$1
-source /trinity/local/trinity.shadow
+ZABBIX_ADMIN_PASSWORD=$(cat /etc/trinity/passwords/zabbix/admin.txt)
 TOKEN=$(curl -s localhost/zabbix/api_jsonrpc.php \
               -H 'Content-Type: application/json-rpc' \
               -d '{"jsonrpc": "2.0",

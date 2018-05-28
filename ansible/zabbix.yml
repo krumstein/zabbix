@@ -72,6 +72,7 @@
           - "/usr/lib/zabbix/templates/01*.xml"
           - "/usr/lib/zabbix/templates/02*.xml"
           - "/usr/lib/zabbix/templates/*.xml"
+      tags: import
 
     - name: Get template IDs
       zabbix_conf: 
@@ -84,35 +85,36 @@
           params:   "{{item.params}}"
       with_items:
           - {object: "template", action: "get", query: { }, params: {filter: { host: "CV Controller" }  } }
+          - {object: "template", action: "get", query: { }, params: {filter: { host: "Template App SSH Service" }  } }
+          - {object: "template", action: "get", query: { }, params: {filter: { host: "Template ICMP Ping" }  } }
+
       register: templates
 
-    - name: Add templates to controller
-      zabbix_conf:
-          username: "Admin"
-          password: "{{ zabbix_admin_pwd  }}"
-          hostname: "127.0.0.1"
-          object:   "host"
-          action:   "find_update"
-          query:    {"host": "{{ TRIX_CTRL_HOSTNAME.stdout }}" }
-          params:
-              templates:
-                  - {templateid:  "{{ templates.results.0.result.0.templateid }}" }    
-                  - {templateid:  10102 }    
-                  - {templateid:  10104 }    
-
-    - name: Get controller ID
-      zabbix_conf: 
-          username: "Admin"
-          password: "{{ zabbix_admin_pwd  }}"
-          hostname: "127.0.0.1"
-          object:   "{{item.object}}"
-          action:   "{{item.action}}"
-          query:    "{{item.query}}"
-          params:   "{{item.params}}"
-      with_items:
-          - {object: "host", action: "get", query: { }, params: {filter: { host: "{{ TRIX_CTRL_HOSTNAME.stdout }}" }  } }
-      register: controller
- 
+#    - name: Add templates to controller
+#      zabbix_conf:
+#          username: "Admin"
+#          password: "{{ zabbix_admin_pwd  }}"
+#          hostname: "127.0.0.1"
+#          object:   "host"
+#          action:   "find_update"
+#          query:    {"host": "{{ TRIX_CTRL_HOSTNAME.stdout }}" }
+#          params:
+#              templates:
+#                  - {templateid:  "{{ templates.results.0.result.0.templateid }}" }    
+#
+#    - name: Get controller ID
+#      zabbix_conf: 
+#          username: "Admin"
+#          password: "{{ zabbix_admin_pwd  }}"
+#          hostname: "127.0.0.1"
+#          object:   "{{item.object}}"
+#          action:   "{{item.action}}"
+#          query:    "{{item.query}}"
+#          params:   "{{item.params}}"
+#      with_items:
+#          - {object: "host", action: "get", query: { }, params: {filter: { host: "{{ TRIX_CTRL_HOSTNAME.stdout }}" }  } }
+#      register: controller
+# 
    
 
     - name: Configuring mail forwarding, creating host groups and chaging default auto registration default rule
@@ -141,9 +143,9 @@
                        operationtype: 6
                        optemplate: 
                           - operationid: 13
-                            templateid:  10102
+                            templateid:  "{{ templates.results.1.result.0.templateid }}"
                           - operationid: 13
-                            templateid:  10104
+                            templateid:  "{{ templates.results.2.result.0.templateid }}"
                        recovery: 0 
     - name: Get Group IDs
       zabbix_conf: 
@@ -159,23 +161,23 @@
       register: group
 
 
-    - name: Configuring mail forwarding, creating host groups and chaging default auto registration default rule
-      zabbix_conf: 
-          username: "Admin"
-          password: "{{ zabbix_admin_pwd  }}"
-          hostname: "127.0.0.1"
-          object:   "{{item.object}}"
-          action:   "{{item.action}}"
-          query:    "{{item.query}}"
-          params:   "{{item.params}}"
-      with_items:
-          - object: "host"
-            action: "update"
-            query: { } 
-            params: 
-                hostid: "{{ controller.results.0.result.0.hostid}}"
-                groups: 
-                - groupid:  "{{ group.results.0.result.0.groupid  }}"
+#    - name: Configuring mail forwarding, creating host groups and chaging default auto registration default rule
+#      zabbix_conf: 
+#          username: "Admin"
+#          password: "{{ zabbix_admin_pwd  }}"
+#          hostname: "127.0.0.1"
+#          object:   "{{item.object}}"
+#          action:   "{{item.action}}"
+#          query:    "{{item.query}}"
+#          params:   "{{item.params}}"
+#      with_items:
+#          - object: "host"
+#            action: "update"
+#            query: { } 
+#            params: 
+#                hostid: "{{ controller.results.0.result.0.hostid}}"
+#                groups: 
+#                - groupid:  "{{ group.results.0.result.0.groupid  }}"
     - name: Enable unsafe parameters in zabbix agent
       lineinfile:
            path: /etc/zabbix/zabbix_agentd.conf
@@ -197,4 +199,11 @@
 
 
 
-
+- hosts: 
+  - osimages.luna
+  tasks:
+    - name: Enable unsafe parameters in zabbix agent
+      lineinfile:
+          path: /etc/zabbix/zabbix_agentd.conf
+          line: 'UnsafeUserParameters=1'
+ 

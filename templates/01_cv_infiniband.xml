@@ -9,7 +9,7 @@
   </groups>
   <templates>
     <template>
-      <template>CV Infinband</template>
+      <template>CV Infiniband</template>
       <name>CV Infiniband</name>
       <description/>
       <groups>
@@ -804,7 +804,7 @@
           </item_prototypes>
           <trigger_prototypes>
             <trigger_prototype>
-              <expression>{CV Infinband:ibstat_physical_state[{#PORT_NUM}].regexp(LinkUp)}&lt;&gt;1</expression>
+              <expression>{CV Infiniband:ibstat_physical_state[{#PORT_NUM}].regexp(LinkUp)}&lt;&gt;1</expression>
               <recovery_mode>0</recovery_mode>
               <recovery_expression/>
               <name>Port {#PORT_NUM} physical state is not LinkUp</name>
@@ -820,7 +820,7 @@
               <tags/>
             </trigger_prototype>
             <trigger_prototype>
-              <expression>{CV Infinband:ibstat_state[{#PORT_NUM}].regexp(Active)}&lt;&gt;1</expression>
+              <expression>{CV Infiniband:ibstat_state[{#PORT_NUM}].regexp(Active)}&lt;&gt;1</expression>
               <recovery_mode>0</recovery_mode>
               <recovery_expression/>
               <name>Port {#PORT_NUM} state is not Active</name>

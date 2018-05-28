@@ -1,5 +1,5 @@
 Name:		cv-zabbix-checks	
-Version:	0.44
+Version:	0.45
 Release:	0%{?dist}
 Summary:	Zabbix checks by ClusterVision
 
@@ -86,6 +86,8 @@ systemctl restart zabbix-agent
 
 
 %changelog
+* Mon May 28 2018 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.45.0
+- Remove auto add templates to controller, until a stable location of ansible playbooks exists, fixed some template to be supported by Zabbix 3.4, updated export.sh to ansible-based TRIX
 * Mon May 28 2018 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.44.0
 - Fixed zabbix.yml to newer version on TRIX
 * Fri May 25 2018 Vladimir Krumshtein <vladimir.krumstein@clustervision.com> 0.43.0

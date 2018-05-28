@@ -90,13 +90,7 @@
       <description/>
       <type>0</type>
       <manual_close>0</manual_close>
-      <dependencies>
-        <dependency>
-          <name>{HOST.NAME} is unavailable by ICMP</name>
-          <expression>{Template ICMP Ping:icmpping.max(#3)}=0</expression>
-          <recovery_expression/>
-        </dependency>
-      </dependencies>
+      <dependencies/>
       <tags/>
     </trigger>
   </triggers>
